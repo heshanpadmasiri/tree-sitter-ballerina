@@ -68,6 +68,11 @@
     "fields": {}
   },
   {
+    "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "continue_stmt",
     "named": true,
     "fields": {}
@@ -669,6 +674,10 @@
   },
   {
     "type": "/",
+    "named": false
+  },
+  {
+    "type": "//",
     "named": false
   },
   {

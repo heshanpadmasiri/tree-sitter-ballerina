@@ -1,6 +1,11 @@
 module.exports = grammar({
     name: "Ballerina",
 
+    extras: $ => [
+        /\s|\\\r?\n/,
+        $.comment,
+    ],
+
     rules: {
         source_file:        $ => $.module_part,
         module_part:        $ => seq(repeat($.import_decl), repeat1($.module_decl)),
@@ -90,6 +95,7 @@ module.exports = grammar({
             "0",
             /[1-9][0-9]*/,
         ),
-        identifier:          $ => /[A-Za-z][A-Za-z0-9_]*/
+        identifier:          $ => /[A-Za-z][A-Za-z0-9_]*/,
+        comment:             $ => seq('//', /(\\(.|\r?\n)|[^\\\n])*/)
     }
 });

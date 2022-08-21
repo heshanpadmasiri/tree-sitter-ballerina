@@ -8,8 +8,17 @@
   },
   "author": "Heshan Padmasiri",
   "license": "MIT",
+  "tree-sitter": [
+    {
+        "scope": "source.bal",
+        "file-types": [
+            "bal"
+        ]
+    }
+  ],
   "dependencies": {
-    "nan": "^2.16.0"
+    "nan": "^2.16.0",
+    "node-gyp": "^9.1.0"
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.6"
