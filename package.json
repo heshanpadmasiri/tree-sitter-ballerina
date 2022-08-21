@@ -1,0 +1,17 @@
+{
+  "name": "tree-sitter-ballerina",
+  "version": "1.0.0",
+  "description": "Tree sitter grammer for ballerina language",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Heshan Padmasiri",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.16.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.6"
+  }
+}
