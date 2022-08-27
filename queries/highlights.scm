@@ -1,4 +1,11 @@
-[
-    "public"
-    "function"
-] @keyword
+"function" @keyword
+"import" @keyword
+"returns" @keyword
+"return" @keyword
+"break" @keyword
+"public" @keyword
+"if" @keyword
+"else" @keyword
+"while" @keyword
+(type_desc) @type
+(basic_type_name) @type.builtin

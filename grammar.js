@@ -1,5 +1,5 @@
 module.exports = grammar({
-    name: "Ballerina",
+    name: "ballerina",
 
     extras: $ => [
         /\s|\\\r?\n/,
