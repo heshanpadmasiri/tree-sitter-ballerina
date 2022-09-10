@@ -15,113 +15,113 @@ public function main() {
 
 ---
 
-(source_file [0, 0] - [10, 0]
-  (module_part [0, 0] - [9, 1]
-    (import_decl [0, 0] - [0, 20]
-      (identifier [0, 7] - [0, 16])
-      (identifier [0, 17] - [0, 19]))
-    (module_decl [2, 0] - [9, 1]
-      (function_defn [2, 0] - [9, 1]
-        (identifier [2, 16] - [2, 20])
-        (signature [2, 20] - [2, 22])
-        (stmt_block [2, 23] - [9, 1]
-          (statement [3, 4] - [3, 14]
-            (local_var_decl_stmt [3, 4] - [3, 14]
-              (type_desc [3, 4] - [3, 7]
-                (basic_type_name [3, 4] - [3, 7]))
-              (identifier [3, 8] - [3, 9])
-              (expression [3, 12] - [3, 13]
-                (equality_expr [3, 12] - [3, 13]
-                  (relational_expr [3, 12] - [3, 13]
-                    (additive_expr [3, 12] - [3, 13]
-                      (multiplicative_expr [3, 12] - [3, 13]
-                        (unary_expr [3, 12] - [3, 13]
-                          (primary_expr [3, 12] - [3, 13]
-                            (literal [3, 12] - [3, 13]
-                              (integer_literal [3, 12] - [3, 13])))))))))))
-          (statement [4, 4] - [4, 18]
-            (function_call_stmt [4, 4] - [4, 18]
-              (function_call_expr [4, 4] - [4, 17]
-                (function_reference [4, 4] - [4, 14]
-                  (qualified_identifier [4, 4] - [4, 14]
-                    (module_prefix [4, 4] - [4, 6]
-                      (identifier [4, 4] - [4, 6]))
-                    (identifier [4, 7] - [4, 14])))
-                (arg_list [4, 14] - [4, 17]
-                  (expr_list [4, 15] - [4, 16]
-                    (expression [4, 15] - [4, 16]
-                      (equality_expr [4, 15] - [4, 16]
-                        (relational_expr [4, 15] - [4, 16]
-                          (additive_expr [4, 15] - [4, 16]
-                            (multiplicative_expr [4, 15] - [4, 16]
-                              (unary_expr [4, 15] - [4, 16]
-                                (primary_expr [4, 15] - [4, 16]
-                                  (variable_reference_expr [4, 15] - [4, 16]
-                                    (identifier [4, 15] - [4, 16]))))))))))))))
-          (comment [4, 19] - [4, 31])
-          (statement [5, 4] - [5, 10]
-            (assing_stmt [5, 4] - [5, 10]
-              (lvexpr [5, 4] - [5, 5]
-                (identifier [5, 4] - [5, 5]))
-              (expression [5, 8] - [5, 9]
-                (equality_expr [5, 8] - [5, 9]
-                  (relational_expr [5, 8] - [5, 9]
-                    (additive_expr [5, 8] - [5, 9]
-                      (multiplicative_expr [5, 8] - [5, 9]
-                        (unary_expr [5, 8] - [5, 9]
-                          (primary_expr [5, 8] - [5, 9]
-                            (literal [5, 8] - [5, 9]
-                              (integer_literal [5, 8] - [5, 9])))))))))))
-          (statement [6, 4] - [6, 18]
-            (function_call_stmt [6, 4] - [6, 18]
-              (function_call_expr [6, 4] - [6, 17]
-                (function_reference [6, 4] - [6, 14]
-                  (qualified_identifier [6, 4] - [6, 14]
-                    (module_prefix [6, 4] - [6, 6]
-                      (identifier [6, 4] - [6, 6]))
-                    (identifier [6, 7] - [6, 14])))
-                (arg_list [6, 14] - [6, 17]
-                  (expr_list [6, 15] - [6, 16]
-                    (expression [6, 15] - [6, 16]
-                      (equality_expr [6, 15] - [6, 16]
-                        (relational_expr [6, 15] - [6, 16]
-                          (additive_expr [6, 15] - [6, 16]
-                            (multiplicative_expr [6, 15] - [6, 16]
-                              (unary_expr [6, 15] - [6, 16]
-                                (primary_expr [6, 15] - [6, 16]
-                                  (variable_reference_expr [6, 15] - [6, 16]
-                                    (identifier [6, 15] - [6, 16]))))))))))))))
-          (comment [6, 19] - [6, 31])
-          (statement [7, 4] - [7, 10]
-            (assing_stmt [7, 4] - [7, 10]
-              (lvexpr [7, 4] - [7, 5]
-                (identifier [7, 4] - [7, 5]))
-              (expression [7, 8] - [7, 9]
-                (equality_expr [7, 8] - [7, 9]
-                  (relational_expr [7, 8] - [7, 9]
-                    (additive_expr [7, 8] - [7, 9]
-                      (multiplicative_expr [7, 8] - [7, 9]
-                        (unary_expr [7, 8] - [7, 9]
-                          (primary_expr [7, 8] - [7, 9]
-                            (literal [7, 8] - [7, 9]
-                              (integer_literal [7, 8] - [7, 9])))))))))))
-          (statement [8, 4] - [8, 18]
-            (function_call_stmt [8, 4] - [8, 18]
-              (function_call_expr [8, 4] - [8, 17]
-                (function_reference [8, 4] - [8, 14]
-                  (qualified_identifier [8, 4] - [8, 14]
-                    (module_prefix [8, 4] - [8, 6]
-                      (identifier [8, 4] - [8, 6]))
-                    (identifier [8, 7] - [8, 14])))
-                (arg_list [8, 14] - [8, 17]
-                  (expr_list [8, 15] - [8, 16]
-                    (expression [8, 15] - [8, 16]
-                      (equality_expr [8, 15] - [8, 16]
-                        (relational_expr [8, 15] - [8, 16]
-                          (additive_expr [8, 15] - [8, 16]
-                            (multiplicative_expr [8, 15] - [8, 16]
-                              (unary_expr [8, 15] - [8, 16]
-                                (primary_expr [8, 15] - [8, 16]
-                                  (variable_reference_expr [8, 15] - [8, 16]
-                                    (identifier [8, 15] - [8, 16]))))))))))))))
-          (comment [8, 19] - [8, 31]))))))
+    (source_file
+      (module_part
+        (import_decl
+          (identifier)
+          (identifier))
+        (module_decl
+          (function_defn
+            (identifier)
+            (signature)
+            (stmt_block
+              (statement
+                (local_var_decl_stmt
+                  (type_desc
+                    (basic_type_name))
+                  (identifier)
+                  (expression
+                    (equality_expr
+                      (relational_expr
+                        (additive_expr
+                          (multiplicative_expr
+                            (unary_expr
+                              (primary_expr
+                                (literal
+                                  (integer_literal)))))))))))
+              (statement
+                (function_call_stmt
+                  (function_call_expr
+                    (function_reference
+                      (qualified_identifier
+                        (module_prefix
+                          (identifier))
+                        (identifier)))
+                    (arg_list
+                      (expr_list
+                        (expression
+                          (equality_expr
+                            (relational_expr
+                              (additive_expr
+                                (multiplicative_expr
+                                  (unary_expr
+                                    (primary_expr
+                                      (variable_reference_expr
+                                        (identifier))))))))))))))
+              (comment)
+              (statement
+                (assing_stmt
+                  (lvexpr
+                    (identifier))
+                  (expression
+                    (equality_expr
+                      (relational_expr
+                        (additive_expr
+                          (multiplicative_expr
+                            (unary_expr
+                              (primary_expr
+                                (literal
+                                  (integer_literal)))))))))))
+              (statement
+                (function_call_stmt
+                  (function_call_expr
+                    (function_reference
+                      (qualified_identifier
+                        (module_prefix
+                          (identifier))
+                        (identifier)))
+                    (arg_list
+                      (expr_list
+                        (expression
+                          (equality_expr
+                            (relational_expr
+                              (additive_expr
+                                (multiplicative_expr
+                                  (unary_expr
+                                    (primary_expr
+                                      (variable_reference_expr
+                                        (identifier))))))))))))))
+              (comment)
+              (statement
+                (assing_stmt
+                  (lvexpr
+                    (identifier))
+                  (expression
+                    (equality_expr
+                      (relational_expr
+                        (additive_expr
+                          (multiplicative_expr
+                            (unary_expr
+                              (primary_expr
+                                (literal
+                                  (integer_literal)))))))))))
+              (statement
+                (function_call_stmt
+                  (function_call_expr
+                    (function_reference
+                      (qualified_identifier
+                        (module_prefix
+                          (identifier))
+                        (identifier)))
+                    (arg_list
+                      (expr_list
+                        (expression
+                          (equality_expr
+                            (relational_expr
+                              (additive_expr
+                                (multiplicative_expr
+                                  (unary_expr
+                                    (primary_expr
+                                      (variable_reference_expr
+                                        (identifier))))))))))))))
+              (comment))))))
