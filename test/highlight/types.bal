@@ -1,5 +1,12 @@
 type A int|boolean;
 
+type R record {
+    A a;
+//  ^ type
+    float b;
+//  ^ type.builtin
+};
+
 function tmp (int a, boolean b) returns int {
 //             ^ type.builtin
 //                    ^ type.builtin

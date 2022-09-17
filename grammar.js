@@ -27,7 +27,7 @@ module.exports = grammar({
 
         const_defn:         $ => seq(optional("public"), "const", $.builtin_type_name, $.identifier, "=", $.const_expr, ";"),
 
-        type_defn:          $ => seq(optional("public"), "type", $.identifier, $.type_defn, ";"),
+        type_defn:          $ => seq(optional("public"), "type", $.identifier, $.type_desc, ";"),
 
         type_desc:          $ => $.union_type_desc,
         union_type_desc:    $ => choice(

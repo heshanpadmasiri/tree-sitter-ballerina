@@ -122,14 +122,6 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "function_defn"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "const_defn"
-        },
-        {
-          "type": "SYMBOL",
           "name": "type_defn"
         }
       ]
@@ -279,7 +271,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "type_defn"
+          "name": "type_desc"
         },
         {
           "type": "STRING",
