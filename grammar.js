@@ -46,7 +46,7 @@ module.exports = grammar({
 
         optional_type_desc: $ => seq($.postfix_type_desc, "?"),
 
-        array_type_desc:    $ => prec.left(seq($.array_member_type_desc, repeat1($.array_dimensions))),
+        array_type_desc:    $ => seq($.array_member_type_desc, repeat1($.array_dimensions)),
         array_dimensions:   $ => seq("[", optional($.array_length), "]"),
         array_member_type_desc: $ => choice(
             $.type_desc
@@ -318,5 +318,41 @@ module.exports = grammar({
         binary_operator:     $ => choice("+", "-", "*", "/", "&", "|", "^", "<<", ">>", ">>>"),
         string_literal:      $ => /".*"/,
         comment:             $ => seq('//', /(\\(.|\r?\n)|[^\\\n])*/)
-    }
+    },
+    conflicts: $ => [
+        [$.type_reference, $.const_reference_expr],
+        [$.literal, $.nil_type_desc],
+        [$.array_type_desc],
+        [$.type_reference, $.const_reference_expr, $.variable_reference_expr],
+        [$.primary_expr, $.lvexpr], // both can be variable_reference_expr
+        [$.primary_expr, $.simple_const_expr], // both can  be literals
+        [$.literal, $.simple_const_expr], // both can be floating_point_literal
+
+        // we need look ahead for these
+        [$.method_call_expr, $.function_reference],
+        [$.method_call_expr, $.field_access_expr, $.unary_expr],
+        [$.member_access_expr, $.unary_expr],
+
+        [$.type_desc, $.union_type_desc],
+        [$.type_desc, $.intersection_type_desc],
+        [$.union_type_desc, $.intersection_type_desc],
+
+        [$.inner_expr, $.logical_or_expr],
+        [$.logical_and_expr, $.bitwise_or_expr],
+        [$.logical_and_expr, $.bitwise_xor_expr],
+        [$.bitwise_or_expr, $.bitwise_xor_expr],
+        [$.bitwise_and_expr, $.bitwise_xor_expr],
+
+        [$.bitwise_and_expr, $.equality_expr],
+
+        [$.relational_expr, $.shift_expr],
+        [$.additive_expr, $.shift_expr],
+        [$.additive_expr, $.multiplicative_expr],
+
+        [$.array_member_type_desc, $.relational_expr],
+
+        [$.union_type_desc],
+        [$.intersection_type_desc],
+        [$.relational_expr]
+    ],
 });
