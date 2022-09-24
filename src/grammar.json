@@ -122,6 +122,14 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "function_defn"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "const_defn"
+        },
+        {
+          "type": "SYMBOL",
           "name": "type_defn"
         }
       ]
