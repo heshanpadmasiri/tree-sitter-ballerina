@@ -1690,6 +1690,21 @@
     }
   },
   {
+    "type": "string_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "tuple_member_type_desc_list",
     "named": true,
     "fields": {},
@@ -1760,21 +1775,7 @@
   {
     "type": "type_defn",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "type_desc",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "type_desc",
@@ -1907,6 +1908,10 @@
     "named": false
   },
   {
+    "type": "\"",
+    "named": false
+  },
+  {
     "type": "%",
     "named": false
   },
@@ -2019,6 +2024,14 @@
     "named": false
   },
   {
+    "type": "L\"",
+    "named": false
+  },
+  {
+    "type": "U\"",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -2077,6 +2090,10 @@
   {
     "type": "error",
     "named": false
+  },
+  {
+    "type": "escape_sequence",
+    "named": true
   },
   {
     "type": "false",
@@ -2163,15 +2180,19 @@
     "named": false
   },
   {
-    "type": "string_literal",
-    "named": true
-  },
-  {
     "type": "true",
     "named": false
   },
   {
     "type": "type",
+    "named": false
+  },
+  {
+    "type": "u\"",
+    "named": false
+  },
+  {
+    "type": "u8\"",
     "named": false
   },
   {

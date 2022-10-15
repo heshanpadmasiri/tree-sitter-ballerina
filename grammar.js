@@ -27,7 +27,7 @@ module.exports = grammar({
 
         const_defn:         $ => seq(optional("public"), "const", $.builtin_type_name, $.identifier, "=", $.const_expr, ";"),
 
-        type_defn:          $ => seq(optional("public"), "type", $.identifier, $.type_desc, ";"),
+        type_defn:          $ => seq(optional("public"), "type", ";"),
 
         type_desc:          $ => $.union_type_desc,
         union_type_desc:    $ => choice(
@@ -316,7 +316,26 @@ module.exports = grammar({
         identifier:          $ => /[A-Za-z][A-Za-z0-9_]*/,
         compound_assignment_operator: $ => seq($.binary_operator, "="),
         binary_operator:     $ => choice("+", "-", "*", "/", "&", "|", "^", "<<", ">>", ">>>"),
-        string_literal:      $ => /".*"/,
+        // FIXME:
+        // this is same as tree-sitter-c
+        string_literal: $ => seq(
+          choice('L"', 'u"', 'U"', 'u8"', '"'),
+          repeat(choice(
+            token.immediate(prec(1, /[^\\"\n]+/)),
+            $.escape_sequence
+          )),
+          '"',
+        ),
+        escape_sequence: $ => token(prec(1, seq(
+          '\\',
+          choice(
+            /[^xuU]/,
+            /\d{2,3}/,
+            /x[0-9a-fA-F]{2,}/,
+            /u[0-9a-fA-F]{4}/,
+            /U[0-9a-fA-F]{8}/
+          )
+        ))),
         comment:             $ => seq('//', /(\\(.|\r?\n)|[^\\\n])*/)
     },
     conflicts: $ => [
