@@ -127,7 +127,7 @@ module.exports = grammar({
             $.match_stmt
         ),
 
-        local_var_decl_stmt: $ => seq(optional("final"), $.type_desc, $.binding_pattern, "=", $.expression, ";"),
+        local_var_decl_stmt: $ => seq(optional("final"), $.typed_binding_pattern, "=", $.expression, ";"),
         binding_pattern:     $ => choice(
             $.identifier,
             $.wildcard_binding_pattern
@@ -188,7 +188,8 @@ module.exports = grammar({
         expression:          $ => choice(
             $.inner_expr,
             $.list_constructor_expr,
-            $.mapping_constructor_expr
+            $.mapping_constructor_expr,
+            $.query_expr
         ),
         const_expr:          $ => $.inner_expr,
         const_reference_expr:$ => choice($.identifier, $.qualified_identifier),
@@ -273,6 +274,41 @@ module.exports = grammar({
             $.variable_reference_expr,
             seq("(", $.inner_expr, ")")
         ),
+
+        query_expr:          $ => prec.left(seq(optional($.query_construct_type), $.query_pipeline, $.select_clause, optional($.on_conflict_clause))),
+        query_construct_type:$ => choice("map", "stream"), // TODO: add table
+        query_pipeline:      $ => seq($.from_clause, repeat($.intermediate_clause)),
+        intermediate_clause: $ => choice(
+            $.from_clause,
+            $.where_clause,
+            $.let_clause,
+            $.join_clause,
+            $.order_by_clause,
+            $.limit_clause
+        ),
+        // TODO add keywords to highlight
+        from_clause:         $ => seq("from", $.typed_binding_pattern, "in", $.expression),
+
+        where_clause:        $ => seq("where", $.expression),
+
+        let_clause:          $ => seq("let", $.let_var_decl, repeat(seq(",", $.let_var_decl))),
+        join_clause:         $ => seq(optional("outer"), "join", $.typed_binding_pattern, "in", $.expression, $.join_on_condition),
+        join_on_condition:   $ => seq("on", $.expression, "equals", $.expression),
+
+        order_by_clause:     $ => seq("order", "by", $.order_key, repeat(seq(",", $.order_key))),
+        order_key:           $ => seq($.expression, optional($.order_direction)),
+        order_direction:     $ => choice("ascending", "descending"),
+
+        limit_clause:        $ => seq("limit", $.expression),
+
+        select_clause:       $ => seq("select", $.expression),
+
+        on_conflict_clause:  $ => seq("on", "conflict", $.expression),
+
+        typed_binding_pattern:$ => seq($.inferable_type_desc, $.binding_pattern),
+        inferable_type_desc: $ => choice("var", $.type_desc),
+
+        let_var_decl:        $ => seq($.typed_binding_pattern, "=", $.expression),
 
         literal:             $ => choice(
             $.nil_literal,
