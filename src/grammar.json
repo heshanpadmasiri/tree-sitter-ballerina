@@ -274,6 +274,14 @@
           "value": "type"
         },
         {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_desc"
+        },
+        {
           "type": "STRING",
           "value": ";"
         }

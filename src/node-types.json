@@ -1775,7 +1775,21 @@
   {
     "type": "type_defn",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type_desc",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "type_desc",
