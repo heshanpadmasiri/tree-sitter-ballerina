@@ -283,6 +283,21 @@
     "fields": {}
   },
   {
+    "type": "code_point",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "hex_digit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "comment",
     "named": true,
     "fields": {}
@@ -486,6 +501,25 @@
       "types": [
         {
           "type": "hex_number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "double_quoted_string_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "string_char",
+          "named": true
+        },
+        {
+          "type": "string_escape",
           "named": true
         }
       ]
@@ -1669,6 +1703,21 @@
     }
   },
   {
+    "type": "numeric_escape",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "code_point",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "on_conflict_clause",
     "named": true,
     "fields": {},
@@ -2265,19 +2314,43 @@
     }
   },
   {
-    "type": "string_literal",
+    "type": "string_escape",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
-          "type": "escape_sequence",
+          "type": "numeric_escape",
+          "named": true
+        },
+        {
+          "type": "string_single_escpace",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "string_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "double_quoted_string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_single_escpace",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "tuple_member_type_desc_list",
@@ -2519,6 +2592,18 @@
     }
   },
   {
+    "type": "\t",
+    "named": false
+  },
+  {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "\r",
+    "named": false
+  },
+  {
     "type": "!",
     "named": false
   },
@@ -2667,19 +2752,19 @@
     "named": false
   },
   {
-    "type": "L\"",
-    "named": false
-  },
-  {
     "type": "P",
     "named": false
   },
   {
-    "type": "U\"",
+    "type": "[",
     "named": false
   },
   {
-    "type": "[",
+    "type": "\\",
+    "named": false
+  },
+  {
+    "type": "\\u",
     "named": false
   },
   {
@@ -2769,10 +2854,6 @@
   {
     "type": "error",
     "named": false
-  },
-  {
-    "type": "escape_sequence",
-    "named": true
   },
   {
     "type": "f",
@@ -2903,19 +2984,15 @@
     "named": false
   },
   {
+    "type": "string_char",
+    "named": true
+  },
+  {
     "type": "true",
     "named": false
   },
   {
     "type": "type",
-    "named": false
-  },
-  {
-    "type": "u\"",
-    "named": false
-  },
-  {
-    "type": "u8\"",
     "named": false
   },
   {

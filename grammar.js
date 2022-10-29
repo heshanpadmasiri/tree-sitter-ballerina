@@ -389,26 +389,13 @@ module.exports = grammar({
         identifier:          $ => /[A-Za-z][A-Za-z0-9_]*/,
         compound_assignment_operator: $ => seq($.binary_operator, "="),
         binary_operator:     $ => choice("+", "-", "*", "/", "&", "|", "^", "<<", ">>", ">>>"),
-        // FIXME:
-        // this is same as tree-sitter-c
-        string_literal: $ => seq(
-          choice('L"', 'u"', 'U"', 'u8"', '"'),
-          repeat(choice(
-            token.immediate(prec(1, /[^\\"\n]+/)),
-            $.escape_sequence
-          )),
-          '"',
-        ),
-        escape_sequence: $ => token(prec(1, seq(
-          '\\',
-          choice(
-            /[^xuU]/,
-            /\d{2,3}/,
-            /x[0-9a-fA-F]{2,}/,
-            /u[0-9a-fA-F]{4}/,
-            /U[0-9a-fA-F]{8}/
-          )
-        ))),
+        string_literal:      $ => $.double_quoted_string_literal,
+        double_quoted_string_literal: $ => seq("\"", repeat(choice($.string_char, $.string_escape)), "\""),
+        string_char:         $ => /[^\\\"]/ ,
+        string_escape:       $ => choice($.string_single_escpace, $.numeric_escape),
+        string_single_escpace: $ => choice("\t", "\n", "\r", "\\", "\""),
+        numeric_escape:      $ => seq("\\u", "{", $.code_point, "}"),
+        code_point:          $ => repeat1($.hex_digit),
         comment:             $ => seq('//', /(\\(.|\r?\n)|[^\\\n])*/)
     },
     conflicts: $ => [
