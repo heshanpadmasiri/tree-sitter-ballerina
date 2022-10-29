@@ -2809,17 +2809,21 @@
       ]
     },
     "int_literal": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "decimal_number"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "hex_int_literal"
-        }
-      ]
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "decimal_number"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "hex_int_literal"
+          }
+        ]
+      }
     },
     "decimal_number": {
       "type": "CHOICE",
@@ -2868,7 +2872,7 @@
       ]
     },
     "hex_indicator": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
           "type": "STRING",
@@ -2905,8 +2909,355 @@
       ]
     },
     "floating_point_literal": {
-      "type": "PATTERN",
-      "value": "[+-]?[0-9]+[.][0-9]+"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "decimal_floating_point_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hex_floating_point_literal"
+        }
+      ]
+    },
+    "decimal_floating_point_number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "decimal_number"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "exponent"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "floating_point_type_suffix"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "dotted_decimal_number"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "exponent"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "floating_point_type_suffix"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "decimal_number"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "floating_point_type_suffix"
+            }
+          ]
+        }
+      ]
+    },
+    "dotted_decimal_number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "decimal_number"
+            },
+            {
+              "type": "STRING",
+              "value": "."
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "digit"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "."
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "digit"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "exponent": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "exponent_indicator"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "sign"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "digit"
+          }
+        }
+      ]
+    },
+    "exponent_indicator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "e"
+        },
+        {
+          "type": "STRING",
+          "value": "E"
+        }
+      ]
+    },
+    "hex_floating_point_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "hex_indicator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hex_floating_point_number"
+        }
+      ]
+    },
+    "hex_floating_point_number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "hex_number"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "hex_exponent"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "dotted_hex_number"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "hex_exponent"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dotted_hex_number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "hex_number"
+            },
+            {
+              "type": "STRING",
+              "value": "."
+            },
+            {
+              "type": "SYMBOL",
+              "name": "hex_number"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "."
+            },
+            {
+              "type": "SYMBOL",
+              "name": "hex_number"
+            }
+          ]
+        }
+      ]
+    },
+    "hex_exponent": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "hex_exponent_indicator"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "sign"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "digit"
+          }
+        }
+      ]
+    },
+    "hex_exponent_indicator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "p"
+        },
+        {
+          "type": "STRING",
+          "value": "P"
+        }
+      ]
+    },
+    "sign": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "+"
+        },
+        {
+          "type": "STRING",
+          "value": "-"
+        }
+      ]
+    },
+    "floating_point_type_suffix": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "decimal_type_suffix"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "float_type_suffix"
+        }
+      ]
+    },
+    "decimal_type_suffix": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "d"
+        },
+        {
+          "type": "STRING",
+          "value": "D"
+        }
+      ]
+    },
+    "float_type_suffix": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "f"
+        },
+        {
+          "type": "STRING",
+          "value": "F"
+        }
+      ]
     },
     "identifier": {
       "type": "PATTERN",
@@ -3194,6 +3545,10 @@
     ],
     [
       "relational_expr"
+    ],
+    [
+      "hex_int_literal",
+      "dotted_hex_number"
     ]
   ],
   "precedences": [],

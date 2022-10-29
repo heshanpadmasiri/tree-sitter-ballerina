@@ -343,10 +343,10 @@ module.exports = grammar({
             $.identifier,
             $.qualified_identifier
         ),
-        int_literal:         $ => choice(
+        int_literal:         $ => prec(1, choice(
             $.decimal_number,
             $.hex_int_literal
-        ),
+        )),
         decimal_number:      $ => choice(
             "0",
             seq($.non_zero_digit, repeat($.digit))
@@ -354,10 +354,38 @@ module.exports = grammar({
         non_zero_digit:      $ =>/[1-9]/,
         digit:               $ =>/[0-9]/,
         hex_int_literal:     $ => seq($.hex_indicator, $.hex_number),
-        hex_indicator:       $ => choice("0x", "0X"),
+        hex_indicator:       $ => seq("0x", "0X"),
         hex_number:          $ => repeat1($.hex_digit),
         hex_digit:           $ => choice($.digit, /[a-f]/, /[A-F]/),
-        floating_point_literal:$=>/[+-]?[0-9]+[.][0-9]+/,
+
+        floating_point_literal:$ => choice($.decimal_floating_point_number, $.hex_floating_point_literal),
+        decimal_floating_point_number: $ => choice(
+            seq($.decimal_number, $.exponent, optional($.floating_point_type_suffix)),
+            seq($.dotted_decimal_number, optional($.exponent), optional($.floating_point_type_suffix)),
+            seq($.decimal_number, $.floating_point_type_suffix)
+        ),
+        dotted_decimal_number:$ => choice(
+            seq($.decimal_number, ".", repeat1($.digit)),
+            seq(".", repeat1($.digit))
+        ),
+        exponent:            $ => seq($.exponent_indicator, optional($.sign), repeat1($.digit)),
+        exponent_indicator:  $ => choice("e", "E"),
+        hex_floating_point_literal: $ => seq($.hex_indicator, $.hex_floating_point_number),
+        hex_floating_point_number: $ => choice(
+            seq($.hex_number, $.hex_exponent),
+            seq($.dotted_hex_number, optional($.hex_exponent))
+        ),
+        dotted_hex_number:   $ => choice(
+            seq($.hex_number, ".", $.hex_number),
+            seq(".", $.hex_number)
+        ),
+        hex_exponent:        $ => seq($.hex_exponent_indicator, optional($.sign), repeat1($.digit)),
+        hex_exponent_indicator: $ => choice("p", "P"),
+        sign:                $ => choice("+", "-"),
+        floating_point_type_suffix: $ => choice($.decimal_type_suffix, $.float_type_suffix),
+        decimal_type_suffix: $ => choice("d", "D"),
+        float_type_suffix:   $ => choice("f", "F"),
+
         identifier:          $ => /[A-Za-z][A-Za-z0-9_]*/,
         compound_assignment_operator: $ => seq($.binary_operator, "="),
         binary_operator:     $ => choice("+", "-", "*", "/", "&", "|", "^", "<<", ">>", ">>>"),
@@ -417,6 +445,8 @@ module.exports = grammar({
 
         [$.union_type_desc],
         [$.intersection_type_desc],
-        [$.relational_expr]
+        [$.relational_expr],
+
+        [$.hex_int_literal, $.dotted_hex_number]
     ],
 });

@@ -388,6 +388,33 @@
     "fields": {}
   },
   {
+    "type": "decimal_floating_point_number",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "decimal_number",
+          "named": true
+        },
+        {
+          "type": "dotted_decimal_number",
+          "named": true
+        },
+        {
+          "type": "exponent",
+          "named": true
+        },
+        {
+          "type": "floating_point_type_suffix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "decimal_number",
     "named": true,
     "fields": {},
@@ -407,6 +434,11 @@
     }
   },
   {
+    "type": "decimal_type_suffix",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "destructuring_assign_stmt",
     "named": true,
     "fields": {},
@@ -420,6 +452,40 @@
         },
         {
           "type": "wildcard_binding_pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dotted_decimal_number",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "decimal_number",
+          "named": true
+        },
+        {
+          "type": "digit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dotted_hex_number",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "hex_number",
           "named": true
         }
       ]
@@ -477,6 +543,34 @@
         }
       ]
     }
+  },
+  {
+    "type": "exponent",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "digit",
+          "named": true
+        },
+        {
+          "type": "exponent_indicator",
+          "named": true
+        },
+        {
+          "type": "sign",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exponent_indicator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "expr_list",
@@ -631,6 +725,49 @@
     }
   },
   {
+    "type": "float_type_suffix",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "floating_point_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "decimal_floating_point_number",
+          "named": true
+        },
+        {
+          "type": "hex_floating_point_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "floating_point_type_suffix",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "decimal_type_suffix",
+          "named": true
+        },
+        {
+          "type": "float_type_suffix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "foreach_stmt",
     "named": true,
     "fields": {},
@@ -743,6 +880,76 @@
       "types": [
         {
           "type": "digit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hex_exponent",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "digit",
+          "named": true
+        },
+        {
+          "type": "hex_exponent_indicator",
+          "named": true
+        },
+        {
+          "type": "sign",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hex_exponent_indicator",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "hex_floating_point_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "hex_floating_point_number",
+          "named": true
+        },
+        {
+          "type": "hex_indicator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hex_floating_point_number",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "dotted_hex_number",
+          "named": true
+        },
+        {
+          "type": "hex_exponent",
+          "named": true
+        },
+        {
+          "type": "hex_number",
           "named": true
         }
       ]
@@ -1899,6 +2106,11 @@
     }
   },
   {
+    "type": "sign",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "signature",
     "named": true,
     "fields": {},
@@ -2443,7 +2655,23 @@
     "named": false
   },
   {
+    "type": "D",
+    "named": false
+  },
+  {
+    "type": "E",
+    "named": false
+  },
+  {
+    "type": "F",
+    "named": false
+  },
+  {
     "type": "L\"",
+    "named": false
+  },
+  {
+    "type": "P",
     "named": false
   },
   {
@@ -2515,12 +2743,20 @@
     "named": false
   },
   {
+    "type": "d",
+    "named": false
+  },
+  {
     "type": "descending",
     "named": false
   },
   {
     "type": "digit",
     "named": true
+  },
+  {
+    "type": "e",
+    "named": false
   },
   {
     "type": "else",
@@ -2539,6 +2775,10 @@
     "named": true
   },
   {
+    "type": "f",
+    "named": false
+  },
+  {
     "type": "false",
     "named": false
   },
@@ -2549,10 +2789,6 @@
   {
     "type": "float",
     "named": false
-  },
-  {
-    "type": "floating_point_literal",
-    "named": true
   },
   {
     "type": "foreach",
@@ -2628,6 +2864,10 @@
   },
   {
     "type": "outer",
+    "named": false
+  },
+  {
+    "type": "p",
     "named": false
   },
   {
