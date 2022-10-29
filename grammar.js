@@ -95,7 +95,14 @@ module.exports = grammar({
         ),
         inclusive_record_type_desc: $ => seq("record", "{", repeat($.field_desc), "}"),
         exclusive_record_type_desc: $ => seq("record", "{|", repeat($.field_desc), optional($.rest_field_desc), "|}"),
-        field_desc:         $ => seq($.type_desc, $.identifier, ";"),
+        field_desc:         $ => choice($.individual_field_desc, $.record_type_inclusion),
+        individual_field_desc: $ => seq(optional("readonly"), $.type_desc, $.field_name,
+            optional(choice("?",
+                            seq("=", $.default_expression))),
+            ";"),
+        field_name:         $ => $.identifier,
+        default_expression: $ => $.expression,
+        record_type_inclusion: $ => seq("*", $.type_reference, ";"),
         rest_field_desc:    $ => seq($.type_desc, "...", ";"),
 
         tuple_type_desc:    $ => seq("[", $.tuple_member_type_desc_list, "]"),
@@ -326,7 +333,6 @@ module.exports = grammar({
         mapping_constructor_expr:$ => seq("{", optional($.field_list), "}"),
         field_list:          $ => seq($.field, repeat(seq(",", $.field))),
         field:               $ => seq($.field_name, ":", $.expression),
-        field_name:          $ => choice($.string_literal, $.identifier),
 
         member_access_expr:  $ => seq($.primary_expr, "[", $.expression, "]"),
         field_access_expr:  $ => seq($.primary_expr, ".", $.expression),

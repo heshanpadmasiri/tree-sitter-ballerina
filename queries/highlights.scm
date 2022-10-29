@@ -60,7 +60,7 @@
 (int_literal) @number
 (floating_point_literal) @number
 
-(field_desc (identifier) @property)
+(field_name) @property
 (field_access_lvexpr (identifier) @property)
 (field_access_expr (expression) @property)
 
