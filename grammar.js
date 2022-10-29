@@ -343,11 +343,20 @@ module.exports = grammar({
             $.identifier,
             $.qualified_identifier
         ),
-
-        int_literal:     $ => choice(
-            "0",
-            /[1-9][0-9]*/,
+        int_literal:         $ => choice(
+            $.decimal_number,
+            $.hex_int_literal
         ),
+        decimal_number:      $ => choice(
+            "0",
+            seq($.non_zero_digit, repeat($.digit))
+        ),
+        non_zero_digit:      $ =>/[1-9]/,
+        digit:               $ =>/[0-9]/,
+        hex_int_literal:     $ => seq($.hex_indicator, $.hex_number),
+        hex_indicator:       $ => choice("0x", "0X"),
+        hex_number:          $ => repeat1($.hex_digit),
+        hex_digit:           $ => choice($.digit, /[a-f]/, /[A-F]/),
         floating_point_literal:$=>/[+-]?[0-9]+[.][0-9]+/,
         identifier:          $ => /[A-Za-z][A-Za-z0-9_]*/,
         compound_assignment_operator: $ => seq($.binary_operator, "="),

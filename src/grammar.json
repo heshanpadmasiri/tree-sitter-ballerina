@@ -2812,12 +2812,95 @@
       "type": "CHOICE",
       "members": [
         {
+          "type": "SYMBOL",
+          "name": "decimal_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hex_int_literal"
+        }
+      ]
+    },
+    "decimal_number": {
+      "type": "CHOICE",
+      "members": [
+        {
           "type": "STRING",
           "value": "0"
         },
         {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "non_zero_digit"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "digit"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "non_zero_digit": {
+      "type": "PATTERN",
+      "value": "[1-9]"
+    },
+    "digit": {
+      "type": "PATTERN",
+      "value": "[0-9]"
+    },
+    "hex_int_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "hex_indicator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hex_number"
+        }
+      ]
+    },
+    "hex_indicator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "0x"
+        },
+        {
+          "type": "STRING",
+          "value": "0X"
+        }
+      ]
+    },
+    "hex_number": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "hex_digit"
+      }
+    },
+    "hex_digit": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "digit"
+        },
+        {
           "type": "PATTERN",
-          "value": "[1-9][0-9]*"
+          "value": "[a-f]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[A-F]"
         }
       ]
     },

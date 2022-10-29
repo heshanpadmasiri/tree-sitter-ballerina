@@ -388,6 +388,25 @@
     "fields": {}
   },
   {
+    "type": "decimal_number",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "digit",
+          "named": true
+        },
+        {
+          "type": "non_zero_digit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "destructuring_assign_stmt",
     "named": true,
     "fields": {},
@@ -715,6 +734,60 @@
     }
   },
   {
+    "type": "hex_digit",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "digit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hex_indicator",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "hex_int_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "hex_indicator",
+          "named": true
+        },
+        {
+          "type": "hex_number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hex_number",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "hex_digit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_else_stmt",
     "named": true,
     "fields": {},
@@ -823,7 +896,21 @@
   {
     "type": "int_literal",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "decimal_number",
+          "named": true
+        },
+        {
+          "type": "hex_int_literal",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "intermediate_clause",
@@ -2292,6 +2379,14 @@
     "named": false
   },
   {
+    "type": "0X",
+    "named": false
+  },
+  {
+    "type": "0x",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
@@ -2424,6 +2519,10 @@
     "named": false
   },
   {
+    "type": "digit",
+    "named": true
+  },
+  {
     "type": "else",
     "named": false
   },
@@ -2510,6 +2609,10 @@
   {
     "type": "match",
     "named": false
+  },
+  {
+    "type": "non_zero_digit",
+    "named": true
   },
   {
     "type": "null",
