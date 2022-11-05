@@ -21,4 +21,9 @@ public function main() {
     else if (c != 3) {
 //             ^ operator
     }
+    int c = a > 5 ? 10 : -10;
+//            ^ operator
+//                ^ operator
+//                     ^ operator
+//                       ^operator
 }
