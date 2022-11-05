@@ -341,6 +341,25 @@
     }
   },
   {
+    "type": "conditional_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "nil_conditional_expr",
+          "named": true
+        },
+        {
+          "type": "ternary_conditional_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "const_defn",
     "named": true,
     "fields": {},
@@ -1717,6 +1736,21 @@
     }
   },
   {
+    "type": "nil_conditional_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "nil_literal",
     "named": true,
     "fields": {}
@@ -1919,6 +1953,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "conditional_expr",
+          "named": true
+        },
         {
           "type": "error_constructor_expr",
           "named": true
@@ -2402,6 +2440,21 @@
     "fields": {}
   },
   {
+    "type": "ternary_conditional_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "tuple_member_type_desc_list",
     "named": true,
     "fields": {},
@@ -2786,6 +2839,10 @@
   },
   {
     "type": "?",
+    "named": false
+  },
+  {
+    "type": "?:",
     "named": false
   },
   {

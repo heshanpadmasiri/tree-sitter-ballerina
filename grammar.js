@@ -34,10 +34,10 @@ module.exports = grammar({
             $.intersection_type_desc,
             seq($.union_type_desc, "|", $.intersection_type_desc)
         ),
-        intersection_type_desc: $ => choice(
+        intersection_type_desc: $ => prec.left(choice(
             $.postfix_type_desc,
             seq($.intersection_type_desc, "&", $.postfix_type_desc)
-        ), 
+        )), 
         postfix_type_desc:  $ => choice(
             $.primary_type_desc,
             $.optional_type_desc,
@@ -161,7 +161,7 @@ module.exports = grammar({
             $.member_access_lvexpr,
         ),
         variable_reference_expr: $ => $.identifier,
-        field_access_lvexpr: $ => seq($.lvexpr, ".", $.identifier),
+        field_access_lvexpr: $ => prec.left(seq($.lvexpr, ".", $.identifier)),
         member_access_lvexpr:$ => seq($.lvexpr, "[", $.expression, "]"),
 
         return_stmt:         $ => seq("return", optional($.expression), ";"),
@@ -258,15 +258,15 @@ module.exports = grammar({
             seq($.multiplicative_expr, "%", $.unary_expr)
         ),
 
-        unary_expr:          $ => choice(
+        unary_expr:          $ => prec(1, choice(
             $.primary_expr,
             seq("-", $.unary_expr),
             seq("~", $.unary_expr),
             $.type_cast_expr,
             $.checking_expr
-        ),
-        type_cast_expr:      $ => seq("<", $.type_desc, ">", $.unary_expr),
-        checking_expr:       $ => seq($.checking_keyword, $.unary_expr),
+        )),
+        type_cast_expr:      $ => prec(1, seq("<", $.type_desc, ">", $.unary_expr)),
+        checking_expr:       $ => prec(1, seq($.checking_keyword, $.unary_expr)),
         checking_keyword:    $ => choice(
             "check",
             "checkpanic"
@@ -279,6 +279,7 @@ module.exports = grammar({
             $.function_call_expr,
             $.method_call_expr,
             $.variable_reference_expr,
+            $.conditional_expr,
             seq("(", $.inner_expr, ")")
         ),
 
@@ -308,9 +309,9 @@ module.exports = grammar({
 
         limit_clause:        $ => seq("limit", $.expression),
 
-        select_clause:       $ => seq("select", $.expression),
+        select_clause:       $ => prec.left(seq("select", $.expression)),
 
-        on_conflict_clause:  $ => seq("on", "conflict", $.expression),
+        on_conflict_clause:  $ => prec.left(seq("on", "conflict", $.expression)),
 
         typed_binding_pattern:$ => seq($.inferable_type_desc, $.binding_pattern),
         inferable_type_desc: $ => choice("var", $.type_desc),
@@ -335,7 +336,7 @@ module.exports = grammar({
         field:               $ => seq($.field_name, ":", $.expression),
 
         member_access_expr:  $ => seq($.primary_expr, "[", $.expression, "]"),
-        field_access_expr:  $ => seq($.primary_expr, ".", $.expression),
+        field_access_expr:   $ => prec.left(seq($.primary_expr, ".", $.expression)),
 
         function_call_expr:  $ => seq($.function_reference, $.arg_list),
         method_call_expr:    $ => seq($.primary_expr, ".", $.identifier, $.arg_list),
@@ -349,6 +350,15 @@ module.exports = grammar({
             $.identifier,
             $.qualified_identifier
         ),
+
+        conditional_expr:    $ => choice(
+            $.ternary_conditional_expr,
+            $.nil_conditional_expr
+        ),
+        ternary_conditional_expr: $ => prec.left(seq($.expression, "?", $.expression, ":", $.expression)),
+        nil_conditional_expr: $ => prec.left(seq($.expression, "?:", $.expression)),
+
+
         int_literal:         $ => prec(1, choice(
             $.decimal_number,
             $.hex_int_literal
@@ -440,6 +450,20 @@ module.exports = grammar({
         [$.intersection_type_desc],
         [$.relational_expr],
 
-        [$.hex_int_literal, $.dotted_hex_number]
+        [$.logical_or_expr],
+        [$.bitwise_or_expr],
+        [$.logical_and_expr],
+        [$.bitwise_and_expr],
+        [$.bitwise_xor_expr],
+        [$.equality_expr],
+
+        [$.shift_expr],
+        [$.additive_expr],
+        [$.multiplicative_expr],
+
+        [$.hex_int_literal, $.dotted_hex_number],
+        [$.variable_reference_expr, $.module_prefix],
+
+        [$.type_reference, $.const_reference_expr, $.module_prefix]
     ],
 });
