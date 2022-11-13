@@ -48,9 +48,6 @@
 "%" @operator
 "==" @operator
 
-(ternary_conditional_expr ("?") @operator)
-(ternary_conditional_expr (":") @operator)
-
 (type_desc) @type
 (builtin_type_name) @type.builtin
 

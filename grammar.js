@@ -2,8 +2,8 @@ module.exports = grammar({
     name: "ballerina",
 
     extras: $ => [
-        /\s|\\\r?\n/,
         $.comment,
+        $.white_space_char
     ],
 
     rules: {
@@ -22,8 +22,9 @@ module.exports = grammar({
         hex_digit:          $ => choice($.digit, /[a-fA-F]/),
         digit:              $ => /[0-9]/,
         
-
-        comment:            $ => seq('//', /(\\(.|\r?\n)|[^\\\n])*/)
+        comment:            $ => seq("//", repeat($.any_char_but_new_line), "\n"),
+        any_char_but_new_line:$ => /[^\n]/,
+        white_space_char:   $ => /[ \t\r\n]/
     },
     conflicts: $ => [
     ],
