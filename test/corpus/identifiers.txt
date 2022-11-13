@@ -1,0 +1,83 @@
+====
+Identifiers
+====
+a;
+b;
+c_a;
+_123;
+_dlb;
+_dlb34;
+_a__;
+---
+    (source_file
+      (module_level_defns
+        (identifier
+          (unquoted_identifier
+            (identifier_intial_char
+              (ascii_letter))))
+        (white_space_char)
+        (identifier
+          (unquoted_identifier
+            (identifier_intial_char
+              (ascii_letter))))
+        (white_space_char)
+        (identifier
+          (unquoted_identifier
+            (identifier_intial_char
+              (ascii_letter))
+            (identifier_fallowing_char
+              (identifier_intial_char))
+            (identifier_fallowing_char
+              (identifier_intial_char
+                (ascii_letter)))))
+        (white_space_char)
+        (identifier
+          (unquoted_identifier
+            (identifier_intial_char)
+            (identifier_fallowing_char
+              (digit))
+            (identifier_fallowing_char
+              (digit))
+            (identifier_fallowing_char
+              (digit))))
+        (white_space_char)
+        (identifier
+          (unquoted_identifier
+            (identifier_intial_char)
+            (identifier_fallowing_char
+              (identifier_intial_char
+                (ascii_letter)))
+            (identifier_fallowing_char
+              (identifier_intial_char
+                (ascii_letter)))
+            (identifier_fallowing_char
+              (identifier_intial_char
+                (ascii_letter)))))
+        (white_space_char)
+        (identifier
+          (unquoted_identifier
+            (identifier_intial_char)
+            (identifier_fallowing_char
+              (identifier_intial_char
+                (ascii_letter)))
+            (identifier_fallowing_char
+              (identifier_intial_char
+                (ascii_letter)))
+            (identifier_fallowing_char
+              (identifier_intial_char
+                (ascii_letter)))
+            (identifier_fallowing_char
+              (digit))
+            (identifier_fallowing_char
+              (digit))))
+        (white_space_char)
+        (identifier
+          (unquoted_identifier
+            (identifier_intial_char)
+            (identifier_fallowing_char
+              (identifier_intial_char
+                (ascii_letter)))
+            (identifier_fallowing_char
+              (identifier_intial_char))
+            (identifier_fallowing_char
+              (identifier_intial_char))))))

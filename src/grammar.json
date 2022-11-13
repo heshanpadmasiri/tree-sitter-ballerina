@@ -3,7 +3,23 @@
   "rules": {
     "source_file": {
       "type": "SYMBOL",
-      "name": "identifier"
+      "name": "module_level_defns"
+    },
+    "module_level_defns": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "STRING",
+            "value": ";"
+          }
+        ]
+      }
     },
     "identifier": {
       "type": "CHOICE",
@@ -35,17 +51,20 @@
           ]
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "identifier_fallowing_char"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "identifier_escape"
-            }
-          ]
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier_fallowing_char"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "identifier_escape"
+              }
+            ]
+          }
         }
       ]
     },

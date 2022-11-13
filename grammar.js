@@ -7,10 +7,12 @@ module.exports = grammar({
     ],
 
     rules: {
-        source_file:        $ => $.identifier,
+        source_file:        $ => $.module_level_defns,
+        
+        module_level_defns: $ => repeat1(seq($.identifier, ";")), // FIXME:
 
         identifier:         $ => choice($.unquoted_identifier, $.quoted_identifier),
-        unquoted_identifier:$ => seq(choice($.identifier_intial_char, $.identifier_escape), choice($.identifier_fallowing_char, $.identifier_escape)),
+        unquoted_identifier:$ => seq(choice($.identifier_intial_char, $.identifier_escape), repeat(choice($.identifier_fallowing_char, $.identifier_escape))),
         quoted_identifier:  $ => seq("'", repeat1(choice($.identifier_fallowing_char, $.identifier_escape))),
         identifier_intial_char:$ => choice($.ascii_letter, "_"), // TODO: unicode
         identifier_fallowing_char:$ => choice($.identifier_intial_char, $.digit),
