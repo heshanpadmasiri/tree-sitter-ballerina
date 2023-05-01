@@ -406,10 +406,10 @@ module.exports = grammar({
         compound_assignment_operator: $ => seq($.binary_operator, "="),
         binary_operator:     $ => choice("+", "-", "*", "/", "&", "|", "^", "<<", ">>", ">>>"),
         string_literal:      $ => $.double_quoted_string_literal,
-        double_quoted_string_literal: $ => seq("\"", repeat(choice($.string_char, $.string_escape)), "\""),
-        string_char:         $ => /[^\\"\n]+/ ,
+        double_quoted_string_literal: $ => seq('"', repeat(choice(token.immediate(prec(1, $.string_char), $.string_escape)), '"'),
+        string_char:         $ => /[^\\"\n]+/,
         string_escape:       $ => choice($.string_single_escpace, $.numeric_escape),
-        string_single_escpace: $ => choice("\t", "\n", "\r", "\\", "\""),
+        string_single_escpace: $ => choice("\t", "\n", "\r", "\\"),
         numeric_escape:      $ => seq("\\u", "{", $.code_point, "}"),
         code_point:          $ => repeat1($.hex_digit),
         comment:             $ => seq('//', /(\\(.|\r?\n)|[^\\\n])*/)
