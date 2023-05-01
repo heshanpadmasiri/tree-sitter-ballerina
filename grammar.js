@@ -406,7 +406,7 @@ module.exports = grammar({
         compound_assignment_operator: $ => seq($.binary_operator, "="),
         binary_operator:     $ => choice("+", "-", "*", "/", "&", "|", "^", "<<", ">>", ">>>"),
         string_literal:      $ => $.double_quoted_string_literal,
-        double_quoted_string_literal: $ => seq('"', repeat(choice(token.immediate(prec(1, $.string_char), $.string_escape)), '"'),
+        double_quoted_string_literal: $ => seq('"', repeat(choice(token.immediate(prec(1, $.string_char)), $.string_escape)), '"'),
         string_char:         $ => /[^\\"\n]+/,
         string_escape:       $ => choice($.string_single_escpace, $.numeric_escape),
         string_single_escpace: $ => choice("\t", "\n", "\r", "\\"),
