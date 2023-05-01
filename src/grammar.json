@@ -3504,8 +3504,15 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "string_char"
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[^\\\\\"\\n]+"
+                  }
+                }
               },
               {
                 "type": "SYMBOL",
@@ -3519,10 +3526,6 @@
           "value": "\""
         }
       ]
-    },
-    "string_char": {
-      "type": "PATTERN",
-      "value": "[^\\\\\\\"]"
     },
     "string_escape": {
       "type": "CHOICE",
@@ -3555,10 +3558,6 @@
         {
           "type": "STRING",
           "value": "\\"
-        },
-        {
-          "type": "STRING",
-          "value": "\""
         }
       ]
     },

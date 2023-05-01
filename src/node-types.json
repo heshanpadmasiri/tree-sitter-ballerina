@@ -549,10 +549,6 @@
       "required": false,
       "types": [
         {
-          "type": "string_char",
-          "named": true
-        },
-        {
           "type": "string_escape",
           "named": true
         }
@@ -3092,10 +3088,6 @@
   {
     "type": "string",
     "named": false
-  },
-  {
-    "type": "string_char",
-    "named": true
   },
   {
     "type": "true",
