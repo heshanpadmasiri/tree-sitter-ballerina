@@ -378,6 +378,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
         }
       ]
     }
