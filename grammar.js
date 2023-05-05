@@ -33,11 +33,11 @@ module.exports = grammar({
         final_defn:         $ => seq("final", $.typed_binding_pattern, "=", $.expression, ";"),
         type_defn:          $ => seq(optional("public"), "type", $.identifier, $.type_desc, ";"),
 
-        type_desc:          $ => $.union_type_desc,
-        union_type_desc:    $ => choice(
+        type_desc:          $ => prec(2, $.union_type_desc),
+        union_type_desc:    $ => prec(1, choice(
             $.intersection_type_desc,
             seq($.union_type_desc, "|", $.intersection_type_desc)
-        ),
+        )),
         intersection_type_desc: $ => prec.left(choice(
             $.postfix_type_desc,
             seq($.intersection_type_desc, "&", $.postfix_type_desc)
@@ -50,7 +50,7 @@ module.exports = grammar({
 
         optional_type_desc: $ => seq($.postfix_type_desc, "?"),
 
-        array_type_desc:    $ => seq($.array_member_type_desc, repeat1($.array_dimensions)),
+        array_type_desc:    $ => prec.right(seq($.array_member_type_desc, repeat1($.array_dimensions))),
         array_dimensions:   $ => seq("[", optional($.array_length), "]"),
         array_member_type_desc: $ => choice(
             $.type_desc
@@ -159,11 +159,11 @@ module.exports = grammar({
         
         wildcard_binding_pattern: $ => "_",
 
-        lvexpr:              $ => choice(
+        lvexpr:              $ => prec(1, choice(
             $.variable_reference_expr,
             $.field_access_lvexpr,
             $.member_access_lvexpr,
-        ),
+        )),
         variable_reference_expr: $ => $.identifier,
         field_access_lvexpr: $ => prec.left(seq($.lvexpr, ".", $.identifier)),
         member_access_lvexpr:$ => seq($.lvexpr, "[", $.expression, "]"),
@@ -189,12 +189,12 @@ module.exports = grammar({
             $.simple_const_expr
         ),
 
-        simple_const_expr:   $ => choice(
+        simple_const_expr:   $ => prec(2, choice(
             $.literal,
             seq("-", $.int_literal),
             seq("-", $.floating_point_literal),
             $.const_reference_expr
-        ),
+        )),
 
         expression:          $ => choice(
             $.inner_expr,
@@ -203,65 +203,61 @@ module.exports = grammar({
             $.query_expr
         ),
         const_expr:          $ => $.inner_expr,
-        const_reference_expr:$ => choice($.identifier, $.qualified_identifier),
+        const_reference_expr:$ => prec(1, choice($.identifier, $.qualified_identifier)),
         
-        inner_expr:          $ => $.logical_or_expr,
-
-        logical_or_expr:     $ => choice(
+        inner_expr:          $ => prec(12, $.logical_or_expr),
+        logical_or_expr:     $ => prec(11, choice(
             $.logical_and_expr,
             seq($.logical_or_expr, "||", $.logical_and_expr)
-        ),
-        logical_and_expr:    $ => choice(
+        )),
+        logical_and_expr:    $ => prec(10, choice(
             $.bitwise_xor_expr,
             seq($.bitwise_or_expr, "|", $.bitwise_xor_expr)
-        ),
-        bitwise_or_expr:    $ => choice(
+        )),
+        bitwise_or_expr:    $ => prec(9, choice(
             $.bitwise_xor_expr,
             seq($.bitwise_or_expr, "|", $.bitwise_xor_expr)
-        ),
-        bitwise_xor_expr:    $ => choice(
+        )),
+        bitwise_xor_expr:    $ => prec(8, choice(
             $.bitwise_and_expr,
             seq($.bitwise_xor_expr, "^", $.bitwise_and_expr)
-        ),
-        bitwise_and_expr:    $ => choice(
+        )),
+        bitwise_and_expr:    $ => prec(7, choice(
             $.equality_expr,
             seq($.bitwise_and_expr, "&", $.equality_expr)
-        ),
-
-
-        equality_expr:       $ => choice(
+        )),
+        equality_expr:       $ => prec(6, choice(
             $.relational_expr,
             seq($.equality_expr, "==", $.relational_expr),
             seq($.equality_expr, "!=", $.relational_expr),
             seq($.equality_expr, "===", $.relational_expr),
             seq($.equality_expr, "!==", $.relational_expr)
-        ),
-        relational_expr:     $ => choice(
+        )),
+        relational_expr:     $ => prec(5, choice(
             $.shift_expr,
             seq($.shift_expr, "<", $.shift_expr),
             seq($.shift_expr, "<=", $.shift_expr),
             seq($.shift_expr, ">", $.shift_expr),
             seq($.shift_expr, ">=", $.shift_expr),
             seq($.shift_expr, optional("!"), "is", $.type_desc),
-        ),
-        shift_expr:          $ => choice(
+        )),
+        shift_expr:          $ => prec(4, choice(
             $.additive_expr,
             seq($.shift_expr, "<<", $.additive_expr),
             seq($.shift_expr, ">>", $.additive_expr),
             seq($.shift_expr, ">>>", $.additive_expr),
-        ),
-        additive_expr:       $ => choice(
+        )),
+        additive_expr:       $ => prec(3, choice(
             $.multiplicative_expr,
             seq($.additive_expr, "+", $.multiplicative_expr),
             seq($.additive_expr, "-", $.multiplicative_expr)
-        ),
-        multiplicative_expr: $ => choice(
+        )),
+        multiplicative_expr: $ => prec(2, choice(
             $.unary_expr,
             seq($.multiplicative_expr, "*", $.unary_expr),
             seq($.multiplicative_expr, "/", $.unary_expr),
             seq($.multiplicative_expr, "%", $.unary_expr)
-        ),
-
+        )),
         unary_expr:          $ => prec(1, choice(
             $.primary_expr,
             seq("-", $.unary_expr),
@@ -322,13 +318,13 @@ module.exports = grammar({
 
         let_var_decl:        $ => seq($.typed_binding_pattern, "=", $.expression),
 
-        literal:             $ => choice(
+        literal:             $ => prec(1, choice(
             $.nil_literal,
             $.boolean_literal,
             $.int_literal,
             $.floating_point_literal, 
             $.string_literal
-        ),
+        )),
         nil_literal:         $ => choice(seq("(",")"), "null"),
         boolean_literal:     $ => choice("true", "false"),
         
@@ -345,10 +341,10 @@ module.exports = grammar({
         function_call_expr:  $ => seq($.function_reference, $.arg_list),
         method_call_expr:    $ => seq($.primary_expr, ".", $.identifier, $.arg_list),
         arg_list:            $ => seq("(", optional($.expr_list), ")"),
-        function_reference:  $ => choice($.identifier, $.qualified_identifier),
+        function_reference:  $ => prec.left(choice($.identifier, $.qualified_identifier)),
 
         qualified_identifier:$ => seq($.module_prefix, ":", $.identifier),
-        module_prefix:       $ => choice($.identifier),
+        module_prefix:       $ => prec(2, choice($.identifier)),
 
         variable_reference_expr: $ => choice(
             $.identifier,
@@ -373,7 +369,7 @@ module.exports = grammar({
         ),
         non_zero_digit:      $ =>/[1-9]/,
         digit:               $ =>/[0-9]/,
-        hex_int_literal:     $ => seq($.hex_indicator, $.hex_number),
+        hex_int_literal:     $ => prec(1, seq($.hex_indicator, $.hex_number)),
         hex_indicator:       $ => seq("0x", "0X"),
         hex_number:          $ => repeat1($.hex_digit),
         hex_digit:           $ => choice($.digit, /[a-f]/, /[A-F]/),
@@ -418,37 +414,6 @@ module.exports = grammar({
         comment:             $ => seq('//', /(\\(.|\r?\n)|[^\\\n])*/)
     },
     conflicts: $ => [
-        [$.type_reference, $.const_reference_expr],
-        [$.literal, $.nil_type_desc],
-        [$.array_type_desc],
-        [$.type_reference, $.const_reference_expr, $.variable_reference_expr],
-        [$.primary_expr, $.lvexpr], // both can be variable_reference_expr
-        [$.primary_expr, $.simple_const_expr], // both can  be literals
-        [$.literal, $.simple_const_expr], // both can be floating_point_literal
-
-        // we need look ahead for these
-        [$.method_call_expr, $.function_reference],
-        [$.method_call_expr, $.field_access_expr, $.unary_expr],
-        [$.member_access_expr, $.unary_expr],
-
-        [$.type_desc, $.union_type_desc],
-        [$.type_desc, $.intersection_type_desc],
-        [$.union_type_desc, $.intersection_type_desc],
-
-        [$.inner_expr, $.logical_or_expr],
-        [$.logical_and_expr, $.bitwise_or_expr],
-        [$.logical_and_expr, $.bitwise_xor_expr],
-        [$.bitwise_or_expr, $.bitwise_xor_expr],
-        [$.bitwise_and_expr, $.bitwise_xor_expr],
-
-        [$.bitwise_and_expr, $.equality_expr],
-
-        [$.relational_expr, $.shift_expr],
-        [$.additive_expr, $.shift_expr],
-        [$.additive_expr, $.multiplicative_expr],
-
-        [$.array_member_type_desc, $.relational_expr],
-
         [$.union_type_desc],
         [$.intersection_type_desc],
         [$.relational_expr],
@@ -463,10 +428,5 @@ module.exports = grammar({
         [$.shift_expr],
         [$.additive_expr],
         [$.multiplicative_expr],
-
-        [$.hex_int_literal, $.dotted_hex_number],
-        [$.variable_reference_expr, $.module_prefix],
-
-        [$.type_reference, $.const_reference_expr, $.module_prefix]
     ],
 });
