@@ -676,6 +676,10 @@
           "named": true
         },
         {
+          "type": "new_expression",
+          "named": true
+        },
+        {
           "type": "query_expr",
           "named": true
         }
@@ -859,15 +863,15 @@
       "required": true,
       "types": [
         {
-          "type": "additive_expr",
-          "named": true
-        },
-        {
-          "type": "identifier",
+          "type": "expression",
           "named": true
         },
         {
           "type": "stmt_block",
+          "named": true
+        },
+        {
+          "type": "typed_binding_pattern",
           "named": true
         }
       ]
@@ -1133,6 +1137,40 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "include_record_param",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "include_record_params",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "include_record_param",
           "named": true
         }
       ]
@@ -1759,6 +1797,25 @@
     }
   },
   {
+    "type": "new_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_reference_expr",
+          "named": true
+        },
+        {
+          "type": "param_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "nil_conditional_expr",
     "named": true,
     "fields": {},
@@ -1934,6 +1991,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "include_record_params",
+          "named": true
+        },
         {
           "type": "param",
           "named": true
@@ -2785,10 +2846,6 @@
     "named": false
   },
   {
-    "type": "..<",
-    "named": false
-  },
-  {
     "type": "/",
     "named": false
   },
@@ -3054,6 +3111,10 @@
   },
   {
     "type": "match",
+    "named": false
+  },
+  {
+    "type": "new",
     "named": false
   },
   {

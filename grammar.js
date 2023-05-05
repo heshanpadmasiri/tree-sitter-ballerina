@@ -116,8 +116,10 @@ module.exports = grammar({
         ),
         tuple_rest_desc:    $ => seq($.type_desc, "..."),
 
-        param_list:         $ => seq($.param, repeat(seq(",", $.param)), optional(seq(",", $.rest_param))),
+        param_list:         $ => prec.right(seq($.param, repeat(seq(",", $.param)), optional($.include_record_params), optional(seq(",", $.rest_param)))),
         param:              $ => seq($.type_desc, $.identifier),
+        include_record_params: $ => prec.left(seq(",", $.include_record_param, repeat(seq(",", $.include_record_param)))),
+        include_record_param:  $ => seq("*", $.type_reference, $.identifier),
         rest_param:         $ => seq($.type_desc, "...", $.identifier),
 
         stmt_block:         $ => seq("{", repeat($.statement), "}"),
@@ -138,6 +140,7 @@ module.exports = grammar({
             $.match_stmt
         ),
 
+        local_no_init_var_decl_stmt: $ => seq(optional("final"), $.typed_binding_pattern,";"),
         local_var_decl_stmt: $ => seq(optional("final"), $.typed_binding_pattern, "=", $.expression, ";"),
         binding_pattern:     $ => choice(
             $.identifier,
@@ -174,7 +177,7 @@ module.exports = grammar({
         while_stmt:          $ => seq("while", $.expression, $.stmt_block),
         break_stmt:          $ => seq("break", ";"),
         continue_stmt:       $ => seq("continue", ";"),
-        foreach_stmt:        $ => seq("foreach", "int", $.identifier, "in", $.additive_expr, "..<", $.additive_expr, $.stmt_block),
+        foreach_stmt:        $ => seq("foreach", $.typed_binding_pattern, "in", $.expression, $.stmt_block),
 
         panic_stmt:          $ => seq("panic", $.inner_expr, ";"),
 
@@ -197,11 +200,14 @@ module.exports = grammar({
         )),
 
         expression:          $ => choice(
+            $.new_expression,
             $.inner_expr,
             $.list_constructor_expr,
             $.mapping_constructor_expr,
             $.query_expr
         ),
+
+        new_expression:      $ => seq("new", $.const_reference_expr, $.param_list),
         const_expr:          $ => $.inner_expr,
         const_reference_expr:$ => prec(1, choice($.identifier, $.qualified_identifier)),
         

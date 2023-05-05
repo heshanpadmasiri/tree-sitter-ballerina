@@ -912,32 +912,18 @@
       ]
     },
     "param_list": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "param"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ","
-              },
-              {
-                "type": "SYMBOL",
-                "name": "param"
-              }
-            ]
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "param"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
               "type": "SEQ",
               "members": [
                 {
@@ -946,16 +932,46 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "rest_param"
+                  "name": "param"
                 }
               ]
-            },
-            {
-              "type": "BLANK"
             }
-          ]
-        }
-      ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "include_record_params"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ","
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "rest_param"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "param": {
       "type": "SEQ",
@@ -963,6 +979,56 @@
         {
           "type": "SYMBOL",
           "name": "type_desc"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
+    },
+    "include_record_params": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": ","
+          },
+          {
+            "type": "SYMBOL",
+            "name": "include_record_param"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "include_record_param"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "include_record_param": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "*"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_reference"
         },
         {
           "type": "SYMBOL",
@@ -1061,6 +1127,31 @@
         {
           "type": "SYMBOL",
           "name": "match_stmt"
+        }
+      ]
+    },
+    "local_no_init_var_decl_stmt": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "final"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "typed_binding_pattern"
+        },
+        {
+          "type": "STRING",
+          "value": ";"
         }
       ]
     },
@@ -1428,12 +1519,8 @@
           "value": "foreach"
         },
         {
-          "type": "STRING",
-          "value": "int"
-        },
-        {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "typed_binding_pattern"
         },
         {
           "type": "STRING",
@@ -1441,15 +1528,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "additive_expr"
-        },
-        {
-          "type": "STRING",
-          "value": "..<"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "additive_expr"
+          "name": "expression"
         },
         {
           "type": "SYMBOL",
@@ -1606,6 +1685,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "new_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "inner_expr"
         },
         {
@@ -1619,6 +1702,23 @@
         {
           "type": "SYMBOL",
           "name": "query_expr"
+        }
+      ]
+    },
+    "new_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "new"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "const_reference_expr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "param_list"
         }
       ]
     },
