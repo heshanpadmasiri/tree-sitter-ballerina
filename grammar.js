@@ -19,7 +19,8 @@ module.exports = grammar({
         module_defn:        $ => choice(
             $.function_defn,
             $.const_defn,
-            $.type_defn
+            $.type_defn,
+            $.final_defn
         ),
 
         function_defn:      $ => seq(optional("public"), "function", $.identifier, $.signature, $.stmt_block),
@@ -29,7 +30,7 @@ module.exports = grammar({
                                              choice($.const_expr,
                                                     $.literal),
                                              ";")),
-
+        final_defn:         $ => seq("final", $.typed_binding_pattern, "=", $.expression, ";"),
         type_defn:          $ => seq(optional("public"), "type", $.identifier, $.type_desc, ";"),
 
         type_desc:          $ => $.union_type_desc,

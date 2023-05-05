@@ -789,6 +789,25 @@
     }
   },
   {
+    "type": "final_defn",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "typed_binding_pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "float_type_suffix",
     "named": true,
     "fields": {}
@@ -1650,6 +1669,10 @@
       "types": [
         {
           "type": "const_defn",
+          "named": true
+        },
+        {
+          "type": "final_defn",
           "named": true
         },
         {

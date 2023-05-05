@@ -131,6 +131,10 @@
         {
           "type": "SYMBOL",
           "name": "type_defn"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "final_defn"
         }
       ]
     },
@@ -274,6 +278,31 @@
           }
         ]
       }
+    },
+    "final_defn": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "final"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "typed_binding_pattern"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
     },
     "type_defn": {
       "type": "SEQ",
