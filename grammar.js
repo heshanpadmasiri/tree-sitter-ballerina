@@ -207,6 +207,16 @@ module.exports = grammar({
             $.query_expr
         ),
 
+        template_expression: $ => choice(
+            $.string_template_expression,
+            $.xml_template_expression,
+            $.raw_template_expression,
+        ),
+
+        string_template_expression: $ => seq("string", $.back_tick_string),
+        xml_template_expression: $ => seq("xml", $.back_tick_string),
+        raw_template_expression: $ => $.back_tick_string,
+
         new_expression:      $ => seq("new", $.const_reference_expr, $.param_list),
         const_expr:          $ => $.inner_expr,
         const_reference_expr:$ => prec(1, choice($.identifier, $.qualified_identifier)),
@@ -412,7 +422,13 @@ module.exports = grammar({
         compound_assignment_operator: $ => seq($.binary_operator, "="),
         binary_operator:     $ => choice("+", "-", "*", "/", "&", "|", "^", "<<", ">>", ">>>"),
         string_literal:      $ => $.double_quoted_string_literal,
-        double_quoted_string_literal: $ => seq('"', repeat(choice(token.immediate(prec(1, /[^\\"\n]+/)), $.string_escape)), '"'),
+        back_tick_string:    $ => seq("`", optional($.back_tick_body), "`"),
+        back_tick_body:      $ => repeat1(choice(
+            prec(1, seq("${", $.expression, "}")),
+            $.string_body
+        )),
+        double_quoted_string_literal: $ => seq('"', optional($.string_body), '"'),
+        string_body:         $ => repeat1(choice(token.immediate(prec(1, /[^\\"\n]+/)), $.string_escape)),
         string_escape:       $ => choice($.string_single_escpace, $.numeric_escape),
         string_single_escpace: $ => choice("\t", "\n", "\r", "\\"),
         numeric_escape:      $ => seq("\\u", "{", $.code_point, "}"),

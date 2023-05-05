@@ -1705,6 +1705,53 @@
         }
       ]
     },
+    "template_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "string_template_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "xml_template_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "raw_template_expression"
+        }
+      ]
+    },
+    "string_template_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "back_tick_string"
+        }
+      ]
+    },
+    "xml_template_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "xml"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "back_tick_string"
+        }
+      ]
+    },
+    "raw_template_expression": {
+      "type": "SYMBOL",
+      "name": "back_tick_string"
+    },
     "new_expression": {
       "type": "SEQ",
       "members": [
@@ -3725,6 +3772,64 @@
       "type": "SYMBOL",
       "name": "double_quoted_string_literal"
     },
+    "back_tick_string": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "`"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "back_tick_body"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "`"
+        }
+      ]
+    },
+    "back_tick_body": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "${"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "expression"
+                },
+                {
+                  "type": "STRING",
+                  "value": "}"
+                }
+              ]
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "string_body"
+          }
+        ]
+      }
+    },
     "double_quoted_string_literal": {
       "type": "SEQ",
       "members": [
@@ -3733,33 +3838,45 @@
           "value": "\""
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[^\\\\\"\\n]+"
-                  }
-                }
-              },
-              {
-                "type": "SYMBOL",
-                "name": "string_escape"
-              }
-            ]
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "string_body"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
           "value": "\""
         }
       ]
+    },
+    "string_body": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[^\\\\\"\\n]+"
+              }
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "string_escape"
+          }
+        ]
+      }
     },
     "string_escape": {
       "type": "CHOICE",
