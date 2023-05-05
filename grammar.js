@@ -116,7 +116,7 @@ module.exports = grammar({
         ),
         tuple_rest_desc:    $ => seq($.type_desc, "..."),
 
-        param_list:         $ => prec.right(seq($.param, repeat(seq(",", $.param)), optional($.include_record_params), optional(seq(",", $.rest_param)))),
+        param_list:         $ => prec.left(seq($.param, repeat(seq(",", $.param)), optional($.include_record_params), optional(seq(",", $.rest_param)))),
         param:              $ => seq($.type_desc, $.identifier),
         include_record_params: $ => prec.left(seq(",", $.include_record_param, repeat(seq(",", $.include_record_param)))),
         include_record_param:  $ => seq("*", $.type_reference, $.identifier),
