@@ -1,0 +1,42 @@
+====================
+Function Declaration
+====================
+function test(int a, int b) {
+
+}
+
+---
+(source_file
+  (module_part
+    (module_defn
+      (function_defn
+        (identifier)
+        (signature
+          (param_list
+            (param
+              (type_desc
+                (postfix_type_desc
+                  (primary_type_desc
+                    (builtin_type_name)
+                  )
+                )
+              )
+              (identifier)
+            )
+            (param
+              (type_desc
+                (postfix_type_desc
+                  (primary_type_desc
+                    (builtin_type_name)
+                  )
+                )
+              )
+              (identifier)
+            )
+          )
+        )
+        (stmt_block)
+      )
+    )
+  )
+)

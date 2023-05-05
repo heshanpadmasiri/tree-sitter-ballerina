@@ -1341,11 +1341,7 @@
       "required": true,
       "types": [
         {
-          "type": "intersection_type_desc",
-          "named": true
-        },
-        {
-          "type": "postfix_type_desc",
+          "type": "type_desc",
           "named": true
         }
       ]
@@ -2713,6 +2709,14 @@
       "required": true,
       "types": [
         {
+          "type": "intersection_type_desc",
+          "named": true
+        },
+        {
+          "type": "postfix_type_desc",
+          "named": true
+        },
+        {
           "type": "union_type_desc",
           "named": true
         }
@@ -2793,11 +2797,7 @@
       "required": true,
       "types": [
         {
-          "type": "intersection_type_desc",
-          "named": true
-        },
-        {
-          "type": "union_type_desc",
+          "type": "type_desc",
           "named": true
         }
       ]

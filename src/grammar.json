@@ -339,68 +339,63 @@
     },
     "type_desc": {
       "type": "PREC",
-      "value": 2,
-      "content": {
-        "type": "SYMBOL",
-        "name": "union_type_desc"
-      }
-    },
-    "union_type_desc": {
-      "type": "PREC",
       "value": 1,
       "content": {
         "type": "CHOICE",
         "members": [
           {
             "type": "SYMBOL",
+            "name": "union_type_desc"
+          },
+          {
+            "type": "SYMBOL",
             "name": "intersection_type_desc"
           },
           {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "union_type_desc"
-              },
-              {
-                "type": "STRING",
-                "value": "|"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "intersection_type_desc"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "postfix_type_desc"
+          }
+        ]
+      }
+    },
+    "union_type_desc": {
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "type_desc"
+          },
+          {
+            "type": "STRING",
+            "value": "|"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "type_desc"
           }
         ]
       }
     },
     "intersection_type_desc": {
-      "type": "PREC_LEFT",
-      "value": 0,
+      "type": "PREC",
+      "value": 1,
       "content": {
-        "type": "CHOICE",
+        "type": "SEQ",
         "members": [
           {
             "type": "SYMBOL",
-            "name": "postfix_type_desc"
+            "name": "type_desc"
           },
           {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "intersection_type_desc"
-              },
-              {
-                "type": "STRING",
-                "value": "&"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "postfix_type_desc"
-              }
-            ]
+            "type": "STRING",
+            "value": "&"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "type_desc"
           }
         ]
       }
@@ -912,7 +907,7 @@
       ]
     },
     "param_list": {
-      "type": "PREC_RIGHT",
+      "type": "PREC_LEFT",
       "value": 0,
       "content": {
         "type": "SEQ",

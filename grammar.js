@@ -32,16 +32,13 @@ module.exports = grammar({
                                              ";")),
         final_defn:         $ => seq("final", $.typed_binding_pattern, "=", $.expression, ";"),
         type_defn:          $ => seq(optional("public"), "type", $.identifier, $.type_desc, ";"),
-
-        type_desc:          $ => prec(2, $.union_type_desc),
-        union_type_desc:    $ => prec(1, choice(
+        type_desc:          $ => prec(1, choice(
+            $.union_type_desc,
             $.intersection_type_desc,
-            seq($.union_type_desc, "|", $.intersection_type_desc)
+            $.postfix_type_desc
         )),
-        intersection_type_desc: $ => prec.left(choice(
-            $.postfix_type_desc,
-            seq($.intersection_type_desc, "&", $.postfix_type_desc)
-        )), 
+        union_type_desc:    $ => prec(2, seq($.type_desc, "|", $.type_desc)),
+        intersection_type_desc: $ => prec(1, seq($.type_desc, "&", $.type_desc)),
         postfix_type_desc:  $ => choice(
             $.primary_type_desc,
             $.optional_type_desc,
