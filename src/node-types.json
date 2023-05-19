@@ -121,6 +121,40 @@
     }
   },
   {
+    "type": "back_tick_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "string_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "back_tick_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "back_tick_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binary_operator",
     "named": true,
     "fields": {}
@@ -549,11 +583,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
-          "type": "string_escape",
+          "type": "string_body",
           "named": true
         }
       ]
@@ -676,6 +710,10 @@
           "named": true
         },
         {
+          "type": "new_expression",
+          "named": true
+        },
+        {
           "type": "query_expr",
           "named": true
         }
@@ -789,6 +827,25 @@
     }
   },
   {
+    "type": "final_defn",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "typed_binding_pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "float_type_suffix",
     "named": true,
     "fields": {}
@@ -840,15 +897,15 @@
       "required": true,
       "types": [
         {
-          "type": "additive_expr",
-          "named": true
-        },
-        {
-          "type": "identifier",
+          "type": "expression",
           "named": true
         },
         {
           "type": "stmt_block",
+          "named": true
+        },
+        {
+          "type": "typed_binding_pattern",
           "named": true
         }
       ]
@@ -1120,6 +1177,40 @@
     }
   },
   {
+    "type": "include_record_param",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "include_record_params",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "include_record_param",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "inclusive_record_type_desc",
     "named": true,
     "fields": {},
@@ -1250,11 +1341,7 @@
       "required": true,
       "types": [
         {
-          "type": "intersection_type_desc",
-          "named": true
-        },
-        {
-          "type": "postfix_type_desc",
+          "type": "type_desc",
           "named": true
         }
       ]
@@ -1653,6 +1740,10 @@
           "named": true
         },
         {
+          "type": "final_defn",
+          "named": true
+        },
+        {
           "type": "function_defn",
           "named": true
         },
@@ -1730,6 +1821,25 @@
         },
         {
           "type": "unary_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "new_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_reference_expr",
+          "named": true
+        },
+        {
+          "type": "param_list",
           "named": true
         }
       ]
@@ -1911,6 +2021,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "include_record_params",
+          "named": true
+        },
         {
           "type": "param",
           "named": true
@@ -2100,6 +2214,21 @@
         },
         {
           "type": "intermediate_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "raw_template_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "back_tick_string",
           "named": true
         }
       ]
@@ -2401,6 +2530,21 @@
     }
   },
   {
+    "type": "string_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "string_escape",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "string_escape",
     "named": true,
     "fields": {},
@@ -2438,6 +2582,21 @@
     "type": "string_single_escpace",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "string_template_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "back_tick_string",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "ternary_conditional_expr",
@@ -2550,6 +2709,14 @@
       "required": true,
       "types": [
         {
+          "type": "intersection_type_desc",
+          "named": true
+        },
+        {
+          "type": "postfix_type_desc",
+          "named": true
+        },
+        {
           "type": "union_type_desc",
           "named": true
         }
@@ -2630,11 +2797,7 @@
       "required": true,
       "types": [
         {
-          "type": "intersection_type_desc",
-          "named": true
-        },
-        {
-          "type": "union_type_desc",
+          "type": "type_desc",
           "named": true
         }
       ]
@@ -2694,6 +2857,21 @@
     }
   },
   {
+    "type": "xml_template_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "back_tick_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "\t",
     "named": false
   },
@@ -2719,6 +2897,10 @@
   },
   {
     "type": "\"",
+    "named": false
+  },
+  {
+    "type": "${",
     "named": false
   },
   {
@@ -2759,10 +2941,6 @@
   },
   {
     "type": "...",
-    "named": false
-  },
-  {
-    "type": "..<",
     "named": false
   },
   {
@@ -2879,6 +3057,10 @@
   },
   {
     "type": "^",
+    "named": false
+  },
+  {
+    "type": "`",
     "named": false
   },
   {
@@ -3034,6 +3216,10 @@
     "named": false
   },
   {
+    "type": "new",
+    "named": false
+  },
+  {
     "type": "non_zero_digit",
     "named": true
   },
@@ -3116,6 +3302,10 @@
   {
     "type": "wildcard_binding_pattern",
     "named": true
+  },
+  {
+    "type": "xml",
+    "named": false
   },
   {
     "type": "{",
