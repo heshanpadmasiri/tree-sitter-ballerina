@@ -414,7 +414,7 @@ module.exports = grammar({
         string_single_escpace: $ => choice("\t", "\n", "\r", "\\"),
         numeric_escape:      $ => seq("\\u", "{", $.code_point, "}"),
         code_point:          $ => repeat1($.hex_digit),
-        comment:             $ => seq('//', /(\\(.|\r?\n)|[^\\\n])*/)
+        comment:             $ => seq(choice('//', '#'), /(\\(.|\r?\n)|[^\\\n])*/)
     },
     conflicts: $ => [
         [$.type_reference, $.const_reference_expr],
