@@ -8,11 +8,7 @@
       "required": true,
       "types": [
         {
-          "type": "additive_expr",
-          "named": true
-        },
-        {
-          "type": "multiplicative_expr",
+          "type": "expression",
           "named": true
         }
       ]
@@ -155,9 +151,77 @@
     }
   },
   {
+    "type": "binary_and_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "binary_bitwise_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_and_expr",
+          "named": true
+        },
+        {
+          "type": "binary_or_expr",
+          "named": true
+        },
+        {
+          "type": "binary_xor_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binary_operator",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "binary_or_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "binary_xor_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "binding_pattern",
@@ -173,63 +237,6 @@
         },
         {
           "type": "wildcard_binding_pattern",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bitwise_and_expr",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bitwise_and_expr",
-          "named": true
-        },
-        {
-          "type": "equality_expr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bitwise_or_expr",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bitwise_or_expr",
-          "named": true
-        },
-        {
-          "type": "bitwise_xor_expr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bitwise_xor_expr",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bitwise_and_expr",
-          "named": true
-        },
-        {
-          "type": "bitwise_xor_expr",
           "named": true
         }
       ]
@@ -287,25 +294,6 @@
       "types": [
         {
           "type": "call_expr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "checking_expr",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "checking_keyword",
-          "named": true
-        },
-        {
-          "type": "unary_expr",
           "named": true
         }
       ]
@@ -644,11 +632,7 @@
       "required": true,
       "types": [
         {
-          "type": "equality_expr",
-          "named": true
-        },
-        {
-          "type": "relational_expr",
+          "type": "expression",
           "named": true
         }
       ]
@@ -772,6 +756,10 @@
         },
         {
           "type": "query_expr",
+          "named": true
+        },
+        {
+          "type": "type_cast_expr",
           "named": true
         }
       ]
@@ -1333,7 +1321,23 @@
       "required": true,
       "types": [
         {
-          "type": "logical_or_expr",
+          "type": "equality_expr",
+          "named": true
+        },
+        {
+          "type": "logical_expr",
+          "named": true
+        },
+        {
+          "type": "nil_lifted_expr",
+          "named": true
+        },
+        {
+          "type": "primary_expr",
+          "named": true
+        },
+        {
+          "type": "relational_expr",
           "named": true
         }
       ]
@@ -1569,11 +1573,26 @@
       "required": true,
       "types": [
         {
-          "type": "bitwise_or_expr",
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "logical_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "logical_and_expr",
           "named": true
         },
         {
-          "type": "bitwise_xor_expr",
+          "type": "logical_or_expr",
           "named": true
         }
       ]
@@ -1588,11 +1607,7 @@
       "required": true,
       "types": [
         {
-          "type": "logical_and_expr",
-          "named": true
-        },
-        {
-          "type": "logical_or_expr",
+          "type": "expression",
           "named": true
         }
       ]
@@ -1896,11 +1911,7 @@
       "required": true,
       "types": [
         {
-          "type": "multiplicative_expr",
-          "named": true
-        },
-        {
-          "type": "unary_expr",
+          "type": "expression",
           "named": true
         }
       ]
@@ -1935,6 +1946,37 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nil_lifted_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "additive_expr",
+          "named": true
+        },
+        {
+          "type": "binary_bitwise_expr",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expr",
+          "named": true
+        },
+        {
+          "type": "shift_expr",
+          "named": true
+        },
+        {
+          "type": "unary_numeric_expression",
           "named": true
         }
       ]
@@ -2395,11 +2437,7 @@
       "required": true,
       "types": [
         {
-          "type": "shift_expr",
-          "named": true
-        },
-        {
-          "type": "type_desc",
+          "type": "expression",
           "named": true
         }
       ]
@@ -2478,11 +2516,7 @@
       "required": true,
       "types": [
         {
-          "type": "additive_expr",
-          "named": true
-        },
-        {
-          "type": "shift_expr",
+          "type": "expression",
           "named": true
         }
       ]
@@ -2789,11 +2823,11 @@
       "required": true,
       "types": [
         {
-          "type": "type_desc",
+          "type": "expression",
           "named": true
         },
         {
-          "type": "unary_expr",
+          "type": "type_desc",
           "named": true
         }
       ]
@@ -2880,7 +2914,7 @@
     }
   },
   {
-    "type": "unary_expr",
+    "type": "unary_numeric_expression",
     "named": true,
     "fields": {},
     "children": {
@@ -2888,19 +2922,7 @@
       "required": true,
       "types": [
         {
-          "type": "checking_expr",
-          "named": true
-        },
-        {
-          "type": "primary_expr",
-          "named": true
-        },
-        {
-          "type": "type_cast_expr",
-          "named": true
-        },
-        {
-          "type": "unary_expr",
+          "type": "expression",
           "named": true
         }
       ]
@@ -3002,10 +3024,6 @@
     "named": false
   },
   {
-    "type": "!",
-    "named": false
-  },
-  {
     "type": "!=",
     "named": false
   },
@@ -3031,6 +3049,10 @@
   },
   {
     "type": "&",
+    "named": false
+  },
+  {
+    "type": "&&",
     "named": false
   },
   {
@@ -3315,10 +3337,6 @@
   },
   {
     "type": "int",
-    "named": false
-  },
-  {
-    "type": "is",
     "named": false
   },
   {

@@ -222,6 +222,7 @@ module.exports = grammar({
         expression:          $ => choice(
             $.new_expression,
             $.inner_expr,
+            $.type_cast_expr,
             $.list_constructor_expr,
             $.mapping_constructor_expr,
             $.query_expr
@@ -241,68 +242,67 @@ module.exports = grammar({
         const_expr:          $ => $.inner_expr,
         const_reference_expr:$ => prec(1, choice($.identifier, $.qualified_identifier)),
         
-        inner_expr:          $ => prec(12, $.logical_or_expr),
-        logical_or_expr:     $ => prec(11, choice(
-            $.logical_and_expr,
-            seq($.logical_or_expr, "||", $.logical_and_expr)
-        )),
-        logical_and_expr:    $ => prec(10, choice(
-            $.bitwise_xor_expr,
-            seq($.bitwise_or_expr, "|", $.bitwise_xor_expr)
-        )),
-        bitwise_or_expr:    $ => prec(9, choice(
-            $.bitwise_xor_expr,
-            seq($.bitwise_or_expr, "|", $.bitwise_xor_expr)
-        )),
-        bitwise_xor_expr:    $ => prec(8, choice(
-            $.bitwise_and_expr,
-            seq($.bitwise_xor_expr, "^", $.bitwise_and_expr)
-        )),
-        bitwise_and_expr:    $ => prec(7, choice(
+        inner_expr:          $ => prec.left(choice(
+            $.logical_expr,
+            $.nil_lifted_expr,
             $.equality_expr,
-            seq($.bitwise_and_expr, "&", $.equality_expr)
-        )),
-        equality_expr:       $ => prec(6, choice(
             $.relational_expr,
-            seq($.equality_expr, "==", $.relational_expr),
-            seq($.equality_expr, "!=", $.relational_expr),
-            seq($.equality_expr, "===", $.relational_expr),
-            seq($.equality_expr, "!==", $.relational_expr)
+            $.primary_expr
         )),
-        relational_expr:     $ => prec(5, choice(
+        logical_expr:        $ => choice(
+            $.logical_and_expr,
+            $.logical_or_expr
+        ),
+        logical_or_expr:     $ => prec.left(seq($.expression, "||", $.expression)),
+        logical_and_expr:    $ => prec.left(seq($.expression, "&&", $.expression)),
+        nil_lifted_expr:     $ => choice(
+            $.binary_bitwise_expr,
             $.shift_expr,
-            seq($.shift_expr, "<", $.shift_expr),
-            seq($.shift_expr, "<=", $.shift_expr),
-            seq($.shift_expr, ">", $.shift_expr),
-            seq($.shift_expr, ">=", $.shift_expr),
-            seq($.shift_expr, optional("!"), "is", $.type_desc),
-        )),
-        shift_expr:          $ => prec(4, choice(
             $.additive_expr,
-            seq($.shift_expr, "<<", $.additive_expr),
-            seq($.shift_expr, ">>", $.additive_expr),
-            seq($.shift_expr, ">>>", $.additive_expr),
-        )),
-        additive_expr:       $ => prec(3, choice(
             $.multiplicative_expr,
-            seq($.additive_expr, "+", $.multiplicative_expr),
-            seq($.additive_expr, "-", $.multiplicative_expr)
+            $.unary_numeric_expression
+        ),
+        binary_bitwise_expr: $ => choice(
+            $.binary_and_expr,
+            $.binary_or_expr,
+            $.binary_xor_expr
+        ),
+        binary_and_expr:    $ => prec.left(seq($.expression, "&", $.expression)),
+        binary_or_expr:     $ => prec.left(seq($.expression, "|", $.expression)),
+        binary_xor_expr:    $ => prec.left(seq($.expression, "^", $.expression)),
+        equality_expr:      $ => prec.left(choice(
+            seq($.expression, "==", $.expression),
+            seq($.expression, "!=", $.expression),
+            seq($.expression, "===", $.expression),
+            seq($.expression, "!==", $.expression)
         )),
-        multiplicative_expr: $ => prec(2, choice(
-            $.unary_expr,
-            seq($.multiplicative_expr, "*", $.unary_expr),
-            seq($.multiplicative_expr, "/", $.unary_expr),
-            seq($.multiplicative_expr, "%", $.unary_expr)
+        relational_expr:     $ => prec.left(choice(
+            seq($.expression, ">", $.expression),
+            seq($.expression, ">=", $.expression),
+            seq($.expression, "<", $.expression),
+            seq($.expression, "<=", $.expression)
         )),
-        unary_expr:          $ => prec(1, choice(
-            $.primary_expr,
-            seq("-", $.unary_expr),
-            seq("~", $.unary_expr),
-            $.type_cast_expr,
-            $.checking_expr
+        shift_expr:          $ => prec.left(choice(
+            seq($.expression, "<<", $.expression),
+            seq($.expression, ">>", $.expression),
+            seq($.expression, ">>>", $.expression),
         )),
-        type_cast_expr:      $ => prec(1, seq("<", $.type_desc, ">", $.unary_expr)),
-        checking_expr:       $ => prec(1, seq($.checking_keyword, $.unary_expr)),
+        additive_expr:       $ => prec.left(choice(
+            seq($.expression, "+", $.expression),
+            seq($.expression, "-", $.expression),
+        )),
+        multiplicative_expr: $ => prec.left(choice(
+            seq($.expression, "*", $.expression),
+            seq($.expression, "/", $.expression),
+            seq($.expression, "%", $.expression)
+        )),
+        unary_numeric_expression: $ => prec.left(choice(
+            seq("-", $.expression),
+            // TODO: unary +
+            seq("~", $.expression),
+        )),
+        type_cast_expr:      $ => prec(1, seq("<", $.type_desc, ">", $.expression)),
+        checking_expr:       $ => seq($.checking_keyword, $.expression),
         checking_keyword:    $ => choice(
             "check",
             "checkpanic"
@@ -458,17 +458,5 @@ module.exports = grammar({
     conflicts: $ => [
         [$.union_type_desc],
         [$.intersection_type_desc],
-        [$.relational_expr],
-
-        [$.logical_or_expr],
-        [$.bitwise_or_expr],
-        [$.logical_and_expr],
-        [$.bitwise_and_expr],
-        [$.bitwise_xor_expr],
-        [$.equality_expr],
-
-        [$.shift_expr],
-        [$.additive_expr],
-        [$.multiplicative_expr],
     ],
 });
