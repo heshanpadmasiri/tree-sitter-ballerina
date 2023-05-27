@@ -33,7 +33,7 @@ module.exports = grammar({
         expr_function_body: $ => seq("=>", $.expression, ";"),
         signature:          $ => seq("(", optional($.param_list), ")", optional(seq("returns", $.type_desc))),
 
-        const_defn:         $ => prec(1, seq(optional("public"), "const", optional($.builtin_type_name), $.identifier, "=", 
+        const_defn:         $ => prec(3, seq(optional("public"), "const", optional($.builtin_type_name), $.identifier, "=", 
                                              choice($.const_expr,
                                                     $.literal),
                                              ";")),
@@ -174,8 +174,6 @@ module.exports = grammar({
             seq($.checking_keyword, $.call_expr)
         ),
 
-        function_call_expr:  $ => seq($.function_call_expr, ";"),
-
         assign_stmt:         $ => seq($.lvexpr, "=", $.expression, ";"),
         compound_assign_stmt:$ => seq($.lvexpr, $.compound_assignment_operator, $.expression, ";"),
         destructuring_assign_stmt: $ => seq($.wildcard_binding_pattern, "=", $.expression, ";"),
@@ -212,7 +210,7 @@ module.exports = grammar({
             $.simple_const_expr
         ),
 
-        simple_const_expr:   $ => prec(2, choice(
+        simple_const_expr:   $ => prec(3, choice(
             $.literal,
             seq("-", $.int_literal),
             seq("-", $.floating_point_literal),
@@ -307,7 +305,7 @@ module.exports = grammar({
             "check",
             "checkpanic"
         ),
-        primary_expr:        $ => choice(
+        primary_expr:        $ => prec(2, choice(
             $.literal,
             $.error_constructor_expr,
             $.member_access_expr,
@@ -317,7 +315,7 @@ module.exports = grammar({
             $.variable_reference_expr,
             $.conditional_expr,
             seq("(", $.inner_expr, ")")
-        ),
+        )),
 
         query_expr:          $ => prec.left(seq(optional($.query_construct_type), $.query_pipeline, $.select_clause, optional($.on_conflict_clause))),
         query_construct_type:$ => choice("map", "stream"), // TODO: add table
@@ -375,7 +373,7 @@ module.exports = grammar({
         field_access_expr:   $ => prec.left(seq($.primary_expr, ".", $.expression)),
 
         function_call_expr:  $ => seq($.function_reference, $.arg_list),
-        method_call_expr:    $ => seq($.primary_expr, ".", $.identifier, $.arg_list),
+        method_call_expr:    $ => seq($.expression, ".", $.identifier, $.arg_list),
         arg_list:            $ => seq("(", optional($.expr_list), ")"),
         function_reference:  $ => prec.left(choice($.identifier, $.qualified_identifier)),
 
