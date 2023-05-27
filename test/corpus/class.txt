@@ -1,0 +1,117 @@
+================
+Empty class definition
+================
+
+class Test {
+
+}
+
+---
+(source_file
+    (module_part
+        (module_defn
+            (class_defn
+                (identifier)))))
+
+================
+class with object field
+================
+
+class Test {
+    int a;
+    private int a;
+    public int x = 10;
+}
+
+---
+(source_file
+    (module_part
+        (module_defn
+            (class_defn
+                (identifier)
+                (class_member
+                    (object_field
+                        (type_desc
+                            (postfix_type_desc
+                                (primary_type_desc
+                                    (builtin_type_name))))
+                        (identifier)))
+                (class_member
+                    (object_field
+                        (type_desc
+                            (postfix_type_desc
+                                (primary_type_desc
+                                    (builtin_type_name))))
+                (identifier)))
+            (class_member
+              (object_field
+                (type_desc
+                  (postfix_type_desc
+                    (primary_type_desc
+                      (builtin_type_name))))
+                (identifier)
+                (expression
+                  (inner_expr
+                    (logical_or_expr
+                      (logical_and_expr
+                        (bitwise_xor_expr
+                          (bitwise_and_expr
+                            (equality_expr
+                              (relational_expr
+                                (shift_expr
+                                  (additive_expr
+                                    (multiplicative_expr
+                                      (unary_expr
+                                        (primary_expr
+                                          (literal
+                                            (int_literal
+                                              (decimal_number
+                                                (non_zero_digit)
+                                                (digit)))))))))))))))))))))))
+
+=====================
+Object type inclusion
+=====================
+
+class Test {
+    *Other;
+}
+
+---
+(source_file
+    (module_part
+        (module_defn
+            (class_defn
+                (identifier)
+                (class_member
+                    (object_type_inclusion
+                        (type_reference
+                            (identifier))))))))
+
+===========
+Method defn
+===========
+
+class Test {
+    function foo(int a) {}
+}
+
+---
+(source_file
+    (module_part
+        (module_defn
+            (class_defn
+                (identifier)
+                (class_member
+                    (method_defn
+                        (function_defn
+                            (identifier)
+                            (signature
+                              (param_list
+                                (param
+                                  (type_desc
+                                    (postfix_type_desc
+                                      (primary_type_desc
+                                        (builtin_type_name))))
+                                  (identifier))))
+                            (stmt_block))))))))
