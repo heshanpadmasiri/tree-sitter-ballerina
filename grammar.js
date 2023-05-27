@@ -24,7 +24,13 @@ module.exports = grammar({
             $.class_defn
         ),
 
-        function_defn:      $ => seq(optional("public"), "function", $.identifier, $.signature, $.stmt_block),
+        function_defn:      $ => seq(optional("public"),
+                                     "function",
+                                     $.identifier,
+                                     $.signature,
+                                     choice($.stmt_block,
+                                            $.expr_function_body)),
+        expr_function_body: $ => seq("=>", $.expression, ";"),
         signature:          $ => seq("(", optional($.param_list), ")", optional(seq("returns", $.type_desc))),
 
         const_defn:         $ => prec(1, seq(optional("public"), "const", optional($.builtin_type_name), $.identifier, "=", 

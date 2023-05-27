@@ -40,3 +40,52 @@ function test(int a, int b) {
     )
   )
 )
+
+==============
+Arrow function
+==============
+
+function foo(int a) returns int => a + 1;
+
+---
+(source_file
+  (module_part
+    (module_defn
+      (function_defn
+        (identifier)
+        (signature
+          (param_list
+            (param
+              (type_desc
+                (postfix_type_desc
+                  (primary_type_desc
+                    (builtin_type_name))))
+              (identifier)))
+          (type_desc
+            (postfix_type_desc
+              (primary_type_desc
+                (builtin_type_name)))))
+        (expr_function_body
+          (expression
+            (inner_expr
+              (logical_or_expr
+                (logical_and_expr
+                  (bitwise_xor_expr
+                    (bitwise_and_expr
+                      (equality_expr
+                        (relational_expr
+                          (shift_expr
+                            (additive_expr
+                              (additive_expr
+                                (multiplicative_expr
+                                  (unary_expr
+                                    (primary_expr
+                                      (variable_reference_expr
+                                        (identifier))))))
+                              (multiplicative_expr
+                                (unary_expr
+                                  (primary_expr
+                                    (literal
+                                      (int_literal
+                                        (decimal_number
+                                          (non_zero_digit))))))))))))))))))))))

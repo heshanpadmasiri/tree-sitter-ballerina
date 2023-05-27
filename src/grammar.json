@@ -170,8 +170,34 @@
           "name": "signature"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "stmt_block"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "expr_function_body"
+            }
+          ]
+        }
+      ]
+    },
+    "expr_function_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "=>"
+        },
+        {
           "type": "SYMBOL",
-          "name": "stmt_block"
+          "name": "expression"
+        },
+        {
+          "type": "STRING",
+          "value": ";"
         }
       ]
     },
