@@ -249,7 +249,7 @@
     },
     "const_defn": {
       "type": "PREC",
-      "value": 1,
+      "value": 3,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1414,19 +1414,6 @@
         }
       ]
     },
-    "function_call_expr": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "function_reference"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "arg_list"
-        }
-      ]
-    },
     "assign_stmt": {
       "type": "SEQ",
       "members": [
@@ -1813,7 +1800,7 @@
     },
     "simple_const_expr": {
       "type": "PREC",
-      "value": 2,
+      "value": 3,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -2591,58 +2578,62 @@
       ]
     },
     "primary_expr": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "error_constructor_expr"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "member_access_expr"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "field_access_expr"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "function_call_expr"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "method_call_expr"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "variable_reference_expr"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "conditional_expr"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "("
-            },
-            {
-              "type": "SYMBOL",
-              "name": "inner_expr"
-            },
-            {
-              "type": "STRING",
-              "value": ")"
-            }
-          ]
-        }
-      ]
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "literal"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "error_constructor_expr"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "member_access_expr"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "field_access_expr"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "function_call_expr"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "method_call_expr"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "variable_reference_expr"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "conditional_expr"
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "("
+              },
+              {
+                "type": "SYMBOL",
+                "name": "inner_expr"
+              },
+              {
+                "type": "STRING",
+                "value": ")"
+              }
+            ]
+          }
+        ]
+      }
     },
     "query_expr": {
       "type": "PREC_LEFT",
@@ -3269,12 +3260,25 @@
         ]
       }
     },
+    "function_call_expr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "function_reference"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "arg_list"
+        }
+      ]
+    },
     "method_call_expr": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "primary_expr"
+          "name": "expression"
         },
         {
           "type": "STRING",

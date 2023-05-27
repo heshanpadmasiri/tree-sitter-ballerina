@@ -1778,11 +1778,11 @@
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "expression",
           "named": true
         },
         {
-          "type": "primary_expr",
+          "type": "identifier",
           "named": true
         }
       ]
