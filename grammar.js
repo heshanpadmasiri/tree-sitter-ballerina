@@ -453,7 +453,7 @@ module.exports = grammar({
         string_single_escpace: $ => choice("\t", "\n", "\r", "\\"),
         numeric_escape:      $ => seq("\\u", "{", $.code_point, "}"),
         code_point:          $ => repeat1($.hex_digit),
-        comment:             $ => seq(choice('//', '#'), /(\\(.|\r?\n)|[^\\\n])*/)
+        comment:             _ => token(seq(choice('//', '#'), /.*/))
     },
     conflicts: $ => [
         [$.union_type_desc],
