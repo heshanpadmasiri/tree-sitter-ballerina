@@ -239,7 +239,9 @@ module.exports = grammar({
         xml_template_expression: $ => seq("xml", $.back_tick_string),
         raw_template_expression: $ => $.back_tick_string,
 
-        new_expression:      $ => seq("new", $.const_reference_expr, $.param_list),
+        new_expression:      $ => choice($.explicit_new_expression, $.implicit_new_expression),
+        explicit_new_expression: $ => seq("new", $.const_reference_expr, $.arg_list),
+        implicit_new_expression: $ => seq("new", optional($.arg_list)),
         const_expr:          $ => $.inner_expr,
         const_reference_expr:$ => prec(1, choice($.identifier, $.qualified_identifier)),
         

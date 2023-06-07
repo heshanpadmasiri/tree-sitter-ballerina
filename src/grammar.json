@@ -1252,6 +1252,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "local_no_init_var_decl_stmt"
+        },
+        {
+          "type": "SYMBOL",
           "name": "local_var_decl_stmt"
         },
         {
@@ -1931,6 +1935,19 @@
       "name": "back_tick_string"
     },
     "new_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "explicit_new_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "implicit_new_expression"
+        }
+      ]
+    },
+    "explicit_new_expression": {
       "type": "SEQ",
       "members": [
         {
@@ -1943,7 +1960,28 @@
         },
         {
           "type": "SYMBOL",
-          "name": "param_list"
+          "name": "arg_list"
+        }
+      ]
+    },
+    "implicit_new_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "new"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "arg_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -4085,26 +4123,29 @@
       }
     },
     "comment": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "//"
-            },
-            {
-              "type": "STRING",
-              "value": "#"
-            }
-          ]
-        },
-        {
-          "type": "PATTERN",
-          "value": "(\\\\(.|\\r?\\n)|[^\\\\\\n])*"
-        }
-      ]
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "//"
+              },
+              {
+                "type": "STRING",
+                "value": "#"
+              }
+            ]
+          },
+          {
+            "type": "PATTERN",
+            "value": ".*"
+          }
+        ]
+      }
     }
   },
   "extras": [

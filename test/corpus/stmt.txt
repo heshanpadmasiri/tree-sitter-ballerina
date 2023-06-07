@@ -41,3 +41,69 @@ function foo() {
                       (int_literal
                         (decimal_number
                           (non_zero_digit))))))))))))))
+
+========
+new stmt
+========
+function foo() {
+    var a = new int(5);
+    var a = new (10);
+    var a = new;
+}
+---
+(source_file
+  (module_part
+    (module_defn
+      (function_defn
+        (identifier)
+        (signature)
+        (stmt_block
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (new_expression
+                  (explicit_new_expression
+                    (const_reference_expr
+                      (identifier))
+                    (arg_list
+                      (expr_list
+                        (expression
+                          (inner_expr
+                            (primary_expr
+                              (literal
+                                (int_literal
+                                  (decimal_number
+                                    (non_zero_digit))))))))))))))
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (new_expression
+                  (implicit_new_expression
+                    (arg_list
+                      (expr_list
+                        (expression
+                          (inner_expr
+                            (primary_expr
+                              (literal
+                                (int_literal
+                                  (decimal_number
+                                    (non_zero_digit)
+                                    (digit))))))))))))))
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (new_expression
+                  (implicit_new_expression))))))))))
+

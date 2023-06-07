@@ -362,11 +362,6 @@
     }
   },
   {
-    "type": "comment",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "compound_assign_stmt",
     "named": true,
     "fields": {},
@@ -667,6 +662,25 @@
         },
         {
           "type": "rest_field_desc",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "explicit_new_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arg_list",
+          "named": true
+        },
+        {
+          "type": "const_reference_expr",
           "named": true
         }
       ]
@@ -1188,6 +1202,21 @@
     }
   },
   {
+    "type": "implicit_new_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "arg_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "import_decl",
     "named": true,
     "fields": {},
@@ -1540,6 +1569,21 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "local_no_init_var_decl_stmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "typed_binding_pattern",
           "named": true
         }
       ]
@@ -1922,15 +1966,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "const_reference_expr",
+          "type": "explicit_new_expression",
           "named": true
         },
         {
-          "type": "param_list",
+          "type": "implicit_new_expression",
           "named": true
         }
       ]
@@ -2644,6 +2688,10 @@
           "named": true
         },
         {
+          "type": "local_no_init_var_decl_stmt",
+          "named": true
+        },
+        {
           "type": "local_var_decl_stmt",
           "named": true
         },
@@ -3036,10 +3084,6 @@
     "named": false
   },
   {
-    "type": "#",
-    "named": false
-  },
-  {
     "type": "${",
     "named": false
   },
@@ -3089,10 +3133,6 @@
   },
   {
     "type": "/",
-    "named": false
-  },
-  {
-    "type": "//",
     "named": false
   },
   {
@@ -3250,6 +3290,10 @@
   {
     "type": "class",
     "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
   },
   {
     "type": "conflict",
