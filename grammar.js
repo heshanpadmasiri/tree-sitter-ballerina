@@ -145,6 +145,7 @@ module.exports = grammar({
         stmt_block:         $ => seq("{", repeat($.statement), "}"),
 
         statement:          $ => choice(
+            $.local_no_init_var_decl_stmt,
             $.local_var_decl_stmt,
             $.call_stmt,
             $.assign_stmt,

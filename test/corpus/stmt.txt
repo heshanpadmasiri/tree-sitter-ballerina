@@ -1,0 +1,43 @@
+=============
+Var decl stmt
+=============
+
+function foo() {
+    int a;
+    int b = 5;
+}
+---
+(source_file
+  (module_part
+    (module_defn
+      (function_defn
+        (identifier)
+        (signature)
+        (stmt_block
+          (statement
+            (local_no_init_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc
+                  (type_desc
+                    (postfix_type_desc
+                      (primary_type_desc
+                        (builtin_type_name)))))
+                (binding_pattern
+                  (identifier)))))
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc
+                  (type_desc
+                    (postfix_type_desc
+                      (primary_type_desc
+                        (builtin_type_name)))))
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (inner_expr
+                  (primary_expr
+                    (literal
+                      (int_literal
+                        (decimal_number
+                          (non_zero_digit))))))))))))))
