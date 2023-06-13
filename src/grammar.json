@@ -455,8 +455,25 @@
       ]
     },
     "method_defn": {
-      "type": "SYMBOL",
-      "name": "function_defn"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "private"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_defn"
+        }
+      ]
     },
     "final_defn": {
       "type": "SEQ",

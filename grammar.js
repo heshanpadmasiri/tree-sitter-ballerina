@@ -51,7 +51,7 @@ module.exports = grammar({
                                      (optional(seq("=", $.expression))),
                                      ";"),
         object_type_inclusion: $ => seq("*", $.type_reference, ";"),
-        method_defn:        $ => $.function_defn,
+        method_defn:        $ => seq(optional("private"), $.function_defn),
 
         final_defn:         $ => seq("final", $.typed_binding_pattern, "=", $.expression, ";"),
         type_defn:          $ => seq(optional("public"), "type", $.identifier, $.type_desc, ";"),

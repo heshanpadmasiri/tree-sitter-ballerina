@@ -84,6 +84,7 @@ Method defn
 
 class Test {
     function foo(int a) {}
+    private function bar(int a) {}
 }
 
 ---
@@ -92,6 +93,19 @@ class Test {
         (module_defn
             (class_defn
                 (identifier)
+                (class_member
+                    (method_defn
+                        (function_defn
+                            (identifier)
+                            (signature
+                              (param_list
+                                (param
+                                  (type_desc
+                                    (postfix_type_desc
+                                      (primary_type_desc
+                                        (builtin_type_name))))
+                                  (identifier))))
+                            (stmt_block))))
                 (class_member
                     (method_defn
                         (function_defn
