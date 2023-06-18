@@ -377,7 +377,17 @@ module.exports = grammar({
 
         function_call_expr:  $ => seq($.function_reference, $.arg_list),
         method_call_expr:    $ => prec.left(seq($.identifier, ".", $.identifier, $.arg_list)),
-        arg_list:            $ => seq("(", optional($.expr_list), ")"),
+        arg_list:            $ => choice(
+            seq("(", $.positional_args, optional(seq(",", $.other_args)), ")"),
+            seq("(", optional($.other_args), ")")
+        ),
+        positional_args:     $ => prec.left(seq($.positional_arg, repeat(seq(",", $.positional_arg)))),
+        positional_arg:      $ => $.expression,
+        other_args:          $ => choice($.named_args, $.rest_args),
+        named_args:          $ => seq($.named_arg, repeat(seq(",", $.named_arg))),
+        named_arg:           $ => seq($.identifier, "=", $.expression),
+        rest_args:           $ => seq("...", $.expression),
+
         function_reference:  $ => prec.left(choice($.identifier, $.qualified_identifier)),
 
         qualified_identifier:$ => seq($.module_prefix, ":", $.identifier),
