@@ -1,0 +1,22 @@
+===========
+Method call
+===========
+
+function foo() {
+    foo.bar();
+}
+----
+(source_file
+ (module_part
+  (module_defn
+   (function_defn
+    (identifier)
+    (signature)
+    (stmt_block
+     (statement 
+      (call_stmt 
+       (call_expr 
+        (method_call_expr 
+         (identifier)
+         (identifier)
+         (arg_list))))))))))

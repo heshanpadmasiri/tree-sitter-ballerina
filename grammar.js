@@ -376,7 +376,7 @@ module.exports = grammar({
         field_access_expr:   $ => prec.left(seq($.primary_expr, ".", $.expression)),
 
         function_call_expr:  $ => seq($.function_reference, $.arg_list),
-        method_call_expr:    $ => seq($.expression, ".", $.identifier, $.arg_list),
+        method_call_expr:    $ => prec.left(seq($.identifier, ".", $.identifier, $.arg_list)),
         arg_list:            $ => seq("(", optional($.expr_list), ")"),
         function_reference:  $ => prec.left(choice($.identifier, $.qualified_identifier)),
 
@@ -459,5 +459,6 @@ module.exports = grammar({
     conflicts: $ => [
         [$.union_type_desc],
         [$.intersection_type_desc],
+        [$.method_call_expr, $.variable_reference_expr]
     ],
 });

@@ -3295,25 +3295,29 @@
       ]
     },
     "method_call_expr": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "expression"
-        },
-        {
-          "type": "STRING",
-          "value": "."
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "arg_list"
-        }
-      ]
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "STRING",
+            "value": "."
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "arg_list"
+          }
+        ]
+      }
     },
     "arg_list": {
       "type": "SEQ",
@@ -4181,6 +4185,10 @@
     ],
     [
       "intersection_type_desc"
+    ],
+    [
+      "method_call_expr",
+      "variable_reference_expr"
     ]
   ],
   "precedences": [],
