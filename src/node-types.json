@@ -19,11 +19,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "expr_list",
+          "type": "other_args",
+          "named": true
+        },
+        {
+          "type": "positional_args",
           "named": true
         }
       ]
@@ -1958,6 +1962,40 @@
     }
   },
   {
+    "type": "named_arg",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "named_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "named_arg",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "new_expression",
     "named": true,
     "fields": {},
@@ -2180,6 +2218,25 @@
     }
   },
   {
+    "type": "other_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "named_args",
+          "named": true
+        },
+        {
+          "type": "rest_args",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "panic_stmt",
     "named": true,
     "fields": {},
@@ -2231,6 +2288,36 @@
         },
         {
           "type": "rest_param",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "positional_arg",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "positional_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "positional_arg",
           "named": true
         }
       ]
@@ -2474,6 +2561,21 @@
     "fields": {},
     "children": {
       "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rest_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
       "required": true,
       "types": [
         {
