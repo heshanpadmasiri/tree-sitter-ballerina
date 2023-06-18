@@ -1839,10 +1839,6 @@
         {
           "type": "identifier",
           "named": true
-        },
-        {
-          "type": "primary_expr",
-          "named": true
         }
       ]
     }

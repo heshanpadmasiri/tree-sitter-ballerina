@@ -106,4 +106,3 @@ function foo() {
               (expression
                 (new_expression
                   (implicit_new_expression))))))))))
-
