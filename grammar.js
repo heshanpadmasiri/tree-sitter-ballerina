@@ -49,6 +49,7 @@ module.exports = grammar({
         class_member:       $ => choice(
             $.object_field,
             $.method_defn,
+            $.remote_method_defn,
             $.object_type_inclusion
         ),
         object_field:       $ => seq(optional(choice("public", "private")),
@@ -58,7 +59,22 @@ module.exports = grammar({
                                      (optional(seq("=", $.expression))),
                                      ";"),
         object_type_inclusion: $ => seq("*", $.type_reference, ";"),
-        method_defn:        $ => seq(optional("private"), $.function_defn),
+        method_defn:        $ => seq(optional($.object_visibility_qual), optional($.function_quals), "function", $.identifier, $.signature, $.stmt_block),
+        remote_method_defn: $ => seq($.remote_method_quals, "function", $.identifier, $.signature, $.stmt_block),
+        object_visibility_qual: $ => choice("public", "private"),
+        remote_method_quals: $ => choice(
+                                    seq("remote", optional($.function_quals)),
+                                    seq($.isolated_qual, optional($.transactional_qual), "remote"),
+                                    seq($.transactional_qual, optional($.isolated_qual), "remote"),
+                                    seq($.isolated_qual, "remote", $.transactional_qual),
+                                    seq($.transactional_qual, "remote", $.isolated_qual),
+                                  ),
+        function_quals:     $ => choice(
+                                    seq($.transactional_qual, optional($.isolated_qual)),
+                                    seq($.isolated_qual, optional($.transactional_qual)),
+                                 ),
+        transactional_qual: $ => "transactional",
+        isolated_qual:      $ => "isolated",
 
         final_defn:         $ => seq("final", $.typed_binding_pattern, "=", $.expression, ";"),
         type_defn:          $ => seq(optional("public"), "type", $.identifier, $.type_desc, ";"),

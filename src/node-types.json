@@ -350,6 +350,10 @@
         {
           "type": "object_type_inclusion",
           "named": true
+        },
+        {
+          "type": "remote_method_defn",
+          "named": true
         }
       ]
     }
@@ -1049,6 +1053,25 @@
     }
   },
   {
+    "type": "function_quals",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "isolated_qual",
+          "named": true
+        },
+        {
+          "type": "transactional_qual",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function_reference",
     "named": true,
     "fields": {},
@@ -1453,6 +1476,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "isolated_qual",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "join_clause",
@@ -1861,11 +1889,27 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "function_defn",
+          "type": "function_quals",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "object_visibility_qual",
+          "named": true
+        },
+        {
+          "type": "signature",
+          "named": true
+        },
+        {
+          "type": "stmt_block",
           "named": true
         }
       ]
@@ -2141,6 +2185,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "object_visibility_qual",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "on_conflict_clause",
@@ -2574,6 +2623,56 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "remote_method_defn",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "remote_method_quals",
+          "named": true
+        },
+        {
+          "type": "signature",
+          "named": true
+        },
+        {
+          "type": "stmt_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "remote_method_quals",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "function_quals",
+          "named": true
+        },
+        {
+          "type": "isolated_qual",
+          "named": true
+        },
+        {
+          "type": "transactional_qual",
           "named": true
         }
       ]
@@ -3571,6 +3670,10 @@
     "named": false
   },
   {
+    "type": "remote",
+    "named": false
+  },
+  {
     "type": "return",
     "named": false
   },
@@ -3593,6 +3696,10 @@
   {
     "type": "string",
     "named": false
+  },
+  {
+    "type": "transactional_qual",
+    "named": true
   },
   {
     "type": "true",

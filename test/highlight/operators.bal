@@ -24,6 +24,6 @@ public function main() {
     int c = a > 5 ? 10 : -10;
 //            ^ operator
 //                ^ operator
-//                     ^ operator
+//                     ^ delimiter
 //                       ^operator
 }

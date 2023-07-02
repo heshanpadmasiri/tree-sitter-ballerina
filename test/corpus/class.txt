@@ -8,10 +8,10 @@ class Test {
 
 ---
 (source_file
-    (module_part
-        (module_defn
-            (class_defn
-                (identifier)))))
+ (module_part
+  (module_defn
+   (class_defn
+    (identifier)))))
 
 ================
 class with object field
@@ -25,39 +25,39 @@ class Test {
 
 ---
 (source_file
-    (module_part
-        (module_defn
-            (class_defn
-                (identifier)
-                (class_member
-                    (object_field
-                        (type_desc
-                            (postfix_type_desc
-                                (primary_type_desc
-                                    (builtin_type_name))))
-                        (identifier)))
-                (class_member
-                    (object_field
-                        (type_desc
-                            (postfix_type_desc
-                                (primary_type_desc
-                                    (builtin_type_name))))
-                (identifier)))
-            (class_member
-              (object_field
-                (type_desc
-                  (postfix_type_desc
-                    (primary_type_desc
-                      (builtin_type_name))))
-                (identifier)
-                (expression
-                  (inner_expr
-                    (primary_expr
-                        (literal
-                            (int_literal
-                                (decimal_number
-                                    (non_zero_digit)
-                                    (digit)))))))))))))
+ (module_part
+  (module_defn
+   (class_defn
+    (identifier)
+    (class_member
+     (object_field
+      (type_desc
+       (postfix_type_desc
+        (primary_type_desc
+         (builtin_type_name))))
+      (identifier)))
+    (class_member
+     (object_field
+      (type_desc
+       (postfix_type_desc
+        (primary_type_desc
+         (builtin_type_name))))
+      (identifier)))
+    (class_member
+     (object_field
+      (type_desc
+       (postfix_type_desc
+        (primary_type_desc
+         (builtin_type_name))))
+      (identifier)
+      (expression
+       (inner_expr
+        (primary_expr
+         (literal
+          (int_literal
+           (decimal_number
+            (non_zero_digit)
+            (digit)))))))))))))
 
 =====================
 Object type inclusion
@@ -69,14 +69,14 @@ class Test {
 
 ---
 (source_file
-    (module_part
-        (module_defn
-            (class_defn
-                (identifier)
-                (class_member
-                    (object_type_inclusion
-                        (type_reference
-                            (identifier))))))))
+ (module_part
+  (module_defn
+   (class_defn
+    (identifier)
+    (class_member
+     (object_type_inclusion
+      (type_reference
+       (identifier))))))))
 
 ===========
 Method defn
@@ -89,46 +89,67 @@ class Test {
 
 ---
 (source_file
-    (module_part
-        (module_defn
-            (class_defn
-                (identifier)
-                (class_member
-                    (method_defn
-                        (function_defn
-                            (identifier)
-                            (signature
-                              (param_list
-                                (param
-                                  (type_desc
-                                    (postfix_type_desc
-                                      (primary_type_desc
-                                        (builtin_type_name))))
-                                  (identifier))))
-                            (stmt_block))))
-                (class_member
-                    (method_defn
-                        (function_defn
-                            (identifier)
-                            (signature
-                              (param_list
-                                (param
-                                  (type_desc
-                                    (postfix_type_desc
-                                      (primary_type_desc
-                                        (builtin_type_name))))
-                                  (identifier))))
-                            (stmt_block))))))))
+ (module_part
+  (module_defn
+   (class_defn
+    (identifier)
+    (class_member
+     (method_defn
+      (identifier)
+      (signature
+       (param_list
+        (param
+         (type_desc
+          (postfix_type_desc
+           (primary_type_desc
+            (builtin_type_name))))
+         (identifier))))
+      (stmt_block)))
+    (class_member
+     (method_defn
+      (object_visibility_qual)
+      (identifier)
+      (signature
+       (param_list
+        (param
+         (type_desc
+          (postfix_type_desc
+           (primary_type_desc
+            (builtin_type_name))))
+         (identifier))))
+      (stmt_block)))))))
 ============
 Client class
 ============
 isolated client class Client {
+    public isolated function init() {
+    }
+
+    remote isolated function foo() {
+    }
 
 }
 
 ---
 (source_file
-    (module_part 
-        (class_defn 
-            (class_type_quals)
-            (identifier))))
+ (module_part 
+  (module_defn
+   (class_defn 
+    (class_type_quals)
+    (identifier)
+    (class_member
+     (method_defn
+      (object_visibility_qual)
+      (function_quals
+        (isolated_qual))
+      (identifier)
+      (signature)
+      (stmt_block)))
+     (class_member
+      (remote_method_defn 
+       (remote_method_quals 
+        (function_quals
+            (isolated_qual)))
+       (identifier)
+       (signature)
+       (stmt_block)))))))

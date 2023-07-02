@@ -32,7 +32,7 @@
 "var" @keyword
 "where" @keyword
 "while" @keyword
-"disticnt" @keyword
+"distinct" @keyword
 "readonly" @keyword
 "isolated" @keyword
 "client" @keyword
@@ -54,6 +54,7 @@
 "/" @operator
 "%" @operator
 "==" @operator
+"?" @operator
 
 (type_desc) @type
 (builtin_type_name) @type.builtin
