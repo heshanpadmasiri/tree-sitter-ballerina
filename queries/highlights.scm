@@ -32,6 +32,11 @@
 "var" @keyword
 "where" @keyword
 "while" @keyword
+"disticnt" @keyword
+"readonly" @keyword
+"isolated" @keyword
+"client" @keyword
+"service" @keyword
 
 ";" @delimiter
 ":" @delimiter

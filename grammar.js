@@ -38,7 +38,14 @@ module.exports = grammar({
                                                     $.literal),
                                              ";")),
 
-        class_defn:         $ => seq(optional("public"), "class", $.identifier, "{", repeat($.class_member), "}"),
+        class_defn:         $ => seq(optional("public"), optional($.class_type_quals), "class", $.identifier, "{", repeat($.class_member), "}"),
+        class_type_quals:   $ => repeat1(choice(
+            "distinct",
+            "readonly",
+            "isolated",
+            "client",
+            "service",
+        )),
         class_member:       $ => choice(
             $.object_field,
             $.method_defn,

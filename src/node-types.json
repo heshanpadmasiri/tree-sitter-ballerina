@@ -321,6 +321,10 @@
           "named": true
         },
         {
+          "type": "class_type_quals",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         }
@@ -349,6 +353,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "class_type_quals",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "code_point",
@@ -3390,6 +3399,10 @@
     "named": false
   },
   {
+    "type": "client",
+    "named": false
+  },
+  {
     "type": "comment",
     "named": true
   },
@@ -3416,6 +3429,10 @@
   {
     "type": "digit",
     "named": true
+  },
+  {
+    "type": "distinct",
+    "named": false
   },
   {
     "type": "e",
@@ -3479,6 +3496,10 @@
   },
   {
     "type": "int",
+    "named": false
+  },
+  {
+    "type": "isolated",
     "named": false
   },
   {
@@ -3559,6 +3580,10 @@
   },
   {
     "type": "select",
+    "named": false
+  },
+  {
+    "type": "service",
     "named": false
   },
   {

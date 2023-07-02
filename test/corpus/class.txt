@@ -119,3 +119,16 @@ class Test {
                                         (builtin_type_name))))
                                   (identifier))))
                             (stmt_block))))))))
+============
+Client class
+============
+isolated client class Client {
+
+}
+
+---
+(source_file
+    (module_part 
+        (class_defn 
+            (class_type_quals)
+            (identifier))))

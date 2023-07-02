@@ -325,6 +325,18 @@
           ]
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "class_type_quals"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": "class"
         },
@@ -348,6 +360,34 @@
           "value": "}"
         }
       ]
+    },
+    "class_type_quals": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "distinct"
+          },
+          {
+            "type": "STRING",
+            "value": "readonly"
+          },
+          {
+            "type": "STRING",
+            "value": "isolated"
+          },
+          {
+            "type": "STRING",
+            "value": "client"
+          },
+          {
+            "type": "STRING",
+            "value": "service"
+          }
+        ]
+      }
     },
     "class_member": {
       "type": "CHOICE",
