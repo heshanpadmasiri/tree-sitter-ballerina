@@ -325,6 +325,18 @@
           ]
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "class_type_quals"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": "class"
         },
@@ -349,6 +361,34 @@
         }
       ]
     },
+    "class_type_quals": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "distinct"
+          },
+          {
+            "type": "STRING",
+            "value": "readonly"
+          },
+          {
+            "type": "STRING",
+            "value": "isolated"
+          },
+          {
+            "type": "STRING",
+            "value": "client"
+          },
+          {
+            "type": "STRING",
+            "value": "service"
+          }
+        ]
+      }
+    },
     "class_member": {
       "type": "CHOICE",
       "members": [
@@ -359,6 +399,10 @@
         {
           "type": "SYMBOL",
           "name": "method_defn"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "remote_method_defn"
         },
         {
           "type": "SYMBOL",
@@ -461,8 +505,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "private"
+              "type": "SYMBOL",
+              "name": "object_visibility_qual"
             },
             {
               "type": "BLANK"
@@ -470,10 +514,237 @@
           ]
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "function_quals"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "function"
+        },
+        {
           "type": "SYMBOL",
-          "name": "function_defn"
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "signature"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "stmt_block"
         }
       ]
+    },
+    "remote_method_defn": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "remote_method_quals"
+        },
+        {
+          "type": "STRING",
+          "value": "function"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "signature"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "stmt_block"
+        }
+      ]
+    },
+    "object_visibility_qual": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "public"
+        },
+        {
+          "type": "STRING",
+          "value": "private"
+        }
+      ]
+    },
+    "remote_method_quals": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "remote"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "function_quals"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "isolated_qual"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "transactional_qual"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "remote"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "transactional_qual"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "isolated_qual"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "remote"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "isolated_qual"
+            },
+            {
+              "type": "STRING",
+              "value": "remote"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "transactional_qual"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "transactional_qual"
+            },
+            {
+              "type": "STRING",
+              "value": "remote"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "isolated_qual"
+            }
+          ]
+        }
+      ]
+    },
+    "function_quals": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "transactional_qual"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "isolated_qual"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "isolated_qual"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "transactional_qual"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "transactional_qual": {
+      "type": "STRING",
+      "value": "transactional"
+    },
+    "isolated_qual": {
+      "type": "STRING",
+      "value": "isolated"
     },
     "final_defn": {
       "type": "SEQ",
