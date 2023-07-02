@@ -3,6 +3,7 @@
 "by" @keyword
 "check" @keyword
 "checkpanic" @keyword
+"class" @keyword
 "conflict" @keyword
 "const" @keyword
 "descending" @keyword
@@ -22,6 +23,7 @@
 "on" @keyword
 "order" @keyword
 "outer" @keyword
+"private" @keyword
 "public" @keyword
 "return" @keyword
 "returns" @keyword
@@ -47,9 +49,6 @@
 "/" @operator
 "%" @operator
 "==" @operator
-
-(ternary_conditional_expr ("?") @operator)
-(ternary_conditional_expr (":") @operator)
 
 (type_desc) @type
 (builtin_type_name) @type.builtin
