@@ -2413,6 +2413,10 @@
       "required": true,
       "types": [
         {
+          "type": "call_expr",
+          "named": true
+        },
+        {
           "type": "conditional_expr",
           "named": true
         },
@@ -2425,10 +2429,6 @@
           "named": true
         },
         {
-          "type": "function_call_expr",
-          "named": true
-        },
-        {
           "type": "inner_expr",
           "named": true
         },
@@ -2438,10 +2438,6 @@
         },
         {
           "type": "member_access_expr",
-          "named": true
-        },
-        {
-          "type": "method_call_expr",
           "named": true
         },
         {

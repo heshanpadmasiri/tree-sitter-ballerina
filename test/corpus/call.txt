@@ -73,3 +73,87 @@ function foo() {
                  (int_literal
                   (decimal_number
                    (non_zero_digit))))))))))))))))))))
+=============
+Checking call
+=============
+
+function foo() {
+    var a = check foo:bar(1);
+}
+----
+(source_file
+ (module_part
+  (module_defn
+   (function_defn
+    (identifier)
+    (signature)
+    (stmt_block
+     (statement
+      (local_var_decl_stmt
+       (typed_binding_pattern
+        (inferable_type_desc)
+        (binding_pattern
+         (identifier)))
+       (expression
+        (inner_expr
+         (primary_expr
+          (call_expr 
+           (checking_keyword)
+           (call_expr 
+            (function_call_expr
+             (function_reference
+              (qualified_identifier
+               (module_prefix
+                (identifier))
+               (identifier)))
+             (arg_list
+              (positional_args
+               (positional_arg
+                (expression
+                 (inner_expr
+                  (primary_expr
+                   (literal
+                    (int_literal
+                     (decimal_number
+                      (non_zero_digit)))))))))))))))))))))))
+
+=============
+Multiple args
+=============
+
+function main() {
+    foo(1, 2);
+}
+
+---
+(source_file
+ (module_part
+  (module_defn
+   (function_defn
+    (identifier)
+    (signature)
+    (stmt_block
+     (statement
+      (call_stmt
+       (call_expr
+        (function_call_expr
+         (function_reference
+          (identifier))
+         (arg_list
+          (positional_args
+           (positional_arg
+            (expression
+             (inner_expr
+              (primary_expr
+               (literal
+                (int_literal
+                 (decimal_number
+                  (non_zero_digit))))))))
+           (positional_arg
+            (expression
+             (inner_expr
+              (primary_expr
+               (literal
+                (int_literal
+                 (decimal_number
+                  (non_zero_digit)))))))))))))))))))

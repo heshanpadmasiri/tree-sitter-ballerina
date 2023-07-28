@@ -336,8 +336,7 @@ module.exports = grammar({
             $.error_constructor_expr,
             $.member_access_expr,
             $.field_access_expr,
-            $.function_call_expr,
-            $.method_call_expr,
+            $.call_expr,
             $.variable_reference_expr,
             $.conditional_expr,
             seq("(", $.inner_expr, ")")
@@ -404,7 +403,7 @@ module.exports = grammar({
             seq("(", $.positional_args, optional(seq(",", $.other_args)), ")"),
             seq("(", optional($.other_args), ")")
         ),
-        positional_args:     $ => prec.left(seq($.positional_arg, repeat(seq(",", $.positional_arg)))),
+        positional_args:     $ => prec.right(seq($.positional_arg, repeat(seq(",", $.positional_arg)))),
         positional_arg:      $ => $.expression,
         other_args:          $ => choice($.named_args, $.rest_args),
         named_args:          $ => seq($.named_arg, repeat(seq(",", $.named_arg))),
