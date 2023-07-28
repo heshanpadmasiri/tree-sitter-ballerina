@@ -1,0 +1,65 @@
+=======================
+Empty object definition
+=======================
+
+type Test object {
+
+};
+
+---
+(source_file
+ (module_part
+  (module_defn 
+   (type_defn
+    (identifier)
+    (type_desc
+     (object_type_desc))))))
+
+================
+object with object field
+================
+
+type O object {
+    int a;
+    private int a;
+    public int x = 10;
+};
+
+---
+(source_file
+ (module_part
+  (module_defn
+   (type_defn
+    (identifier)
+    (type_desc
+     (object_type_desc
+      (class_member
+       (object_field
+        (type_desc
+         (postfix_type_desc
+          (primary_type_desc
+           (builtin_type_name))))
+        (identifier)))
+      (class_member
+       (object_field
+        (type_desc
+         (postfix_type_desc
+          (primary_type_desc
+           (builtin_type_name))))
+        (identifier)))
+      (class_member
+       (object_field
+        (type_desc
+         (postfix_type_desc
+          (primary_type_desc
+           (builtin_type_name))))
+        (identifier)
+        (expression
+         (inner_expr
+          (primary_expr
+           (literal
+            (int_literal
+             (decimal_number
+              (non_zero_digit)
+              (digit)))))))))))))))
+

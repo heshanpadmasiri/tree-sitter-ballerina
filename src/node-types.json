@@ -1940,10 +1940,6 @@
           "named": true
         },
         {
-          "type": "object_defn",
-          "named": true
-        },
-        {
           "type": "type_defn",
           "named": true
         }
@@ -2153,29 +2149,6 @@
     }
   },
   {
-    "type": "object_defn",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "class_member",
-          "named": true
-        },
-        {
-          "type": "class_type_quals",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "object_field",
     "named": true,
     "fields": {},
@@ -2193,6 +2166,21 @@
         },
         {
           "type": "type_desc",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "object_type_desc",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "class_member",
           "named": true
         }
       ]
@@ -3139,6 +3127,10 @@
       "types": [
         {
           "type": "intersection_type_desc",
+          "named": true
+        },
+        {
+          "type": "object_type_desc",
           "named": true
         },
         {
