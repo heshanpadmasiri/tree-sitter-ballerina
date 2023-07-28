@@ -336,8 +336,7 @@ module.exports = grammar({
             $.error_constructor_expr,
             $.member_access_expr,
             $.field_access_expr,
-            $.function_call_expr,
-            $.method_call_expr,
+            $.call_expr,
             $.variable_reference_expr,
             $.conditional_expr,
             seq("(", $.inner_expr, ")")

@@ -2894,11 +2894,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "function_call_expr"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "method_call_expr"
+          "name": "call_expr"
         },
         {
           "type": "SYMBOL",
