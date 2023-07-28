@@ -1940,6 +1940,10 @@
           "named": true
         },
         {
+          "type": "object_defn",
+          "named": true
+        },
+        {
           "type": "type_defn",
           "named": true
         }
@@ -2143,6 +2147,29 @@
       "types": [
         {
           "type": "code_point",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "object_defn",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "class_member",
+          "named": true
+        },
+        {
+          "type": "class_type_quals",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -3627,6 +3654,10 @@
   },
   {
     "type": "null",
+    "named": false
+  },
+  {
+    "type": "object",
     "named": false
   },
   {

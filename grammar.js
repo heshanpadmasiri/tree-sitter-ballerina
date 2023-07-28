@@ -21,7 +21,8 @@ module.exports = grammar({
             $.const_defn,
             $.type_defn,
             $.final_defn,
-            $.class_defn
+            $.class_defn,
+            $.object_defn
         ),
 
         function_defn:      $ => seq(optional("public"),
@@ -46,6 +47,7 @@ module.exports = grammar({
             "client",
             "service",
         )),
+        object_defn:        $ => seq(optional($.class_type_quals), "object", $.identifier, "{", repeat($.class_member), "}"),
         class_member:       $ => choice(
             $.object_field,
             $.method_defn,

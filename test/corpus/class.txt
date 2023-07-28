@@ -153,3 +153,65 @@ isolated client class Client {
        (identifier)
        (signature)
        (stmt_block)))))))
+
+================
+Empty object definition
+================
+
+object Test {
+
+}
+
+---
+(source_file
+ (module_part
+  (module_defn
+   (object_defn
+    (identifier)))))
+
+================
+object with object field
+================
+
+object Test {
+    int a;
+    private int a;
+    public int x = 10;
+}
+
+---
+(source_file
+ (module_part
+  (module_defn
+   (object_defn
+    (identifier)
+    (class_member
+     (object_field
+      (type_desc
+       (postfix_type_desc
+        (primary_type_desc
+         (builtin_type_name))))
+      (identifier)))
+    (class_member
+     (object_field
+      (type_desc
+       (postfix_type_desc
+        (primary_type_desc
+         (builtin_type_name))))
+      (identifier)))
+    (class_member
+     (object_field
+      (type_desc
+       (postfix_type_desc
+        (primary_type_desc
+         (builtin_type_name))))
+      (identifier)
+      (expression
+       (inner_expr
+        (primary_expr
+         (literal
+          (int_literal
+           (decimal_number
+            (non_zero_digit)
+            (digit)))))))))))))
+
