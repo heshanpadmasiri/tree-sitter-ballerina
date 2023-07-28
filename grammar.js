@@ -403,7 +403,7 @@ module.exports = grammar({
             seq("(", $.positional_args, optional(seq(",", $.other_args)), ")"),
             seq("(", optional($.other_args), ")")
         ),
-        positional_args:     $ => prec.left(seq($.positional_arg, repeat(seq(",", $.positional_arg)))),
+        positional_args:     $ => prec.right(seq($.positional_arg, repeat(seq(",", $.positional_arg)))),
         positional_arg:      $ => $.expression,
         other_args:          $ => choice($.named_args, $.rest_args),
         named_args:          $ => seq($.named_arg, repeat(seq(",", $.named_arg))),

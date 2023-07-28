@@ -116,3 +116,44 @@ function foo() {
                     (int_literal
                      (decimal_number
                       (non_zero_digit)))))))))))))))))))))))
+
+=============
+Multiple args
+=============
+
+function main() {
+    foo(1, 2);
+}
+
+---
+(source_file
+ (module_part
+  (module_defn
+   (function_defn
+    (identifier)
+    (signature)
+    (stmt_block
+     (statement
+      (call_stmt
+       (call_expr
+        (function_call_expr
+         (function_reference
+          (identifier))
+         (arg_list
+          (positional_args
+           (positional_arg
+            (expression
+             (inner_expr
+              (primary_expr
+               (literal
+                (int_literal
+                 (decimal_number
+                  (non_zero_digit))))))))
+           (positional_arg
+            (expression
+             (inner_expr
+              (primary_expr
+               (literal
+                (int_literal
+                 (decimal_number
+                  (non_zero_digit)))))))))))))))))))
