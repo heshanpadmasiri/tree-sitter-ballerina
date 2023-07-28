@@ -21,8 +21,7 @@ module.exports = grammar({
             $.const_defn,
             $.type_defn,
             $.final_defn,
-            $.class_defn,
-            $.object_defn
+            $.class_defn
         ),
 
         function_defn:      $ => seq(optional("public"),
@@ -47,7 +46,6 @@ module.exports = grammar({
             "client",
             "service",
         )),
-        object_defn:        $ => seq(optional($.class_type_quals), "object", $.identifier, "{", repeat($.class_member), "}"),
         class_member:       $ => choice(
             $.object_field,
             $.method_defn,
@@ -83,8 +81,10 @@ module.exports = grammar({
         type_desc:          $ => prec(1, choice(
             $.union_type_desc,
             $.intersection_type_desc,
-            $.postfix_type_desc
+            $.postfix_type_desc,
+            $.object_type_desc
         )),
+        object_type_desc:   $ => seq("object", "{", repeat($.class_member), "}"),
         union_type_desc:    $ => prec(2, seq($.type_desc, "|", $.type_desc)),
         intersection_type_desc: $ => prec(1, seq($.type_desc, "&", $.type_desc)),
         postfix_type_desc:  $ => choice(
