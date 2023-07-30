@@ -1,0 +1,30 @@
+============
+Const values
+============
+const DEFAULT_ROOT_MODULE_NAME = "root";
+const SOURCE_EXTENSION = ".bal";
+const TEST_EXTENSION = ".balt";
+-----
+(source_file
+  (module_part
+    (module_defn
+      (const_defn
+        (identifier)
+        (literal
+          (string_literal
+            (double_quoted_string_literal
+              (string_body))))))
+    (module_defn
+      (const_defn
+        (identifier)
+        (literal
+          (string_literal
+            (double_quoted_string_literal
+              (string_body))))))
+    (module_defn
+      (const_defn
+        (identifier)
+        (literal
+          (string_literal
+            (double_quoted_string_literal
+              (string_body))))))))
