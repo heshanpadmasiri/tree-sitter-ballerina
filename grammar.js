@@ -84,7 +84,15 @@ module.exports = grammar({
             $.postfix_type_desc,
             $.object_type_desc
         )),
-        object_type_desc:   $ => seq("object", "{", repeat($.class_member), "}"),
+        object_type_desc:   $ => seq("object", "{", repeat($.object_type_members), "}"),
+        object_type_members:$ => choice(
+            $.object_field,
+            $.method_decl,
+            $.remote_method_decl,
+            $.object_type_inclusion
+        ),
+        method_decl:        $ => seq(optional("public"), optional($.function_quals), "function", $.identifier, $.signature, ";"),
+        remote_method_decl: $ => seq($.remote_method_quals, "function", $.identifier, $.signature, ";"),
         union_type_desc:    $ => prec(2, seq($.type_desc, "|", $.type_desc)),
         intersection_type_desc: $ => prec(1, seq($.type_desc, "&", $.type_desc)),
         postfix_type_desc:  $ => choice(
@@ -128,7 +136,7 @@ module.exports = grammar({
             "int",
             "boolean"
         ),
-         
+
         nil_type_desc:      $ => $.nil_literal,
         singleton_type_desc:$ => $.simple_const_expr,
         type_reference:     $ => choice(

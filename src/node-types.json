@@ -1885,6 +1885,29 @@
     }
   },
   {
+    "type": "method_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "function_quals",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "signature",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "method_defn",
     "named": true,
     "fields": {},
@@ -2180,7 +2203,7 @@
       "required": false,
       "types": [
         {
-          "type": "class_member",
+          "type": "object_type_members",
           "named": true
         }
       ]
@@ -2196,6 +2219,33 @@
       "types": [
         {
           "type": "type_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "object_type_members",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "method_decl",
+          "named": true
+        },
+        {
+          "type": "object_field",
+          "named": true
+        },
+        {
+          "type": "object_type_inclusion",
+          "named": true
+        },
+        {
+          "type": "remote_method_decl",
           "named": true
         }
       ]
@@ -2634,6 +2684,29 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "remote_method_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "remote_method_quals",
+          "named": true
+        },
+        {
+          "type": "signature",
           "named": true
         }
       ]

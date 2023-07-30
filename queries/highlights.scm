@@ -63,6 +63,7 @@
 
 (function_defn (identifier) @function)
 (method_defn (identifier) @function)
+(method_decl (identifier) @function)
 (function_call_expr (function_reference) @function)
 (method_call_expr (identifier) @function.method)
 
