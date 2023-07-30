@@ -4,6 +4,7 @@ Var decl stmt
 
 function foo() {
     int a;
+    d:Printer printer;
     int b = 5;
 }
 ---
@@ -23,6 +24,22 @@ function foo() {
                       (primary_type_desc
                         (builtin_type_name)))))
                 (binding_pattern
+                  (identifier)))))
+          (statement
+            (local_no_init_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc
+                  (type_desc
+                  (postfix_type_desc
+                    (primary_type_desc
+                      (singleton_type_desc
+                        (simple_const_expr
+                          (const_reference_expr
+                            (qualified_identifier
+                              (module_prefix
+                                (identifier))
+                            (identifier)))))))))
+              (binding_pattern
                   (identifier)))))
           (statement
             (local_var_decl_stmt
