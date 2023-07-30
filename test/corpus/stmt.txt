@@ -58,53 +58,60 @@ function foo() {
         (identifier)
         (signature)
         (stmt_block 
-         (statement
-          (local_var_decl_stmt
-           (typed_binding_pattern
-            (inferable_type_desc)
-            (binding_pattern
-             (identifier)))
-           (expression
-            (new_expression
-             (explicit_new_expression
-              (const_reference_expr
-               (identifier))
-              (arg_list
-               (positional_args
-                (positional_arg
-                 (expression
-                  (inner_expr
-                   (primary_expr
-                    (literal
-                     (int_literal
-                      (decimal_number
-                       (non_zero_digit)))))))))))))))
-         (statement
-          (local_var_decl_stmt
-           (typed_binding_pattern
-            (inferable_type_desc)
-            (binding_pattern
-             (identifier)))
-           (expression
-            (new_expression
-             (implicit_new_expression
-              (arg_list
-               (positional_args
-                (positional_arg
-                 (expression
-                  (inner_expr
-                   (primary_expr
-                    (literal
-                     (int_literal
-                      (decimal_number
-                       (non_zero_digit)
-                       (digit)))))))))))))))
-         (statement
-          (local_var_decl_stmt
-           (typed_binding_pattern
-            (inferable_type_desc)
-            (binding_pattern
-             (identifier)))
-           (expression
-            (new_expression
-             (implicit_new_expression))))))))))
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (new_expression
+                  (explicit_new_expression
+                    (const_reference_expr
+                      (identifier))
+                    (arg_list
+                      (positional_args
+                        (positional_arg
+                          (expression
+                            (inner_expr
+                              (primary_expr
+                                (literal
+                                  (int_literal
+                                    (decimal_number
+                                      (non_zero_digit)))))))))))))))
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (new_expression
+                  (implicit_new_expression
+                    (arg_list
+                      (positional_args
+                        (positional_arg
+                          (expression
+                            (inner_expr
+                              (primary_expr
+                                (literal
+                                  (int_literal
+                                    (decimal_number
+                                      (non_zero_digit)
+                                      (digit)))))))))))))))
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (new_expression
+                  (implicit_new_expression))))))))))
+=======
+foreach
+=======
+function foo() {
+    int[] a = [1, 2, 3];
+    foreach var each in a {}
+}
