@@ -4,6 +4,7 @@ Var decl stmt
 
 function foo() {
     int a;
+    d:Printer printer;
     int b = 5;
 }
 ---
@@ -23,6 +24,22 @@ function foo() {
                       (primary_type_desc
                         (builtin_type_name)))))
                 (binding_pattern
+                  (identifier)))))
+          (statement
+            (local_no_init_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc
+                  (type_desc
+                  (postfix_type_desc
+                    (primary_type_desc
+                      (singleton_type_desc
+                        (simple_const_expr
+                          (const_reference_expr
+                            (qualified_identifier
+                              (module_prefix
+                                (identifier))
+                            (identifier)))))))))
+              (binding_pattern
                   (identifier)))))
           (statement
             (local_var_decl_stmt
@@ -58,53 +75,97 @@ function foo() {
         (identifier)
         (signature)
         (stmt_block 
-         (statement
-          (local_var_decl_stmt
-           (typed_binding_pattern
-            (inferable_type_desc)
-            (binding_pattern
-             (identifier)))
-           (expression
-            (new_expression
-             (explicit_new_expression
-              (const_reference_expr
-               (identifier))
-              (arg_list
-               (positional_args
-                (positional_arg
-                 (expression
-                  (inner_expr
-                   (primary_expr
-                    (literal
-                     (int_literal
-                      (decimal_number
-                       (non_zero_digit)))))))))))))))
-         (statement
-          (local_var_decl_stmt
-           (typed_binding_pattern
-            (inferable_type_desc)
-            (binding_pattern
-             (identifier)))
-           (expression
-            (new_expression
-             (implicit_new_expression
-              (arg_list
-               (positional_args
-                (positional_arg
-                 (expression
-                  (inner_expr
-                   (primary_expr
-                    (literal
-                     (int_literal
-                      (decimal_number
-                       (non_zero_digit)
-                       (digit)))))))))))))))
-         (statement
-          (local_var_decl_stmt
-           (typed_binding_pattern
-            (inferable_type_desc)
-            (binding_pattern
-             (identifier)))
-           (expression
-            (new_expression
-             (implicit_new_expression))))))))))
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (new_expression
+                  (explicit_new_expression
+                    (const_reference_expr
+                      (identifier))
+                    (arg_list
+                      (positional_args
+                        (positional_arg
+                          (expression
+                            (inner_expr
+                              (primary_expr
+                                (literal
+                                  (int_literal
+                                    (decimal_number
+                                      (non_zero_digit)))))))))))))))
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (new_expression
+                  (implicit_new_expression
+                    (arg_list
+                      (positional_args
+                        (positional_arg
+                          (expression
+                            (inner_expr
+                              (primary_expr
+                                (literal
+                                  (int_literal
+                                    (decimal_number
+                                      (non_zero_digit)
+                                      (digit)))))))))))))))
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (new_expression
+                  (implicit_new_expression))))))))))
+=======
+foreach
+=======
+function foo() {
+    int[] a = [];
+    foreach var each in a {}
+}
+-----
+(source_file
+  (module_part
+    (module_defn
+      (function_defn
+        (identifier)
+        (signature)
+        (stmt_block
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc
+                  (type_desc
+                    (postfix_type_desc
+                      (array_type_desc
+                        (array_member_type_desc
+                          (type_desc
+                            (postfix_type_desc
+                              (primary_type_desc
+                                (builtin_type_name)))))
+                        (array_dimensions)))))
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (list_constructor_expr))))
+          (statement
+            (foreach_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (inner_expr
+                  (primary_expr
+                    (variable_reference_expr
+                      (identifier)))))
+              (stmt_block))))))))
