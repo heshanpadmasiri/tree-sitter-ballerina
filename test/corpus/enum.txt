@@ -1,0 +1,46 @@
+===================
+Enum without values
+===================
+
+enum Foo {
+     A,
+     B
+};
+
+----
+(source_file
+  (module_part
+  (module_defn
+    (enum_decl
+    (identifier)
+    (enum_member
+      (identifier))
+    (enum_member
+      (identifier))))))
+
+===================
+Enum with values
+===================
+
+enum Foo {
+     A = 5,
+     B
+};
+
+----
+(source_file
+  (module_part
+  (module_defn
+    (enum_decl
+    (identifier)
+    (enum_member
+      (identifier)
+      (const_expr
+      (inner_expr
+        (primary_expr
+        (literal
+          (int_literal
+          (decimal_number
+            (non_zero_digit))))))))
+    (enum_member
+      (identifier))))))

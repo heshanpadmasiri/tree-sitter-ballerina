@@ -636,6 +636,44 @@
     }
   },
   {
+    "type": "enum_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "enum_member",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_member",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_expr",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "equality_expr",
     "named": true,
     "fields": {},
@@ -1952,6 +1990,10 @@
         },
         {
           "type": "const_defn",
+          "named": true
+        },
+        {
+          "type": "enum_decl",
           "named": true
         },
         {
@@ -3627,6 +3669,10 @@
   },
   {
     "type": "else",
+    "named": false
+  },
+  {
+    "type": "enum",
     "named": false
   },
   {

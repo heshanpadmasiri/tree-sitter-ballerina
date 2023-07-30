@@ -24,7 +24,9 @@ module.exports = grammar({
             $.class_defn,
             $.enum_decl,
         ),
-
+        enum_decl: $ => seq(optional("public"), "enum", $.identifier, "{",
+            $.enum_member, repeat(seq(",", $.enum_member)), "}", optional(";")),
+        enum_member: $ => seq($.identifier, optional(seq("=", $.const_expr))),
         function_defn: $ => seq(optional("public"),
             "function",
             $.identifier,
