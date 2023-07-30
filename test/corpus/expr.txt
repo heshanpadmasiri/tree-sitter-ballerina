@@ -1,0 +1,60 @@
+==============
+New expression
+==============
+
+function foo() {
+   var dPrinter = new d:HtmlPrinter(errorFilename);
+   dPrinter = new d:HtmlPrinter(errorFilename);
+}
+
+----
+(source_file
+  (module_part
+    (module_defn
+      (function_defn
+        (identifier)
+        (signature)
+        (stmt_block
+          (statement
+            (local_var_decl_stmt
+              (typed_binding_pattern
+                (inferable_type_desc)
+                (binding_pattern
+                  (identifier)))
+              (expression
+                (new_expression
+                  (explicit_new_expression
+                    (const_reference_expr
+                      (qualified_identifier
+                        (module_prefix
+                          (identifier))
+                        (identifier)))
+                    (arg_list
+                      (positional_args
+                        (positional_arg
+                          (expression
+                            (inner_expr
+                              (primary_expr
+                                (variable_reference_expr
+                                  (identifier)))))))))))))
+          (statement
+            (assign_stmt
+              (lvexpr
+                (variable_reference_expr
+                  (identifier)))
+              (expression
+                (new_expression
+                  (explicit_new_expression
+                    (const_reference_expr
+                      (qualified_identifier
+                        (module_prefix
+                          (identifier))
+                        (identifier)))
+                    (arg_list
+                      (positional_args
+                        (positional_arg
+                          (expression
+                            (inner_expr
+                              (primary_expr
+                                (variable_reference_expr
+                                  (identifier))))))))))))))))))
