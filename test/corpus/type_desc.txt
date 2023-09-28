@@ -100,3 +100,34 @@ type O object {
           (postfix_type_desc
            (primary_type_desc
             (builtin_type_name)))))))))))))
+
+=================
+Function typedesc
+=================
+
+type F function(int, int) returns int;
+
+---
+(source_file
+ (module_part
+  (module_defn
+   (type_defn
+    (identifier)
+    (type_desc
+     (function_type_desc
+      (signature
+       (param_list
+        (param
+         (type_desc
+          (postfix_type_desc
+           (primary_type_desc
+            (builtin_type_name)))))
+        (param
+         (type_desc
+          (postfix_type_desc
+           (primary_type_desc
+            (builtin_type_name))))))
+       (type_desc
+        (postfix_type_desc
+         (primary_type_desc
+          (builtin_type_name)))))))))))
