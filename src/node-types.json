@@ -1129,6 +1129,25 @@
     }
   },
   {
+    "type": "function_type_desc",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "function_quals",
+          "named": true
+        },
+        {
+          "type": "signature",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "hex_digit",
     "named": true,
     "fields": {},
@@ -3240,6 +3259,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "function_type_desc",
+          "named": true
+        },
         {
           "type": "intersection_type_desc",
           "named": true

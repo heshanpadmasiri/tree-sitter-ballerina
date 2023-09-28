@@ -34,7 +34,7 @@ module.exports = grammar({
             choice($.stmt_block,
                 $.expr_function_body)),
         expr_function_body: $ => seq("=>", $.expression, ";"),
-        signature: $ => seq("(", optional($.param_list), ")", optional(seq("returns", $.type_desc))),
+        signature: $ => prec(3, seq("(", optional($.param_list), ")", optional(seq("returns", $.type_desc)))),
 
         const_defn: $ => prec(1, seq(optional("public"), "const", optional($.builtin_type_name), $.identifier, "=",
             choice($.const_expr,
@@ -64,7 +64,7 @@ module.exports = grammar({
         object_type_inclusion: $ => seq("*", $.type_reference, ";"),
         method_defn: $ => seq(optional($.object_visibility_qual), optional($.function_quals), "function", $.identifier, $.signature, $.stmt_block),
         remote_method_defn: $ => seq($.remote_method_quals, "function", $.identifier, $.signature, $.stmt_block),
-        object_visibility_qual: $ => choice("public", "private"),
+        object_visibility_qual: $ => prec.left(choice("public", "private")),
         remote_method_quals: $ => choice(
             seq("remote", optional($.function_quals)),
             seq($.isolated_qual, optional($.transactional_qual), "remote"),
@@ -85,8 +85,10 @@ module.exports = grammar({
             $.union_type_desc,
             $.intersection_type_desc,
             $.postfix_type_desc,
-            $.object_type_desc
+            $.object_type_desc,
+            $.function_type_desc
         )),
+        function_type_desc: $ => seq(optional($.function_quals), "function", $.signature),
         object_type_desc: $ => seq("object", "{", repeat($.object_type_members), "}"),
         object_type_members: $ => choice(
             $.object_field,
@@ -173,7 +175,7 @@ module.exports = grammar({
         tuple_rest_desc: $ => seq($.type_desc, "..."),
 
         param_list: $ => prec.left(seq($.param, repeat(seq(",", $.param)), optional($.include_record_params), optional(seq(",", $.rest_param)))),
-        param: $ => seq($.type_desc, $.identifier),
+        param: $ => seq($.type_desc, optional($.identifier)),
         include_record_params: $ => prec.left(seq(",", $.include_record_param, repeat(seq(",", $.include_record_param)))),
         include_record_param: $ => seq("*", $.type_reference, $.identifier),
         rest_param: $ => seq($.type_desc, "...", $.identifier),
