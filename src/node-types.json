@@ -262,6 +262,25 @@
     "fields": {}
   },
   {
+    "type": "builtin_type_qualified_identifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "builtin_type_name",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "call_expr",
     "named": true,
     "fields": {},
@@ -3305,6 +3324,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "builtin_type_qualified_identifier",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true

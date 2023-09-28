@@ -1224,10 +1224,6 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "builtin_type_name"
-        },
-        {
-          "type": "SYMBOL",
           "name": "nil_type_desc"
         },
         {
@@ -1254,6 +1250,10 @@
         {
           "type": "SYMBOL",
           "name": "type_reference"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "builtin_type_name"
         },
         {
           "type": "SYMBOL",
@@ -1335,9 +1335,30 @@
           {
             "type": "SYMBOL",
             "name": "qualified_identifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "builtin_type_qualified_identifier"
           }
         ]
       }
+    },
+    "builtin_type_qualified_identifier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "builtin_type_name"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
     },
     "map_type_desc": {
       "type": "SEQ",

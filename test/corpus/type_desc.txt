@@ -136,6 +136,7 @@ type F function(int, int) returns int;
 imported typeDesc
 =================
 type Printer d:Printer;
+type C string:Char;
 
 ---
 (source_file
@@ -150,4 +151,14 @@ type Printer d:Printer;
                 (qualified_identifier
                   (module_prefix
                     (identifier))
+                  (identifier))))))))
+    (module_defn
+      (type_defn
+        (identifier)
+        (type_desc
+          (postfix_type_desc
+            (primary_type_desc
+              (type_reference
+                (builtin_type_qualified_identifier
+                  (builtin_type_name)
                   (identifier))))))))))
