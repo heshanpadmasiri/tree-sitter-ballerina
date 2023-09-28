@@ -119,11 +119,11 @@ module.exports = grammar({
         ),
 
         primary_type_desc: $ => choice(
-            $.builtin_type_name,
             $.nil_type_desc,
             $.singleton_type_desc,
             seq("(", $.type_desc, ")"),
             $.type_reference,
+            $.builtin_type_name,
             $.map_type_desc,
             $.record_type_desc,
             $.tuple_type_desc
@@ -142,12 +142,17 @@ module.exports = grammar({
         )),
 
         nil_type_desc: $ => $.nil_literal,
-        singleton_type_desc: $ => $.simple_const_expr,
-        type_reference: $ => choice(
+        singleton_type_desc: $ => $.simple_const_no_ref_expr,
+        type_reference: $ => prec(3, choice(
             $.identifier,
-            $.qualified_identifier
+            $.qualified_identifier,
+            $.builtin_type_qualified_identifier
+        )),
+        // This is a hack to make types like string:Char to work
+        // otherwise it will match up the string and break
+        builtin_type_qualified_identifier: $=> seq(
+            $.builtin_type_name, ":", $.identifier
         ),
-
         map_type_desc: $ => seq("map", "<", $.type_desc, ">"),
 
         record_type_desc: $ => choice(
@@ -249,11 +254,15 @@ module.exports = grammar({
         ),
 
         simple_const_expr: $ => prec(2, choice(
+            $.simple_const_no_ref_expr,
+            $.const_reference_expr
+        )),
+
+        simple_const_no_ref_expr: $ => choice (
             $.literal,
             seq("-", $.int_literal),
             seq("-", $.floating_point_literal),
-            $.const_reference_expr
-        )),
+        ),
 
         expression: $ => choice(
             $.new_expression,

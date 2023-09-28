@@ -1224,10 +1224,6 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "builtin_type_name"
-        },
-        {
-          "type": "SYMBOL",
           "name": "nil_type_desc"
         },
         {
@@ -1254,6 +1250,10 @@
         {
           "type": "SYMBOL",
           "name": "type_reference"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "builtin_type_name"
         },
         {
           "type": "SYMBOL",
@@ -1320,18 +1320,43 @@
     },
     "singleton_type_desc": {
       "type": "SYMBOL",
-      "name": "simple_const_expr"
+      "name": "simple_const_no_ref_expr"
     },
     "type_reference": {
-      "type": "CHOICE",
+      "type": "PREC",
+      "value": 3,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "qualified_identifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "builtin_type_qualified_identifier"
+          }
+        ]
+      }
+    },
+    "builtin_type_qualified_identifier": {
+      "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "builtin_type_name"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
         },
         {
           "type": "SYMBOL",
-          "name": "qualified_identifier"
+          "name": "identifier"
         }
       ]
     },
@@ -2361,33 +2386,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "literal"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "-"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "int_literal"
-              }
-            ]
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "-"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "floating_point_literal"
-              }
-            ]
+            "name": "simple_const_no_ref_expr"
           },
           {
             "type": "SYMBOL",
@@ -2395,6 +2394,41 @@
           }
         ]
       }
+    },
+    "simple_const_no_ref_expr": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "literal"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "-"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "int_literal"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "-"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "floating_point_literal"
+            }
+          ]
+        }
+      ]
     },
     "expression": {
       "type": "CHOICE",
