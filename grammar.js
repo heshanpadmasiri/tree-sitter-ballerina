@@ -129,18 +129,17 @@ module.exports = grammar({
             $.tuple_type_desc
         ),
 
-        builtin_type_name: $ => choice(
+        builtin_type_name: $ => prec.left(choice(
             "any",
             "anydata",
             "boolean",
             "byte",
-            "int",
-            "float",
-            "string",
             "error",
+            "float",
             "int",
-            "boolean"
-        ),
+            "readonly",
+            "string",
+        )),
 
         nil_type_desc: $ => $.nil_literal,
         singleton_type_desc: $ => $.simple_const_expr,
