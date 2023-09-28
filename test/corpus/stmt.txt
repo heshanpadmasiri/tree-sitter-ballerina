@@ -33,13 +33,11 @@ function foo() {
          (type_desc
           (postfix_type_desc
            (primary_type_desc
-            (singleton_type_desc
-             (simple_const_expr
-              (const_reference_expr
-               (qualified_identifier
+            (type_reference
+              (qualified_identifier
                 (module_prefix
-                 (identifier))
-                (identifier)))))))))
+                  (identifier))
+                (identifier)))))))
         (binding_pattern
          (identifier)))))
      (statement

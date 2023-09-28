@@ -1320,20 +1320,24 @@
     },
     "singleton_type_desc": {
       "type": "SYMBOL",
-      "name": "simple_const_expr"
+      "name": "simple_const_no_ref_expr"
     },
     "type_reference": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "qualified_identifier"
-        }
-      ]
+      "type": "PREC",
+      "value": 3,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "qualified_identifier"
+          }
+        ]
+      }
     },
     "map_type_desc": {
       "type": "SEQ",
@@ -2361,33 +2365,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "literal"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "-"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "int_literal"
-              }
-            ]
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "-"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "floating_point_literal"
-              }
-            ]
+            "name": "simple_const_no_ref_expr"
           },
           {
             "type": "SYMBOL",
@@ -2395,6 +2373,41 @@
           }
         ]
       }
+    },
+    "simple_const_no_ref_expr": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "literal"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "-"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "int_literal"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "-"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "floating_point_literal"
+            }
+          ]
+        }
+      ]
     },
     "expression": {
       "type": "CHOICE",

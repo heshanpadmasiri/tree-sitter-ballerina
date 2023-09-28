@@ -131,3 +131,23 @@ type F function(int, int) returns int;
         (postfix_type_desc
          (primary_type_desc
           (builtin_type_name)))))))))))
+
+=================
+imported typeDesc
+=================
+type Printer d:Printer;
+
+---
+(source_file
+  (module_part
+    (module_defn
+      (type_defn
+        (identifier)
+        (type_desc
+          (postfix_type_desc
+            (primary_type_desc
+              (type_reference
+                (qualified_identifier
+                  (module_prefix
+                    (identifier))
+                  (identifier))))))))))

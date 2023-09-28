@@ -142,11 +142,11 @@ module.exports = grammar({
         )),
 
         nil_type_desc: $ => $.nil_literal,
-        singleton_type_desc: $ => $.simple_const_expr,
-        type_reference: $ => choice(
+        singleton_type_desc: $ => $.simple_const_no_ref_expr,
+        type_reference: $ => prec(3, choice(
             $.identifier,
             $.qualified_identifier
-        ),
+        )),
 
         map_type_desc: $ => seq("map", "<", $.type_desc, ">"),
 
@@ -249,11 +249,15 @@ module.exports = grammar({
         ),
 
         simple_const_expr: $ => prec(2, choice(
+            $.simple_const_no_ref_expr,
+            $.const_reference_expr
+        )),
+
+        simple_const_no_ref_expr: $ => choice (
             $.literal,
             seq("-", $.int_literal),
             seq("-", $.floating_point_literal),
-            $.const_reference_expr
-        )),
+        ),
 
         expression: $ => choice(
             $.new_expression,

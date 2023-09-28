@@ -2954,6 +2954,21 @@
           "named": true
         },
         {
+          "type": "simple_const_no_ref_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "simple_const_no_ref_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
           "type": "floating_point_literal",
           "named": true
         },
@@ -2977,7 +2992,7 @@
       "required": true,
       "types": [
         {
-          "type": "simple_const_expr",
+          "type": "simple_const_no_ref_expr",
           "named": true
         }
       ]
