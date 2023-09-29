@@ -119,3 +119,128 @@ public function main(string[] filenames, *Options opts) returns error? {
                   (primary_type_desc
                     (builtin_type_name)))))))
         (stmt_block)))))
+
+====================================
+Function with defaultable param
+====================================
+
+function foo(int a, int b = 10) returns int {
+  return a + b;
+}
+---
+(source_file
+  (module_part
+  (module_defn
+    (function_defn
+      (identifier)
+      (signature
+        (param_list
+          (param
+            (type_desc
+              (postfix_type_desc
+                (primary_type_desc
+                  (builtin_type_name))))
+            (identifier))
+          (defaultable_params
+            (defaultable_param
+              (param
+                (type_desc
+                  (postfix_type_desc
+                    (primary_type_desc
+                      (builtin_type_name))))
+                (identifier))
+              (expression
+                (inner_expr
+                  (primary_expr
+                    (literal
+                      (int_literal
+                        (decimal_number
+                          (non_zero_digit)
+                          (digit))))))))))
+        (type_desc
+          (postfix_type_desc
+            (primary_type_desc
+              (builtin_type_name)))))
+      (stmt_block
+        (statement
+          (return_stmt
+            (expression
+              (inner_expr
+                (nil_lifted_expr
+                  (additive_expr
+                    (expression
+                      (inner_expr
+                        (primary_expr
+                          (variable_reference_expr
+                            (identifier)))))
+                    (expression
+                      (inner_expr
+                        (primary_expr
+                          (variable_reference_expr
+                            (identifier))))))))))))))))
+
+====================================
+Function with only defaultable param
+====================================
+
+function foo(int a=6, int b = 10) returns int {
+  return a + b;
+}
+---
+(source_file
+  (module_part
+  (module_defn
+    (function_defn
+      (identifier)
+      (signature
+        (param_list
+          (defaultable_param
+            (param
+              (type_desc
+                (postfix_type_desc
+                  (primary_type_desc
+                    (builtin_type_name))))
+              (identifier))
+            (expression
+              (inner_expr
+                (primary_expr
+                  (literal
+                    (int_literal
+                      (decimal_number
+                        (non_zero_digit))))))))
+          (defaultable_param
+            (param
+              (type_desc
+                (postfix_type_desc
+                  (primary_type_desc
+                    (builtin_type_name))))
+              (identifier))
+            (expression
+              (inner_expr
+                (primary_expr
+                  (literal
+                    (int_literal
+                      (decimal_number
+                        (non_zero_digit)
+                        (digit)))))))))
+        (type_desc
+          (postfix_type_desc
+            (primary_type_desc
+              (builtin_type_name)))))
+      (stmt_block
+        (statement
+          (return_stmt
+            (expression
+              (inner_expr
+                (nil_lifted_expr
+                  (additive_expr
+                    (expression
+                      (inner_expr
+                        (primary_expr
+                          (variable_reference_expr
+                            (identifier)))))
+                    (expression
+                      (inner_expr
+                        (primary_expr
+                          (variable_reference_expr
+                            (identifier))))))))))))))))
