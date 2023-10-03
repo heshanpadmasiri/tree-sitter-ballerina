@@ -178,12 +178,10 @@ module.exports = grammar({
         ),
         tuple_rest_desc: $ => seq($.type_desc, "..."),
 
-        param_list: $ => choice(prec.left(seq($.param, repeat(seq(",", $.param)), optional($.defaultable_params), optional($.include_record_params), optional(seq(",", $.rest_param)))),
-                                prec.left(seq($.defaultable_param, repeat(seq(",", $.defaultable_param)), optional($.include_record_params), optional(seq(",", $.rest_param))))),
+        param_list: $ => choice(seq($.param, repeat(seq(",", $.param)), repeat(seq(",", $.defaultable_param)), repeat(seq(",", $.include_record_param)), optional(seq(",", $.rest_param))),
+                                seq($.defaultable_param, repeat(seq(",", $.defaultable_param)), repeat(seq(",", $.include_record_param)), optional(seq(",", $.rest_param)))),
         param: $ => seq($.type_desc, optional($.identifier)),
-        defaultable_params: $ => prec.left(seq(",", $.defaultable_param, repeat(seq(",", $.defaultable_param)))),
         defaultable_param: $ => seq($.param, "=", $.expression),
-        include_record_params: $ => prec.left(seq(",", $.include_record_param, repeat(seq(",", $.include_record_param)))),
         include_record_param: $ => seq("*", $.type_reference, $.identifier),
         rest_param: $ => seq($.type_desc, "...", $.identifier),
 
