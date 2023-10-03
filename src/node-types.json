@@ -606,21 +606,6 @@
     }
   },
   {
-    "type": "defaultable_params",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "defaultable_param",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "destructuring_assign_stmt",
     "named": true,
     "fields": {},
@@ -1414,21 +1399,6 @@
         },
         {
           "type": "type_reference",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "include_record_params",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "include_record_param",
           "named": true
         }
       ]
@@ -2520,11 +2490,7 @@
           "named": true
         },
         {
-          "type": "defaultable_params",
-          "named": true
-        },
-        {
-          "type": "include_record_params",
+          "type": "include_record_param",
           "named": true
         },
         {

@@ -107,11 +107,10 @@ public function main(string[] filenames, *Options opts) returns error? {
                             (builtin_type_name)))))
                     (array_dimensions))))
               (identifier))
-            (include_record_params
-              (include_record_param
-                (type_reference
-                  (identifier))
-                (identifier))))
+            (include_record_param
+              (type_reference
+                (identifier))
+              (identifier)))
           (type_desc
             (postfix_type_desc
               (optional_type_desc
@@ -120,11 +119,11 @@ public function main(string[] filenames, *Options opts) returns error? {
                     (builtin_type_name)))))))
         (stmt_block)))))
 
-====================================
+===============================
 Function with defaultable param
-====================================
+===============================
 
-function foo(int a, int b = 10) returns int {
+function foo(int a, int b = 10, int c = 5) returns int {
   return a + b;
 }
 ---
@@ -141,22 +140,35 @@ function foo(int a, int b = 10) returns int {
                 (primary_type_desc
                   (builtin_type_name))))
             (identifier))
-          (defaultable_params
-            (defaultable_param
-              (param
-                (type_desc
-                  (postfix_type_desc
-                    (primary_type_desc
-                      (builtin_type_name))))
-                (identifier))
-              (expression
-                (inner_expr
-                  (primary_expr
-                    (literal
-                      (int_literal
-                        (decimal_number
-                          (non_zero_digit)
-                          (digit))))))))))
+          (defaultable_param
+            (param
+              (type_desc
+                (postfix_type_desc
+                  (primary_type_desc
+                    (builtin_type_name))))
+              (identifier))
+            (expression
+              (inner_expr
+                (primary_expr
+                  (literal
+                    (int_literal
+                      (decimal_number
+                        (non_zero_digit)
+                        (digit))))))))
+          (defaultable_param
+            (param
+              (type_desc
+                (postfix_type_desc
+                  (primary_type_desc
+                    (builtin_type_name))))
+              (identifier))
+            (expression
+              (inner_expr
+                (primary_expr
+                  (literal
+                    (int_literal
+                      (decimal_number
+                        (non_zero_digit)))))))))
         (type_desc
           (postfix_type_desc
             (primary_type_desc
