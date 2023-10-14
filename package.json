@@ -4,7 +4,7 @@
   "description": "Tree sitter grammer for ballerina language",
   "main": "bindings/node",
   "scripts": {
-    "test": "tree-sitter build && tree-sitter test"
+    "test": "tree-sitter test"
   },
   "author": "Heshan Padmasiri",
   "license": "MIT",
