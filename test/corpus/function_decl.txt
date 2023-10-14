@@ -1,9 +1,7 @@
 ====================
 Function Declaration
 ====================
-function test(int a, int b) {
-
-}
+function test(int a, int b) { }
 
 ---
 (source_file
@@ -17,29 +15,15 @@ function test(int a, int b) {
               (type_desc
                 (postfix_type_desc
                   (primary_type_desc
-                    (builtin_type_name)
-                  )
-                )
-              )
-              (identifier)
-            )
+                    (builtin_type_name))))
+              (identifier))
             (param
               (type_desc
                 (postfix_type_desc
                   (primary_type_desc
-                    (builtin_type_name)
-                  )
-                )
-              )
-              (identifier)
-            )
-          )
-        )
-        (stmt_block)
-      )
-    )
-  )
-)
+                    (builtin_type_name))))
+              (identifier))))
+        (stmt_block)))))
 
 ==============
 Arrow function
@@ -86,8 +70,7 @@ function foo(int a) returns int => a+1;
 ==================================
 Function with include record param
 ==================================
-public function main(string[] filenames, *Options opts) returns error? {
-}
+public function main(string[] filenames, *Options opts) returns error? { }
 ---
 (source_file
   (module_part
@@ -275,11 +258,7 @@ function test(int... a) { }
                   (primary_type_desc
                     (builtin_type_name))))
               (identifier))))
-        (stmt_block)
-      )
-    )
-  )
-)
+        (stmt_block)))))
 
 ==============================
 Rest param with required param
@@ -305,8 +284,4 @@ function test(int a, int... b) { }
                   (primary_type_desc
                     (builtin_type_name))))
               (identifier))))
-        (stmt_block)
-      )
-    )
-  )
-)
+        (stmt_block)))))
