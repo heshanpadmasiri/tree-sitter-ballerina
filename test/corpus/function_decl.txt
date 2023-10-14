@@ -256,3 +256,57 @@ function foo(int a=6, int b = 10) returns int {
                         (primary_expr
                           (variable_reference_expr
                             (identifier))))))))))))))))
+
+==========
+Rest param
+==========
+function test(int... a) { }
+---
+(source_file
+  (module_part
+    (module_defn
+      (function_defn
+        (identifier)
+        (signature
+          (param_list
+            (rest_param
+              (type_desc
+                (postfix_type_desc
+                  (primary_type_desc
+                    (builtin_type_name))))
+              (identifier))))
+        (stmt_block)
+      )
+    )
+  )
+)
+
+==============================
+Rest param with required param
+==============================
+function test(int a, int... b) { }
+---
+(source_file
+  (module_part
+    (module_defn
+      (function_defn
+        (identifier)
+        (signature
+          (param_list
+            (param
+              (type_desc
+                (postfix_type_desc
+                  (primary_type_desc
+                    (builtin_type_name))))
+              (identifier))
+            (rest_param
+              (type_desc
+                (postfix_type_desc
+                  (primary_type_desc
+                    (builtin_type_name))))
+              (identifier))))
+        (stmt_block)
+      )
+    )
+  )
+)
