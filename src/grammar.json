@@ -1795,6 +1795,10 @@
               ]
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "rest_param"
         }
       ]
     },
