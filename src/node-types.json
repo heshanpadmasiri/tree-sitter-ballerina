@@ -37,7 +37,21 @@
   {
     "type": "type_descriptor",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "type_descriptor",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "&",
+    "named": false
   },
   {
     "type": "()",
@@ -77,6 +91,10 @@
   },
   {
     "type": "type",
+    "named": false
+  },
+  {
+    "type": "|",
     "named": false
   }
 ]

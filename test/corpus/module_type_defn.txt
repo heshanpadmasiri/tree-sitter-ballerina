@@ -28,3 +28,30 @@ type String string;
   (identifier)
   (type_descriptor)))
 
+======================
+Binary type operations
+======================
+
+type Foo int|string;
+type Bar int&string;
+type FooBar int&string|string;
+
+---
+(source_file
+ (type_decl
+  (identifier)
+  (type_descriptor
+   (type_descriptor)
+   (type_descriptor)))
+ (type_decl
+  (identifier)
+  (type_descriptor
+   (type_descriptor)
+   (type_descriptor)))
+ (type_decl
+  (identifier)
+  (type_descriptor
+   (type_descriptor
+    (type_descriptor)
+    (type_descriptor))
+   (type_descriptor))))

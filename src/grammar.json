@@ -57,6 +57,14 @@
         {
           "type": "SYMBOL",
           "name": "_basic_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_union_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_intersection_type"
         }
       ]
     },
@@ -97,6 +105,48 @@
           "value": "()"
         }
       ]
+    },
+    "_union_type": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "type_descriptor"
+          },
+          {
+            "type": "STRING",
+            "value": "|"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "type_descriptor"
+          }
+        ]
+      }
+    },
+    "_intersection_type": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "type_descriptor"
+          },
+          {
+            "type": "STRING",
+            "value": "&"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "type_descriptor"
+          }
+        ]
+      }
     },
     "word": {
       "type": "SYMBOL",
