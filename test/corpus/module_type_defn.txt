@@ -1,0 +1,30 @@
+================
+Basic type alias
+================
+
+type Int int;
+
+---
+(source_file
+ (type_decl
+    (identifier)
+    (type_descriptor)))
+
+
+
+===================
+Multiple type alias
+===================
+
+type Int int;
+type String string;
+
+---
+(source_file
+ (type_decl
+  (identifier)
+  (type_descriptor))
+ (type_decl
+  (identifier)
+  (type_descriptor)))
+
