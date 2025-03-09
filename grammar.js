@@ -22,7 +22,9 @@ module.exports = grammar({
       $._intersection_type,
       $._optional_type,
       $._distinct_type,
-      $._type_reference),
+      $._type_reference,
+      seq("(", $.type_descriptor, ")")
+    ),
     _basic_type: $ => choice(
       "int",
       "float",

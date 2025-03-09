@@ -79,11 +79,29 @@ type FooBar int|string?;
 Distinct type
 =============
 
-type distinct Foo;
+type Bar distinct Foo;
+
+(source_file
+ (type_decl
+  (identifier)
+  (type_descriptor
+   (identifier))))
+
+=============
+Nested type
+=============
+
+type foo ((int|string)|int);
 
 ---
 (source_file
  (type_decl
   (identifier)
   (type_descriptor
-   (identifier))))
+   (type_descriptor
+    (type_descriptor
+     (type_descriptor
+      (type_descriptor)
+      (type_descriptor)))
+    (type_descriptor)))))
+(identifier))))
