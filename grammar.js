@@ -15,28 +15,28 @@ module.exports = grammar({
     _module_decl: $ => choice(
       $.type_decl
     ),
-    type_decl: $ => seq(optional("public"), "type", $.identifier, $.type_descriptor, ";"),
-    type_descriptor: $ => choice(
-      $._basic_type,
+    type_decl: $ => seq(optional("public"), "type", $.identifier, $._type_descriptor, ";"),
+    _type_descriptor: $ => choice(
+      $.basic_type,
       $._union_type,
       $._intersection_type,
       $._optional_type,
       $._distinct_type,
       $._type_reference,
-      seq("(", $.type_descriptor, ")")
+      seq("(", $._type_descriptor, ")")
     ),
-    _basic_type: $ => choice(
+    basic_type: $ => choice(
       "int",
       "float",
       "string",
       "boolean",
-      $._nil_literal
+      $.nil_literal
     ),
-    _nil_literal: $ => choice("null", "()"),
-    _union_type: $ => prec.left(seq($.type_descriptor, "|", $.type_descriptor)),
-    _intersection_type: $ => prec.left(seq($.type_descriptor, "&", $.type_descriptor)),
-    _optional_type: $ => prec.left(seq($.type_descriptor, "?")),
-    _distinct_type: $ => prec.left(seq("distinct", $.type_descriptor)),
+    nil_literal: $ => choice("null", "()"),
+    _union_type: $ => prec.left(seq($._type_descriptor, "|", $._type_descriptor)),
+    _intersection_type: $ => prec.left(seq($._type_descriptor, "&", $._type_descriptor)),
+    _optional_type: $ => prec.left(seq($._type_descriptor, "?")),
+    _distinct_type: $ => prec.left(seq("distinct", $._type_descriptor)),
     _type_reference: $ => $.identifier,
 
     word: $ => $.identifier,

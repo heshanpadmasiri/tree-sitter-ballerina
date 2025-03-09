@@ -43,7 +43,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "type_descriptor"
+          "name": "_type_descriptor"
         },
         {
           "type": "STRING",
@@ -51,12 +51,12 @@
         }
       ]
     },
-    "type_descriptor": {
+    "_type_descriptor": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_basic_type"
+          "name": "basic_type"
         },
         {
           "type": "SYMBOL",
@@ -87,7 +87,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "type_descriptor"
+              "name": "_type_descriptor"
             },
             {
               "type": "STRING",
@@ -97,7 +97,7 @@
         }
       ]
     },
-    "_basic_type": {
+    "basic_type": {
       "type": "CHOICE",
       "members": [
         {
@@ -118,11 +118,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_nil_literal"
+          "name": "nil_literal"
         }
       ]
     },
-    "_nil_literal": {
+    "nil_literal": {
       "type": "CHOICE",
       "members": [
         {
@@ -143,7 +143,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "type_descriptor"
+            "name": "_type_descriptor"
           },
           {
             "type": "STRING",
@@ -151,7 +151,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "type_descriptor"
+            "name": "_type_descriptor"
           }
         ]
       }
@@ -164,7 +164,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "type_descriptor"
+            "name": "_type_descriptor"
           },
           {
             "type": "STRING",
@@ -172,7 +172,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "type_descriptor"
+            "name": "_type_descriptor"
           }
         ]
       }
@@ -185,7 +185,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "type_descriptor"
+            "name": "_type_descriptor"
           },
           {
             "type": "STRING",
@@ -206,7 +206,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "type_descriptor"
+            "name": "_type_descriptor"
           }
         ]
       }

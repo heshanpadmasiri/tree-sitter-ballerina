@@ -7,9 +7,8 @@ type Int int;
 ---
 (source_file
  (type_decl
-    (identifier)
-    (type_descriptor)))
-
+  (identifier)
+  (basic_type)))
 
 
 ===================
@@ -23,10 +22,10 @@ type String string;
 (source_file
  (type_decl
   (identifier)
-  (type_descriptor))
+  (basic_type))
  (type_decl
   (identifier)
-  (type_descriptor)))
+  (basic_type)))
 
 ======================
 Binary type operations
@@ -40,21 +39,17 @@ type FooBar int&string|string;
 (source_file
  (type_decl
   (identifier)
-  (type_descriptor
-   (type_descriptor)
-   (type_descriptor)))
+  (basic_type)
+  (basic_type))
  (type_decl
   (identifier)
-  (type_descriptor
-   (type_descriptor)
-   (type_descriptor)))
+  (basic_type)
+  (basic_type))
  (type_decl
   (identifier)
-  (type_descriptor
-   (type_descriptor
-    (type_descriptor)
-    (type_descriptor))
-   (type_descriptor))))
+  (basic_type)
+  (basic_type)
+  (basic_type)))
 
 =============
 Optional type
@@ -66,14 +61,11 @@ type FooBar int|string?;
 (source_file
  (type_decl
   (identifier)
-  (type_descriptor
-   (type_descriptor)))
+  (basic_type))
  (type_decl
   (identifier)
-  (type_descriptor
-   (type_descriptor
-    (type_descriptor)
-    (type_descriptor)))))
+  (basic_type)
+  (basic_type)))
 
 =============
 Distinct type
@@ -97,11 +89,6 @@ type foo ((int|string)|int);
 (source_file
  (type_decl
   (identifier)
-  (type_descriptor
-   (type_descriptor
-    (type_descriptor
-     (type_descriptor
-      (type_descriptor)
-      (type_descriptor)))
-    (type_descriptor)))))
-(identifier))))
+  (basic_type)
+  (basic_type)
+  (basic_type)))

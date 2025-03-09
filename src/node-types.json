@@ -1,5 +1,25 @@
 [
   {
+    "type": "basic_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "nil_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nil_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "source_file",
     "named": true,
     "root": true,
@@ -24,30 +44,11 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "basic_type",
           "named": true
         },
         {
-          "type": "type_descriptor",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "type_descriptor",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "type_descriptor",
           "named": true
         }
       ]
