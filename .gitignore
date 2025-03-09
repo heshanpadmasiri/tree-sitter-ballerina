@@ -1,9 +1,6 @@
 package-lock.json
 node_modules/
 build
-*.log
-/examples/*/
 /target/
 .git
 .vscode
-*.bal
