@@ -79,10 +79,11 @@ type FooBar int|string?;
 Distinct type
 =============
 
-type distinct int;
+type distinct Foo;
 
 ---
 (source_file
  (type_decl
   (identifier)
-  (type_descriptor)))
+  (type_descriptor
+   (identifier))))

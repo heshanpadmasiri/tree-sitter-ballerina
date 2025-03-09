@@ -73,6 +73,10 @@
         {
           "type": "SYMBOL",
           "name": "_distinct_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_type_reference"
         }
       ]
     },
@@ -189,6 +193,10 @@
           }
         ]
       }
+    },
+    "_type_reference": {
+      "type": "SYMBOL",
+      "name": "identifier"
     },
     "word": {
       "type": "SYMBOL",
