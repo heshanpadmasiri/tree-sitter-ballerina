@@ -65,6 +65,10 @@
         {
           "type": "SYMBOL",
           "name": "_intersection_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_optional_type"
         }
       ]
     },
@@ -144,6 +148,23 @@
           {
             "type": "SYMBOL",
             "name": "type_descriptor"
+          }
+        ]
+      }
+    },
+    "_optional_type": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "type_descriptor"
+          },
+          {
+            "type": "STRING",
+            "value": "?"
           }
         ]
       }

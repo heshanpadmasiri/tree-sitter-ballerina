@@ -55,3 +55,22 @@ type FooBar int&string|string;
     (type_descriptor)
     (type_descriptor))
    (type_descriptor))))
+
+=============
+Optional type
+=============
+type Foo int?;
+type FooBar int|string?;
+
+---
+(source_file
+ (type_decl
+  (identifier)
+  (type_descriptor
+   (type_descriptor)))
+ (type_decl
+  (identifier)
+  (type_descriptor
+   (type_descriptor
+    (type_descriptor)
+    (type_descriptor)))))
