@@ -1,0 +1,39 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "tree_sitter_ballerina",
+      "camelcase": "TreeSitterBallerina",
+      "title": "TreeSitterBallerina",
+      "scope": "source.tree_sitter_ballerina",
+      "file-types": [
+        "bal"
+      ],
+      "injection-regex": "^tree_sitter_ballerina$",
+      "class-name": "TreeSitterTreeSitterBallerina"
+    }
+  ],
+  "metadata": {
+    "version": "0.2.0",
+    "license": "MIT",
+    "description": "Tree sitter parser for Ballerina",
+    "authors": [
+      {
+        "name": "Heshan Padmasiri",
+        "email": "hpheshan@gmail.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/heshanpadmasiri/tree-sitter-ballerina"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
