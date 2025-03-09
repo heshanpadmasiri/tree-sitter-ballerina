@@ -74,3 +74,15 @@ type FooBar int|string?;
    (type_descriptor
     (type_descriptor)
     (type_descriptor)))))
+
+=============
+Distinct type
+=============
+
+type distinct int;
+
+---
+(source_file
+ (type_decl
+  (identifier)
+  (type_descriptor)))

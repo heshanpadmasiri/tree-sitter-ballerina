@@ -70,6 +70,10 @@
     "named": false
   },
   {
+    "type": "distinct",
+    "named": false
+  },
+  {
     "type": "float",
     "named": false
   },
