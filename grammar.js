@@ -37,10 +37,11 @@ module.exports = grammar({
     _intersection_type: $ => prec.left(seq($._type_descriptor, "&", $._type_descriptor)),
     _optional_type: $ => prec.left(seq($._type_descriptor, "?")),
     _distinct_type: $ => prec.left(seq("distinct", $._type_descriptor)),
-    _type_reference: $ => $.identifier,
+    _type_reference: $ => choice($.identifier, $.qualified_identifier),
 
     word: $ => $.identifier,
 
+    qualified_identifier: $ => seq($.identifier, ":", $.identifier),
     identifier: $ => /[a-zA-Z_]\w*/, // This is strictly not correct according to spec but good enough for now
   }
 });

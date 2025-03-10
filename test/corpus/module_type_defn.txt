@@ -92,3 +92,17 @@ type foo ((int|string)|int);
   (basic_type)
   (basic_type)
   (basic_type)))
+
+==============
+Type Reference
+==============
+
+type foo mod:Bar;
+
+---
+(source_file
+ (type_decl
+  (identifier)
+  (qualified_identifier
+   (identifier)
+   (identifier))))

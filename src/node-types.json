@@ -20,6 +20,21 @@
     "fields": {}
   },
   {
+    "type": "qualified_identifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "root": true,
@@ -50,6 +65,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
         }
       ]
     }
@@ -68,6 +87,10 @@
   },
   {
     "type": ")",
+    "named": false
+  },
+  {
+    "type": ":",
     "named": false
   },
   {
