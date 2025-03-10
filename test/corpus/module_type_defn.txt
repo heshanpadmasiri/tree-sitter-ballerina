@@ -106,3 +106,56 @@ type foo mod:Bar;
   (qualified_identifier
    (identifier)
    (identifier))))
+
+===========
+Array types
+===========
+
+type simple int[];
+type infered int[*];
+type with_size int[10];
+type multi int[][];
+type multi_infered int[*][*];
+type multi_with_size int[10][10];
+type mixed int[10][*];
+type mixed2 int[*][10];
+
+---
+(source_file
+ (type_decl
+  (identifier)
+  (array_type
+   (basic_type)))
+ (type_decl
+  (identifier)
+  (array_type
+   (basic_type)))
+ (type_decl
+  (identifier)
+  (array_type
+   (basic_type)))
+ (type_decl
+  (identifier)
+  (array_type
+   (array_type
+    (basic_type))))
+ (type_decl
+  (identifier)
+  (array_type
+   (array_type
+    (basic_type))))
+    (type_decl
+     (identifier)
+     (array_type
+      (array_type
+       (basic_type))))
+    (type_decl
+     (identifier)
+     (array_type
+      (array_type
+       (basic_type))))
+    (type_decl
+     (identifier)
+     (array_type
+      (array_type
+       (basic_type)))))

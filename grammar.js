@@ -23,6 +23,7 @@ module.exports = grammar({
       $._optional_type,
       $._distinct_type,
       $._type_reference,
+      $.array_type,
       seq("(", $._type_descriptor, ")")
     ),
     basic_type: $ => choice(
@@ -38,10 +39,14 @@ module.exports = grammar({
     _optional_type: $ => prec.left(seq($._type_descriptor, "?")),
     _distinct_type: $ => prec.left(seq("distinct", $._type_descriptor)),
     _type_reference: $ => choice($.identifier, $.qualified_identifier),
+    array_type: $ => prec.left(seq($._type_descriptor, $._array_dimension, repeat($._array_dimension))),
+    _array_dimension: $ => seq("[", optional($._array_length), "]"),
+    _array_length: $ => choice($._int_literal, "*"),
 
     word: $ => $.identifier,
 
     qualified_identifier: $ => seq($.identifier, ":", $.identifier),
     identifier: $ => /[a-zA-Z_]\w*/, // This is strictly not correct according to spec but good enough for now
+    _int_literal: $ => /[0-9]+/,
   }
 });
