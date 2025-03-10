@@ -245,3 +245,55 @@ type mapWithRef map<foo:Bar>;
    (qualified_identifier
     (identifier)
     (identifier)))))
+
+===========
+Record type
+===========
+
+type foo record { 
+    int foo;
+    readonly string bar;
+};
+
+type readonlyFoo readonly & record {|
+    float bar;
+    string baz;
+    float ...;
+|};
+
+type nestedRecord record {|
+    record {| int x; int y; |} pos;
+    record {| float...;|}...;
+|};
+
+---
+
+(source_file
+ (type_decl
+  (identifier)
+  (record_type
+   (basic_type)
+   (identifier)
+   (basic_type)
+   (identifier)))
+ (type_decl
+  (identifier)
+  (identifier)
+  (record_type
+   (basic_type)
+   (identifier)
+   (basic_type)
+   (identifier)
+   (basic_type)))
+ (type_decl
+  (identifier)
+  (record_type
+   (record_type
+    (basic_type)
+    (identifier)
+    (basic_type)
+    (identifier))
+   (identifier)
+   (record_type
+    (basic_type)))))
+

@@ -26,6 +26,7 @@ module.exports = grammar({
       $.array_type,
       $.tuple_type,
       $.map_type,
+      $.record_type,
       seq("(", $._type_descriptor, ")")
     ),
     basic_type: $ => choice(
@@ -55,6 +56,16 @@ module.exports = grammar({
     _tuple_rest: $ => seq($._type_descriptor, "..."),
 
     map_type: $ => seq("map", "<", $._type_descriptor, ">"),
+
+    record_type: $=> choice($._inclusive_record_type_desc, $._exclusive_record_type_desc),
+    _inclusive_record_type_desc: $=> seq("record", "{", repeat($._field_desc), "}"),
+    _exclusive_record_type_desc: $=> seq("record", "{|", repeat($._field_desc), optional($._record_rest), "|}"),
+    _field_desc: $ => choice($._individual_field_desc, $._type_inclusion),
+    // TODO: add default expressions
+    _individual_field_desc: $ => seq(optional("readonly"), $._type_descriptor, $.identifier, optional("?"), ";"),
+    _type_inclusion: $=> seq("*", $._type_reference),
+    _record_rest: $ => seq($._type_descriptor, "...", ";"),
+
 
     word: $ => $.identifier,
 
