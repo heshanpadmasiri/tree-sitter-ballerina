@@ -25,6 +25,7 @@ module.exports = grammar({
       $._type_reference,
       $.array_type,
       $.tuple_type,
+      $.map_type,
       seq("(", $._type_descriptor, ")")
     ),
     basic_type: $ => choice(
@@ -32,6 +33,7 @@ module.exports = grammar({
       "float",
       "string",
       "boolean",
+      "map",
       $.nil_literal
     ),
     nil_literal: $ => choice("null", "()"),
@@ -40,14 +42,19 @@ module.exports = grammar({
     _optional_type: $ => prec.left(seq($._type_descriptor, "?")),
     _distinct_type: $ => prec.left(seq("distinct", $._type_descriptor)),
     _type_reference: $ => choice($.identifier, $.qualified_identifier),
+
     array_type: $ => prec.left(seq($._type_descriptor, $._array_dimension, repeat($._array_dimension))),
     _array_dimension: $ => seq("[", optional($._array_length), "]"),
     _array_length: $ => choice($._int_literal, "*"),
 
     tuple_type: $ => seq("[", $._tuple_members, "]"),
-    _tuple_members: $ => choice(seq($._type_descriptor, (repeat(prec.left(seq(",", $._type_descriptor)))), optional($._tuple_rest)),
-                                $._tuple_rest),
+    _tuple_members: $ => choice(
+      seq($._type_descriptor, (repeat(prec.left(seq(",", $._type_descriptor)))), optional($._tuple_rest)),
+      $._tuple_rest
+    ),
     _tuple_rest: $ => seq($._type_descriptor, "..."),
+
+    map_type: $ => seq("map", "<", $._type_descriptor, ">"),
 
     word: $ => $.identifier,
 

@@ -218,3 +218,32 @@ type tuple_array [[int, string], [int, string]][];
        (tuple_type
         (basic_type)
               (basic_type))))))
+=========
+Map types
+=========
+type basicType map;
+type simpleMap map<string>;
+type complexMap map<[string, int]>;
+type mapWithRef map<foo:Bar>;
+
+---
+(source_file
+ (type_decl
+  (identifier)
+  (basic_type))
+ (type_decl
+  (identifier)
+  (map_type
+   (basic_type)))
+ (type_decl
+  (identifier)
+  (map_type
+   (tuple_type
+    (basic_type)
+    (basic_type))))
+ (type_decl
+  (identifier)
+  (map_type
+   (qualified_identifier
+    (identifier)
+    (identifier)))))
