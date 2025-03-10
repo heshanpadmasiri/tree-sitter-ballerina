@@ -186,8 +186,7 @@ type tuple_array [[int, string], [int, string]][];
   (tuple_type
    (basic_type)
    (basic_type)
-   (basic_type)
-   (ERROR)))
+   (basic_type)))
  (type_decl
   (identifier)
   (tuple_type
@@ -206,8 +205,7 @@ type tuple_array [[int, string], [int, string]][];
       (tuple_type
        (basic_type)
        (basic_type)
-       (basic_type)
-       (ERROR))))
+       (basic_type))))
     (type_decl
      (identifier)
      (array_type
@@ -217,7 +215,7 @@ type tuple_array [[int, string], [int, string]][];
         (basic_type))
        (tuple_type
         (basic_type)
-              (basic_type))))))
+        (basic_type))))))
 =========
 Map types
 =========

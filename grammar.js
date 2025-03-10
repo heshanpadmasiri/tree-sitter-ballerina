@@ -49,7 +49,7 @@ module.exports = grammar({
 
     tuple_type: $ => seq("[", $._tuple_members, "]"),
     _tuple_members: $ => choice(
-      seq($._type_descriptor, (repeat(prec.left(seq(",", $._type_descriptor)))), optional($._tuple_rest)),
+      seq($._type_descriptor, (repeat(prec.left(seq(",", $._type_descriptor)))), optional(seq(",", $._tuple_rest))),
       $._tuple_rest
     ),
     _tuple_rest: $ => seq($._type_descriptor, "..."),
