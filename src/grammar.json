@@ -83,6 +83,10 @@
           "name": "array_type"
         },
         {
+          "type": "SYMBOL",
+          "name": "tuple_type"
+        },
+        {
           "type": "SEQ",
           "members": [
             {
@@ -287,6 +291,86 @@
         {
           "type": "STRING",
           "value": "*"
+        }
+      ]
+    },
+    "tuple_type": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_tuple_members"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "_tuple_members": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_type_descriptor"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "PREC_LEFT",
+                "value": 0,
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ","
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "_type_descriptor"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_tuple_rest"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_tuple_rest"
+        }
+      ]
+    },
+    "_tuple_rest": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_type_descriptor"
+        },
+        {
+          "type": "STRING",
+          "value": "..."
         }
       ]
     },

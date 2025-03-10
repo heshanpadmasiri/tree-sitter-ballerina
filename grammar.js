@@ -24,6 +24,7 @@ module.exports = grammar({
       $._distinct_type,
       $._type_reference,
       $.array_type,
+      $.tuple_type,
       seq("(", $._type_descriptor, ")")
     ),
     basic_type: $ => choice(
@@ -42,6 +43,11 @@ module.exports = grammar({
     array_type: $ => prec.left(seq($._type_descriptor, $._array_dimension, repeat($._array_dimension))),
     _array_dimension: $ => seq("[", optional($._array_length), "]"),
     _array_length: $ => choice($._int_literal, "*"),
+
+    tuple_type: $ => seq("[", $._tuple_members, "]"),
+    _tuple_members: $ => choice(seq($._type_descriptor, (repeat(prec.left(seq(",", $._type_descriptor)))), optional($._tuple_rest)),
+                                $._tuple_rest),
+    _tuple_rest: $ => seq($._type_descriptor, "..."),
 
     word: $ => $.identifier,
 

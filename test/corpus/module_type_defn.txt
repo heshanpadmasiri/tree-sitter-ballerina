@@ -159,3 +159,62 @@ type mixed2 int[*][10];
      (array_type
       (array_type
        (basic_type)))))
+
+===========
+Tuple types
+===========
+type only_rest [int...];
+type fixed [int, string];
+type mixed [int, string, int...];
+type nested [[int, string], [int, string]];
+type nested_mixed [[int, string], [int, string, int...]];
+type tuple_array [[int, string], [int, string]][];
+
+---
+(source_file
+ (type_decl
+  (identifier)
+  (tuple_type
+   (basic_type)))
+ (type_decl
+  (identifier)
+  (tuple_type
+   (basic_type)
+   (basic_type)))
+ (type_decl
+  (identifier)
+  (tuple_type
+   (basic_type)
+   (basic_type)
+   (basic_type)
+   (ERROR)))
+ (type_decl
+  (identifier)
+  (tuple_type
+   (tuple_type
+    (basic_type)
+    (basic_type))
+   (tuple_type
+    (basic_type)
+    (basic_type))))
+    (type_decl
+     (identifier)
+     (tuple_type
+      (tuple_type
+       (basic_type)
+       (basic_type))
+      (tuple_type
+       (basic_type)
+       (basic_type)
+       (basic_type)
+       (ERROR))))
+    (type_decl
+     (identifier)
+     (array_type
+      (tuple_type
+       (tuple_type
+        (basic_type)
+        (basic_type))
+       (tuple_type
+        (basic_type)
+              (basic_type))))))
