@@ -13,6 +13,7 @@ module.exports = grammar({
   conflicts: $ => [
     [$._required_params],
     [$._included_record_params],
+    [$.function_type, $.object_type],
   ],
   rules: {
     source_file: $ => repeat($._module_decl),
@@ -32,6 +33,7 @@ module.exports = grammar({
       $.map_type,
       $.record_type,
       $.function_type,
+      $.object_type,
       seq("(", $._type_descriptor, ")")
     ),
     basic_type: $ => choice(
@@ -71,7 +73,8 @@ module.exports = grammar({
     _type_inclusion: $=> seq("*", $._type_reference),
     _record_rest: $ => seq($._type_descriptor, "...", ";"),
 
-    function_type: $ => seq(optional($._function_quals), "function", "(", optional($._function_params), ")", optional($._return_type_desc)),
+    function_type: $ => seq(optional($._function_quals), "function", $._function_signature),
+    _function_signature: $ => seq("(", optional($._function_params), ")", optional($._return_type_desc)),
     _function_quals: $ => repeat1(choice("isolated", "transactional")),
     _function_params: $ => choice(
       // TODO: also add defaultable params
@@ -83,6 +86,19 @@ module.exports = grammar({
     _included_record_param: $ => seq("*", $._type_reference, optional($.identifier)),
     _rest_param: $ => seq($._type_descriptor, "...", optional($.identifier)),
     _return_type_desc: $ => prec.right(seq("returns", $._type_descriptor)),
+
+    object_type: $ => seq(optional($._object_quals), "object", "{", repeat($._object_member), "}"),
+    _object_quals: $ => repeat1(choice("isolated", choice("client", "service"))),
+    _object_member: $ => choice(
+      $.object_field,
+      $.method_decl,
+      // TODO: add remote and resource methods as well
+      $._type_inclusion
+    ),
+    object_field: $ => seq(optional("public"), $.identifier, $._type_descriptor, ";"),
+    method_decl: $ => seq(optional("public"), optional($._function_quals) ,"function", $.identifier,  $._function_signature , ";"),
+
+    
     word: $ => $.identifier,
 
     qualified_identifier: $ => seq($.identifier, ":", $.identifier),

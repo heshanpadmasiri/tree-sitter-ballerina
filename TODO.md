@@ -11,7 +11,7 @@
         - [x] Rest type
     - [x] Map
     - [x] Record
-    + [ ] Function type description
+    + [x] Function type description
     - [ ] Object 
 - [ ] Function definition
     - [ ] Statements

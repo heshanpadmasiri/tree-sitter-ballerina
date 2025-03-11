@@ -343,3 +343,25 @@ type F3 function(int x, int ...) returns string;
       (identifier)
       (basic_type)
       (basic_type))))
+
+===========
+Object type
+===========
+
+type foo object {
+    int foo;
+    public function bar(int, int);
+};
+
+---
+(source_file
+ (type_decl
+  (identifier)
+  (object_type
+   (object_field
+    (identifier)
+    (identifier))
+   (method_decl
+    (identifier)
+    (basic_type)
+    (basic_type)))))

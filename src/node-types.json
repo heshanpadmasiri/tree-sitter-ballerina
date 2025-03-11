@@ -28,6 +28,10 @@
           "named": true
         },
         {
+          "type": "object_type",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
           "named": true
         },
@@ -86,6 +90,10 @@
           "named": true
         },
         {
+          "type": "object_type",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
           "named": true
         },
@@ -129,6 +137,57 @@
           "named": true
         },
         {
+          "type": "object_type",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "record_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "basic_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "object_type",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
           "named": true
         },
@@ -147,6 +206,80 @@
     "type": "nil_literal",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "object_field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "basic_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "object_type",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "record_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "object_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "method_decl",
+          "named": true
+        },
+        {
+          "type": "object_field",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "qualified_identifier",
@@ -189,6 +322,10 @@
         },
         {
           "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "object_type",
           "named": true
         },
         {
@@ -251,6 +388,10 @@
           "named": true
         },
         {
+          "type": "object_type",
+          "named": true
+        },
+        {
           "type": "qualified_identifier",
           "named": true
         },
@@ -291,6 +432,10 @@
         },
         {
           "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "object_type",
           "named": true
         },
         {
@@ -369,6 +514,10 @@
     "named": false
   },
   {
+    "type": "client",
+    "named": false
+  },
+  {
     "type": "distinct",
     "named": false
   },
@@ -401,6 +550,10 @@
     "named": false
   },
   {
+    "type": "object",
+    "named": false
+  },
+  {
     "type": "public",
     "named": false
   },
@@ -414,6 +567,10 @@
   },
   {
     "type": "returns",
+    "named": false
+  },
+  {
+    "type": "service",
     "named": false
   },
   {
