@@ -297,3 +297,49 @@ type nestedRecord record {|
    (record_type
     (basic_type)))))
 
+==================
+Function type desc
+==================
+
+type F1 function(int x, int y);
+type F1x function(int, int);
+
+type F2 function(int x, int y) returns string;
+type F2x function(int, int) returns string;
+
+type F3 function(int x, int ...) returns string;
+---
+(source_file
+ (type_decl
+  (identifier)
+  (function_type
+   (basic_type)
+   (identifier)
+   (basic_type)
+   (identifier)))
+ (type_decl
+  (identifier)
+  (function_type
+   (basic_type)
+   (basic_type)))
+ (type_decl
+  (identifier)
+  (function_type
+   (basic_type)
+   (identifier)
+   (basic_type)
+   (identifier)
+   (basic_type)))
+    (type_decl
+     (identifier)
+     (function_type
+      (basic_type)
+      (basic_type)
+      (basic_type)))
+    (type_decl
+     (identifier)
+     (function_type
+      (basic_type)
+      (identifier)
+      (basic_type)
+      (basic_type))))

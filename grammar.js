@@ -10,6 +10,10 @@
 module.exports = grammar({
   name: "tree_sitter_ballerina",
 
+  conflicts: $ => [
+    [$._required_params],
+    [$._included_record_params],
+  ],
   rules: {
     source_file: $ => repeat($._module_decl),
     _module_decl: $ => choice(
@@ -27,6 +31,7 @@ module.exports = grammar({
       $.tuple_type,
       $.map_type,
       $.record_type,
+      $.function_type,
       seq("(", $._type_descriptor, ")")
     ),
     basic_type: $ => choice(
@@ -66,11 +71,22 @@ module.exports = grammar({
     _type_inclusion: $=> seq("*", $._type_reference),
     _record_rest: $ => seq($._type_descriptor, "...", ";"),
 
-
+    function_type: $ => seq(optional($._function_quals), "function", "(", optional($._function_params), ")", optional($._return_type_desc)),
+    _function_quals: $ => repeat1(choice("isolated", "transactional")),
+    _function_params: $ => choice(
+      // TODO: also add defaultable params
+      seq($._required_params, optional(seq(",", $._included_record_params)), optional(seq(",", $._rest_param))),
+      seq($._included_record_params, optional(seq(",", $._rest_param))),
+      $._rest_param),
+    _required_params: $ => seq($._type_descriptor, optional($.identifier), repeat(seq(",", $._type_descriptor, optional($.identifier)))),
+    _included_record_params: $ => seq($._included_record_param, repeat(seq(",", $._included_record_param))),
+    _included_record_param: $ => seq("*", $._type_reference, optional($.identifier)),
+    _rest_param: $ => seq($._type_descriptor, "...", optional($.identifier)),
+    _return_type_desc: $ => prec.right(seq("returns", $._type_descriptor)),
     word: $ => $.identifier,
 
     qualified_identifier: $ => seq($.identifier, ":", $.identifier),
     identifier: $ => /[a-zA-Z_]\w*/, // This is strictly not correct according to spec but good enough for now
     _int_literal: $ => /[0-9]+/,
-  }
+  },
 });
