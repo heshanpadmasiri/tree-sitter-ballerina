@@ -589,7 +589,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_function_quals"
+              "name": "_quals"
             },
             {
               "type": "BLANK"
@@ -643,21 +643,26 @@
         }
       ]
     },
-    "_function_quals": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "isolated"
-          },
-          {
-            "type": "STRING",
-            "value": "transactional"
-          }
-        ]
-      }
+    "_quals": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "isolated"
+        },
+        {
+          "type": "STRING",
+          "value": "transactional"
+        },
+        {
+          "type": "STRING",
+          "value": "client"
+        },
+        {
+          "type": "STRING",
+          "value": "service"
+        }
+      ]
     },
     "_function_params": {
       "type": "PREC_RIGHT",
@@ -801,7 +806,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_object_quals"
+              "name": "_quals"
             },
             {
               "type": "BLANK"
@@ -828,31 +833,6 @@
           "value": "}"
         }
       ]
-    },
-    "_object_quals": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "isolated"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "client"
-              },
-              {
-                "type": "STRING",
-                "value": "service"
-              }
-            ]
-          }
-        ]
-      }
     },
     "_object_member": {
       "type": "CHOICE",
@@ -920,7 +900,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_function_quals"
+              "name": "_quals"
             },
             {
               "type": "BLANK"
@@ -981,12 +961,7 @@
       "value": "\\s"
     }
   ],
-  "conflicts": [
-    [
-      "function_type",
-      "object_type"
-    ]
-  ],
+  "conflicts": [],
   "precedences": [],
   "externals": [],
   "inline": [],

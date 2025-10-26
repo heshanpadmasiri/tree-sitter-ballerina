@@ -11,7 +11,6 @@ module.exports = grammar({
   name: "tree_sitter_ballerina",
 
   conflicts: $ => [
-    [$.function_type, $.object_type],
   ],
   rules: {
     source_file: $ => repeat($._module_decl),
@@ -71,9 +70,10 @@ module.exports = grammar({
     _type_inclusion: $ => seq("*", $._type_reference),
     _record_rest: $ => seq($._type_descriptor, "...", ";"),
 
-    function_type: $ => seq(optional($._function_quals), "function", $._function_signature),
+    function_type: $ => seq(optional($._quals), "function", $._function_signature),
     _function_signature: $ => seq("(", optional($._function_params), ")", optional($._return_type_desc)),
-    _function_quals: $ => repeat1(choice("isolated", "transactional")),
+    // This is not correct by grammer is too ambiguous, revisit this later.
+    _quals: $ => choice("isolated", "transactional", "client", "service"),
     // This is strictly not correct but I don't have the time to fight the ambiguity of the spec, revisit this later.
     _function_params: $ => prec.right(seq($._function_param, repeat(seq(",", $._function_param)))),
     _function_param: $ => choice($._required_param, $._included_record_param, $._rest_param),
@@ -82,8 +82,7 @@ module.exports = grammar({
     _rest_param: $ => seq($._type_descriptor, "...", optional($.identifier)),
     _return_type_desc: $ => prec.right(seq("returns", $._type_descriptor)),
 
-    object_type: $ => seq(optional($._object_quals), "object", "{", repeat($._object_member), "}"),
-    _object_quals: $ => repeat1(choice("isolated", choice("client", "service"))),
+    object_type: $ => seq(optional($._quals), "object", "{", repeat($._object_member), "}"),
     _object_member: $ => choice(
       $.object_field,
       $.method_decl,
@@ -91,7 +90,7 @@ module.exports = grammar({
       $._type_inclusion
     ),
     object_field: $ => seq(optional("public"), $.identifier, $._type_descriptor, ";"),
-    method_decl: $ => seq(optional("public"), optional($._function_quals), "function", $.identifier, $._function_signature, ";"),
+    method_decl: $ => seq(optional("public"), optional($._quals), "function", $.identifier, $._function_signature, ";"),
 
 
     word: $ => $.identifier,
