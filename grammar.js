@@ -11,8 +11,6 @@ module.exports = grammar({
   name: "tree_sitter_ballerina",
 
   conflicts: $ => [
-    [$._required_params],
-    [$._included_record_params],
     [$.function_type, $.object_type],
   ],
   rules: {
@@ -64,25 +62,22 @@ module.exports = grammar({
 
     map_type: $ => seq("map", "<", $._type_descriptor, ">"),
 
-    record_type: $=> choice($._inclusive_record_type_desc, $._exclusive_record_type_desc),
-    _inclusive_record_type_desc: $=> seq("record", "{", repeat($._field_desc), "}"),
-    _exclusive_record_type_desc: $=> seq("record", "{|", repeat($._field_desc), optional($._record_rest), "|}"),
+    record_type: $ => choice($._inclusive_record_type_desc, $._exclusive_record_type_desc),
+    _inclusive_record_type_desc: $ => seq("record", "{", repeat($._field_desc), "}"),
+    _exclusive_record_type_desc: $ => seq("record", "{|", repeat($._field_desc), optional($._record_rest), "|}"),
     _field_desc: $ => choice($._individual_field_desc, $._type_inclusion),
     // TODO: add default expressions
     _individual_field_desc: $ => seq(optional("readonly"), $._type_descriptor, $.identifier, optional("?"), ";"),
-    _type_inclusion: $=> seq("*", $._type_reference),
+    _type_inclusion: $ => seq("*", $._type_reference),
     _record_rest: $ => seq($._type_descriptor, "...", ";"),
 
     function_type: $ => seq(optional($._function_quals), "function", $._function_signature),
     _function_signature: $ => seq("(", optional($._function_params), ")", optional($._return_type_desc)),
     _function_quals: $ => repeat1(choice("isolated", "transactional")),
-    _function_params: $ => choice(
-      // TODO: also add defaultable params
-      seq($._required_params, optional(seq(",", $._included_record_params)), optional(seq(",", $._rest_param))),
-      seq($._included_record_params, optional(seq(",", $._rest_param))),
-      $._rest_param),
-    _required_params: $ => seq($._type_descriptor, optional($.identifier), repeat(seq(",", $._type_descriptor, optional($.identifier)))),
-    _included_record_params: $ => seq($._included_record_param, repeat(seq(",", $._included_record_param))),
+    // This is strictly not correct but I don't have the time to fight the ambiguity of the spec, revisit this later.
+    _function_params: $ => prec.right(seq($._function_param, repeat(seq(",", $._function_param)))),
+    _function_param: $ => choice($._required_param, $._included_record_param, $._rest_param),
+    _required_param: $ => seq($._type_descriptor, optional($.identifier)),
     _included_record_param: $ => seq("*", $._type_reference, optional($.identifier)),
     _rest_param: $ => seq($._type_descriptor, "...", optional($.identifier)),
     _return_type_desc: $ => prec.right(seq("returns", $._type_descriptor)),
@@ -96,9 +91,9 @@ module.exports = grammar({
       $._type_inclusion
     ),
     object_field: $ => seq(optional("public"), $.identifier, $._type_descriptor, ";"),
-    method_decl: $ => seq(optional("public"), optional($._function_quals) ,"function", $.identifier,  $._function_signature , ";"),
+    method_decl: $ => seq(optional("public"), optional($._function_quals), "function", $.identifier, $._function_signature, ";"),
 
-    
+
     word: $ => $.identifier,
 
     qualified_identifier: $ => seq($.identifier, ":", $.identifier),
