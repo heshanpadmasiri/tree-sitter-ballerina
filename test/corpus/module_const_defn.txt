@@ -1,0 +1,33 @@
+================
+Module constants
+================
+public const int MAX_AGE = 100;
+public const MIN_AGE = 0;
+public const PROD = 10.5;
+const TEXT = "Hello, World!";
+const string OTHER_TEXT = "Foo bar baz";
+
+---
+(source_file
+ (module_const_decl
+  (basic_type)
+  (identifier)
+  (literal
+   (numeric_literal)))
+ (module_const_decl
+  (identifier)
+  (literal
+   (numeric_literal)))
+ (module_const_decl
+  (identifier)
+  (literal
+   (numeric_literal)))
+ (module_const_decl
+  (identifier)
+  (literal
+   (string_literal)))
+ (module_const_decl
+  (basic_type)
+  (identifier)
+  (literal
+   (string_literal))))

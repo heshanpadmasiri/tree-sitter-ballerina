@@ -22,7 +22,37 @@ module.exports = grammar({
         ";",
       ),
     _module_name: ($) => seq($.identifier, repeat(seq(".", $.identifier))),
-    _module_decl: ($) => choice($.type_decl),
+    _module_decl: ($) => choice($.type_decl, $.module_const_decl),
+    module_const_decl: ($) =>
+      seq(
+        optional("public"),
+        "const",
+        optional($._type_descriptor),
+        $.identifier,
+        "=",
+        $._const_expr,
+        ";",
+      ),
+    // TODO: add the other const exprs
+    _const_expr: ($) => choice($.literal),
+    literal: ($) =>
+      choice(
+        $.nil_literal,
+        $.boolean_literal,
+        $.numeric_literal,
+        $.string_literal,
+      ),
+    boolean_literal: ($) => choice("true", "false"),
+    numeric_literal: ($) => choice($._int_literal, $._floating_point_literal),
+    _floating_point_literal: ($) =>
+      choice($._decimal_floating_point_number, $._hex_floating_point_number),
+    // FIXME: this is not complete but good enough for now
+    _decimal_floating_point_number: ($) =>
+      seq($._int_literal, ".", $._int_literal),
+    _hex_floating_point_number: ($) =>
+      seq("0x", $._hex_digits, ".", $._hex_digits),
+    _hex_digits: ($) => /[0-9a-fA-F]+/,
+    string_literal: ($) => seq('"', /[^"]*/, '"'),
     type_decl: ($) =>
       seq(optional("public"), "type", $.identifier, $._type_descriptor, ";"),
     _type_descriptor: ($) =>
