@@ -12,7 +12,16 @@ module.exports = grammar({
 
   conflicts: ($) => [],
   rules: {
-    source_file: ($) => repeat($._module_decl),
+    source_file: ($) => seq(repeat($.import_decl), repeat($._module_decl)),
+    import_decl: ($) =>
+      seq(
+        "import",
+        optional(seq($.identifier, "/")),
+        $._module_name,
+        optional(seq("as", $.identifier)),
+        ";",
+      ),
+    _module_name: ($) => seq($.identifier, repeat(seq(".", $.identifier))),
     _module_decl: ($) => choice($.type_decl),
     type_decl: ($) =>
       seq(optional("public"), "type", $.identifier, $._type_descriptor, ";"),

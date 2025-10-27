@@ -109,6 +109,21 @@
     }
   },
   {
+    "type": "import_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "map_type",
     "named": true,
     "fields": {},
@@ -353,6 +368,10 @@
       "required": false,
       "types": [
         {
+          "type": "import_decl",
+          "named": true
+        },
+        {
           "type": "type_decl",
           "named": true
         }
@@ -478,7 +497,15 @@
     "named": false
   },
   {
+    "type": ".",
+    "named": false
+  },
+  {
     "type": "...",
+    "named": false
+  },
+  {
+    "type": "/",
     "named": false
   },
   {
@@ -510,6 +537,10 @@
     "named": false
   },
   {
+    "type": "as",
+    "named": false
+  },
+  {
     "type": "boolean",
     "named": false
   },
@@ -532,6 +563,10 @@
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "import",
+    "named": false
   },
   {
     "type": "int",

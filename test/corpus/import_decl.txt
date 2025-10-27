@@ -1,0 +1,25 @@
+==============
+Basic import
+==============
+
+import ballerina/io;
+import foo;
+
+---
+(source_file
+ (import_decl
+  (identifier)
+  (identifier))
+ (import_decl
+  (identifier)))
+=================
+Import with alias
+=================
+
+import foo as bar;
+
+---
+(source_file
+ (import_decl
+   (identifier)
+   (identifier)))
